@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+body{
+	font-family: 'Kanit', sans-serif;
+	line-height: 1.5;
+	/* line-height-step: 1.5; */
+}
