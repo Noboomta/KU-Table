@@ -46,15 +46,15 @@ const testApi = new Vue({
     },
     methods: {
         login: async function(){
-            
+
             // window.onunload = function() { debugger; }
-            
+
             const data = {
                 username: this.username,
                 password: this.password,
             };
-            
-            fetch('http://localhost:8000/login', {
+
+            fetch('https://schedule-ku-server.herokuapp.com/login', {
                   method: 'POST', // or 'PUT'
                 //   mode: 'no-cors',
                   headers: {
@@ -68,7 +68,7 @@ const testApi = new Vue({
                     this.all_courses = json
                     this.courses = this.all_courses[0]["course"]
                 })
-            
+
         }
     }
 })

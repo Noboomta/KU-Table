@@ -65,7 +65,7 @@ export default {
 				password: this.password
 			};
 
-			fetch("http://localhost:8000/login", {
+			fetch("https://schedule-ku-server.herokuapp.com/login", {
 				method: "POST", // or 'PUT'
 				//   mode: 'no-cors',
 				headers: {
