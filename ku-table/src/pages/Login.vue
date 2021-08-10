@@ -4,6 +4,9 @@
 			<div class="flex-grow">
 				<h3 class="text-4xl">Login</h3>
 				<h3 class="text-sm text-gray-600">Sign in to your nontri account</h3>
+				<!-- <div v-if="err">
+					<h1 class="text-red-500">ลอคอินไม่ได้จ้า</h1>
+				</div> -->
 				<input
 					type="text"
 					class="w-full my-5 p-3 border focus:shadow-lg"
@@ -29,10 +32,13 @@
 				>
 					Login
 				</button>
+				<div class="mt-3" v-if="err">
+					<h1 class="text-red-500">ลอคอินไม่ได้จ้า</h1>
+				</div>
 			</div>
 
 			<footer class="text-xs">
-				<h3>ทั้งหมดนี้ไม่ใช่เว็บของมหาลัยจริง</h3>
+				<h3 class="font-bold">ทั้งหมดนี้<span class="text-red-400">ไม่ใช่</span>เว็บของมหาลัยจริง</h3>
 				<h3>
 					KU-Table
 					เป็นเพียงเว็บที่ทำเพื่อความสะดวกสบายด้วยการสร้างตารางเรียนให้นิสิต
@@ -52,10 +58,11 @@
 <script>
 export default {
 	name: "Login",
-	data: function() {
+	data() {
 		return {
 			username: "",
-			password: ""
+			password: "",
+			err: false
 		};
 	},
 	methods: {
@@ -65,7 +72,7 @@ export default {
 				password: this.password
 			};
 
-			fetch("https://schedule-ku-server.herokuapp.com:8000/login", {
+			fetch("https://schedule-ku-server.herokuapp.com/login", {
 				method: "POST", // or 'PUT'
 				//   mode: 'no-cors',
 				headers: {
@@ -82,7 +89,11 @@ export default {
 				.then(() => {
 					this.$emit("login");
 					this.$router.push("/schedule");
-				});
+				}).catch((error)=> {
+					console.log(error)
+					this.err = true
+				})
+				;
 		}
 	},
 	mounted() {

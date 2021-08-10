@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="h-16 shadow-xl flex items-center bg-green-500 px-5 justify-between">
+    <nav class="h-16 flex items-center bg-green-500 px-5 justify-between">
       <div id="left">
         <img src="./assets/ku-table.jpg" class="w-10 h-10" alt="KU-Logo">
       </div>
@@ -64,5 +64,7 @@ export default {
   flex-direction: column;
   min-height: 100vh;
 }
-
+nav {
+	box-shadow: 0px 4px 4px 0px #00000040;
+}
 </style>
