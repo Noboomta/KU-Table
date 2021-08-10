@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="h-16 flex items-center bg-green-500 px-5 justify-between">
+    <nav class="h-16 shadow-xl flex items-center bg-green-500 px-5 justify-between">
       <div id="left">
         <img src="./assets/ku-table.jpg" class="w-10 h-10" alt="KU-Logo">
       </div>
@@ -15,7 +15,7 @@
     <div class="flex-grow flex flex-col">
     <router-view @login="authStatus = true" />
     </div>
-    <footer class="text-xs px-5 h-44 items-center flex flex-col justify-center bg-gray-500">
+    <footer class="text-xs px-5 h-44 items-center flex flex-col justify-center bg-gray-300">
 			<a href="https://github.com/Noboomta/schedule-ku" target="_blank"><img class="w-7 h-7" src="./assets/github_logo.png" alt="github-logo"></a>
 		</footer>
   </div>

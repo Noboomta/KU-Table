@@ -25,7 +25,7 @@ export default {
 		},
 		getSchedule: function() {
 			fetch(
-				`https://schedule-ku-server.herokuapp.com/getSchedule?stdId=${localStorage.getItem(
+				`https://schedule-ku-server.herokuapp.com:8000/getSchedule?stdId=${localStorage.getItem(
 					"stdId"
 				)}`,
 				{
