@@ -28,7 +28,7 @@
 						:class="
 							`col-start-${course.startCol} col-end-${
 								course.endCol
-							} bg-${getColorByDate(date)}`
+							} ${getColorByDate(date)}`
 						"
 						v-for="(course, courseIndex) in mappedCourses[date]"
 						:key="`course-${courseIndex}`"
@@ -88,13 +88,13 @@ export default {
 		},
 		getColorByDate(date) {
 			const color = {
-				MON: "yellow-200",
-				TUE: "pink-400",
-				WED: "green-400",
-				THU: "yellow-400",
-				FRI: "blue-400",
-				SAT: "purple-400",
-				SUN: "red-400"
+				MON: "bg-yellow-200",
+				TUE: "bg-pink-400",
+				WED: "bg-green-400",
+				THU: "bg-yellow-400",
+				FRI: "bg-blue-400",
+				SAT: "bg-purple-400",
+				SUN: "bg-red-400"
 			};
 			return color[date];
 		},
@@ -119,7 +119,29 @@ export default {
 
 <style>
 .yellow-200{
-  background-color: rgba(253, 230, 138, 1);
+  @apply bg-yellow-200
+}
+.pink-400 {
+	@apply bg-pink-400
+}
 
+.green-400 {
+	@apply bg-green-400
+}
+
+.yellow-400 {
+	@apply bg-yellow-400
+}
+
+.blue-400 {
+	@apply bg-blue-400
+}
+
+.purple-400 {
+	@apply bg-purple-400
+}
+
+.red-400 {
+	@apply bg-red-400
 }
 </style>
