@@ -4,18 +4,15 @@
 			<div class="flex-grow">
 				<h3 class="text-4xl">Login</h3>
 				<h3 class="text-sm text-gray-600">Sign in to your nontri account</h3>
-				<!-- <div v-if="err">
-					<h1 class="text-red-500">ลอคอินไม่ได้จ้า</h1>
-				</div> -->
 				<input
 					type="text"
-					class="w-full my-5 p-3 border rounded focus:shadow-lg"
+					class="w-full my-5 p-3 border rounded"
 					required
 					v-model="username"
 					placeholder="username"
 				/>
 				<input
-					class="w-full p-3 mb-5 border rounded focus:shadow-lg"
+					class="w-full p-3 mb-5 border rounded"
 					type="password"
 					required
 					v-model="password"
