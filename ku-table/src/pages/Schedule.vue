@@ -1,42 +1,44 @@
 <template>
-	<div class="container mx-auto py-10">
+	<div class="py-10 container mx-auto">
 		<h1 class="text-2xl mb-5">Schedule</h1>
-		<div class="border">
-			<div class="grid grid-cols-13">
-				<div
-					class="border py-1"
-					v-for="(header, headerIndex) in headers"
-					:key="`header-${headerIndex}`"
-				>
-					{{ header }}
-				</div>
-			</div>
-			<div
-				v-for="(date, dateIndex) in orderedDate"
-				:key="`date-${dateIndex}`"
-				class="grid grid-cols-13 min-h-24 border"
-			>
-				<div
-					class="p-3 col-span-1 border-r-2"
-					:class="`bg-${getColorByDate(date)}`"
-				>
-					<span class="font-bold">{{ date }}</span>
+		<div class="overflow-x-auto border">
+			<div class="overflow-x-hidden min-w-1000" id="table">
+				<div class="grid grid-cols-13">
+					<div
+						class="border py-1"
+						v-for="(header, headerIndex) in headers"
+						:key="`header-${headerIndex}`"
+					>
+						{{ header }}
+					</div>
 				</div>
 				<div
-					class="border p-3 rounded text-sm bg-opacity-60 flex flex-col justify-between"
-					:class="
-						`col-start-${course.startCol} col-end-${
-							course.endCol
-						} bg-${getColorByDate(date)}`
-					"
-					v-for="(course, courseIndex) in mappedCourses[date]"
-					:key="`course-${courseIndex}`"
+					v-for="(date, dateIndex) in orderedDate"
+					:key="`date-${dateIndex}`"
+					class="grid grid-cols-13 min-h-24 border"
 				>
-					<p class="flex flex-wrap justify-between mb-2">
-						<span>{{ course.subject_code }}</span>
-						<span>({{ course.time_from }} - {{ course.time_to }})</span>
-					</p>
-					<p>{{ course.subject_name_th }}</p>
+					<div
+						class="p-3 col-span-1 border-r-2"
+						:class="`bg-${getColorByDate(date)}`"
+					>
+						<span class="font-bold">{{ date }}</span>
+					</div>
+					<div
+						class="border p-3 rounded text-sm bg-opacity-60 flex flex-col justify-between"
+						:class="
+							`col-start-${course.startCol} col-end-${
+								course.endCol
+							} bg-${getColorByDate(date)}`
+						"
+						v-for="(course, courseIndex) in mappedCourses[date]"
+						:key="`course-${courseIndex}`"
+					>
+						<p class="flex flex-wrap justify-between mb-2">
+							<span>{{ course.subject_code }}</span>
+							<span>({{ course.time_from }} - {{ course.time_to }})</span>
+						</p>
+						<p>{{ course.subject_name_th }}</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -55,7 +57,7 @@ export default {
 		};
 	},
 	created() {
-		this.getSchedule()
+		this.getSchedule();
 	},
 	computed: {
 		orderedDate() {
@@ -115,4 +117,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>

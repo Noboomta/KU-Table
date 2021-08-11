@@ -13,7 +13,7 @@ module.exports = {
           ...theme('spacing')
         }),
         minWidth: {
-          '900': '900px'
+          '1000': '1000px'
         }
       },
     },
