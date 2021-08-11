@@ -1,7 +1,7 @@
 <template>
 	<div class="py-10 container mx-auto">
 		<h1 class="text-2xl mb-5">Schedule</h1>
-		<div class="overflow-x-auto border">
+		<div class="overflow-x-auto border rounded-lg">
 			<div class="overflow-x-hidden min-w-1000" id="table">
 				<div class="grid grid-cols-13">
 					<div
