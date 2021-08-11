@@ -57,7 +57,7 @@ export default {
 	},
 	data() {
 		return {
-			loading: true,
+			loading: false,
 			courses: [],
 			headers: ["", 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 		};
@@ -70,8 +70,9 @@ export default {
 			return ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
 		},
 		mappedCourses() {
-			return this.courses.reduce((acc, course) => {
-				const dayKey = course.day_w.trim();
+			if(Array.isArray(this.courses)){
+				return this.courses.reduce((acc, course) => {
+					const dayKey = course.day_w.trim();
 				const mappedCourse = {
 					startCol: +course.time_from.split(":")[0] - 6,
 					endCol: +course.time_to.split(":")[0] - 6,
@@ -83,7 +84,9 @@ export default {
 					acc[dayKey] = [mappedCourse];
 				}
 				return acc;
-			}, {});
+				}, {});
+			}
+			return ''
 		}
 	},
 	methods: {
@@ -113,6 +116,7 @@ export default {
 			return color[date];
 		},
 		getSchedule() {
+			this.loading=true
 			axios
 				.get("/getSchedule", {
 					headers: {
@@ -125,7 +129,12 @@ export default {
 				.then(response => {
 					const { data } = response;
 					this.courses = data;
-				}).finally(() => this.loading = false );
+				})
+				.catch(() =>{
+					localStorage.clear('accesstoken')
+					this.$router('/login')
+				})
+				.finally(() => this.loading = false );
 		}
 	}
 };
