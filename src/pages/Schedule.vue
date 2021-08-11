@@ -26,9 +26,7 @@
 					<div
 						class="border p-3 rounded text-sm bg-opacity-60 flex flex-col justify-between"
 						:class="
-							`col-start-${course.startCol} col-end-${
-								course.endCol
-							} ${getColorByDate(date)}`
+							`${getStartColByCourses(course)} ${getEndColByCourses(course)} ${getColorByDate(date)}`
 						"
 						v-for="(course, courseIndex) in mappedCourses[date]"
 						:key="`course-${courseIndex}`"
@@ -81,6 +79,12 @@ export default {
 		}
 	},
 	methods: {
+		getStartColByCourses(courses) {
+			return `col-start-${courses.startCol}`
+		},
+		getEndColByCourses(courses) {
+			return `col-start-${courses.endCol}`
+		},
 		logout() {
 			localStorage.removeItem("accesstoken");
 			localStorage.removeItem("stdId");
