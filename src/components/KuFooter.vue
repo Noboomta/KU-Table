@@ -5,6 +5,7 @@
 			<a href="https://github.com/Noboomta/schedule-ku" target="_blank"
 				><img class="w-7 h-7" src="../assets/github_logo.png" alt="github-logo"
 			/></a>
+			<p>ABOUT US</p>
 		</footer>
 </template>
 

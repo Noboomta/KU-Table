@@ -19,7 +19,7 @@
 				>
 					<div
 						class="p-3 col-span-1 border-r-2"
-						:class="`bg-${getColorByDate(date)}`"
+						:class="`${getColorByDate(date)}`"
 					>
 						<span class="font-bold">{{ date }}</span>
 					</div>
@@ -118,4 +118,8 @@ export default {
 </script>
 
 <style>
+.yellow-200{
+  background-color: rgba(253, 230, 138, 1);
+
+}
 </style>
