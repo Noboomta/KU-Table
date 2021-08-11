@@ -83,7 +83,7 @@ export default {
 			return `col-start-${courses.startCol}`
 		},
 		getEndColByCourses(courses) {
-			return `col-start-${courses.endCol}`
+			return `col-end-${courses.endCol}`
 		},
 		logout() {
 			localStorage.removeItem("accesstoken");
@@ -121,31 +121,4 @@ export default {
 };
 </script>
 
-<style>
-.yellow-200{
-  @apply bg-yellow-200
-}
-.pink-400 {
-	@apply bg-pink-400
-}
-
-.green-400 {
-	@apply bg-green-400
-}
-
-.yellow-400 {
-	@apply bg-yellow-400
-}
-
-.blue-400 {
-	@apply bg-blue-400
-}
-
-.purple-400 {
-	@apply bg-purple-400
-}
-
-.red-400 {
-	@apply bg-red-400
-}
-</style>
+<style></style>
