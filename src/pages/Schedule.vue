@@ -80,10 +80,12 @@ export default {
 	},
 	methods: {
 		getStartColByCourses(courses) {
-			return `col-start-${courses.startCol}`
+		const colClass = `col-start-${courses.startCol}`
+			return colClass
 		},
 		getEndColByCourses(courses) {
-			return `col-end-${courses.endCol}`
+			const colClass = `col-end-${courses.endCol}`
+			return colClass
 		},
 		logout() {
 			localStorage.removeItem("accesstoken");
