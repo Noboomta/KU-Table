@@ -109,7 +109,7 @@ export default {
 					}
 				})
 				.then(response => {
-					const { data } = response.data;
+					const { data } = response;
 					this.courses = data;
 				});
 		}
