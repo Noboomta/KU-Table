@@ -9,13 +9,13 @@
 				</div> -->
 				<input
 					type="text"
-					class="w-full my-5 p-3 border focus:shadow-lg"
+					class="w-full my-5 p-3 border rounded focus:shadow-lg"
 					required
 					v-model="username"
 					placeholder="username"
 				/>
 				<input
-					class="w-full p-3 mb-5 border focus:shadow-lg"
+					class="w-full p-3 mb-5 border rounded focus:shadow-lg"
 					type="password"
 					required
 					v-model="password"
@@ -38,7 +38,9 @@
 			</div>
 
 			<footer class="text-xs">
-				<h3 class="font-bold">ทั้งหมดนี้<span class="text-red-400">ไม่ใช่</span>เว็บของมหาลัยจริง</h3>
+				<h3 class="font-bold">
+					ทั้งหมดนี้<span class="text-red-400">ไม่ใช่</span>เว็บของมหาลัยจริง
+				</h3>
 				<h3>
 					KU-Table
 					เป็นเพียงเว็บที่ทำเพื่อความสะดวกสบายด้วยการสร้างตารางเรียนให้นิสิต
@@ -56,6 +58,8 @@
 </template>
 
 <script>
+import axios from "../http";
+
 export default {
 	name: "Login",
 	data() {
@@ -72,28 +76,21 @@ export default {
 				password: this.password
 			};
 
-			fetch("https://schedule-ku-server.herokuapp.com/login", {
-				method: "POST", // or 'PUT'
-				//   mode: 'no-cors',
-				headers: {
-					"Content-Type": "application/json"
-				},
-				body: JSON.stringify(data)
-			})
-				.then(response => response.json())
-				.then(json => {
-					console.log(json);
-					localStorage.setItem("accesstoken", json.accesstoken);
-					localStorage.setItem("stdId", json.user.student.stdId);
+			axios
+				.post("/login", data)
+				.then(response => {
+					const { accesstoken, user } = response.data;
+					localStorage.setItem("accesstoken", accesstoken);
+					localStorage.setItem("stdId", user.student.stdId);
 				})
 				.then(() => {
 					this.$emit("login");
 					this.$router.push("/schedule");
-				}).catch((error)=> {
-					console.log(error)
-					this.err = true
 				})
-				;
+				.catch(error => {
+					console.log(error);
+					this.err = true;
+				});
 		}
 	},
 	mounted() {

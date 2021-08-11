@@ -5,7 +5,17 @@ module.exports = {
     ],
     darkMode: false, // or 'media' or 'class'
     theme: {
-      extend: {},
+      extend: {
+        gridTemplateColumns: {
+          '13': 'repeat(13, minmax(0, 1fr))'
+        },
+        minHeight: (theme) => ({
+          ...theme('spacing')
+        }),
+        minWidth: {
+          '900': '900px'
+        }
+      },
     },
     variants: {
       extend: {},
