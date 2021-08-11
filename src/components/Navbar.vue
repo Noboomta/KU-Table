@@ -1,9 +1,9 @@
 <template>
   <div>
     <nav class="h-16 flex items-center bg-green-500 px-5 justify-between z-10 fixed w-full">
-      <div id="middle" class="h-16 flex items-center w-full justify-center absolute">
+      <div id="middle" class="h-16 flex items-center m-auto justify-center absolute">
           <h1 class="font-bold text-gray-200 text-2xl">KU-Table</h1>
-      </div>  
+      </div>
 			<div id="left">
 				<img src="../assets/ku-table.jpg" class="w-10 h-10" alt="KU-Logo" />
 			</div>
@@ -63,5 +63,9 @@ export default {
 <style>
 nav {
 	box-shadow: 0px 4px 4px 0px #00000040;
+}
+#middle{
+    left: 50%;
+    transform: translateX(-50%);
 }
 </style>
