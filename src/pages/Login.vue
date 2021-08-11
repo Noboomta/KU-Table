@@ -1,5 +1,6 @@
 <template>
-	<div id="card" class="flex mx-auto border rounded-lg m-10 overflow-hidden">
+	<div class="flex mx-auto border rounded-lg m-10 overflow-hidden">
+	<spin-table-vue v-if="loading"></spin-table-vue>
 		<form class="p-5 w-96 flex flex-col" @submit.prevent="login">
 			<div class="flex-grow">
 				<h3 class="text-4xl">Login</h3>
@@ -56,14 +57,19 @@
 
 <script>
 import axios from "../http";
+import spinTableVue from "../components/SpinTable.vue"
 
 export default {
 	name: "Login",
+	components: {
+		spinTableVue
+	},
 	data() {
 		return {
 			username: "",
 			password: "",
-			err: false
+			err: false,
+			loading: false
 		};
 	},
 	methods: {
@@ -72,7 +78,7 @@ export default {
 				username: this.username,
 				password: this.password
 			};
-
+			this.loading=true
 			axios
 				.post("/login", data)
 				.then(response => {
@@ -87,7 +93,8 @@ export default {
 				.catch(error => {
 					console.log(error);
 					this.err = true;
-				});
+				}).finally(() => this.loading=false)
+				;
 		}
 	},
 	mounted() {

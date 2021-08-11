@@ -36,7 +36,7 @@ import KuFooter from '@/components/KuFooter.vue'
 
 export default {
 	components: {
-		KuFooter
+		KuFooter,
 	},
 	name: "navbar",
   data() {

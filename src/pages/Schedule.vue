@@ -1,11 +1,13 @@
 <template>
+	<div>
+	<spin-table-vue v-if="loading"></spin-table-vue>
 	<div class="py-10 container mx-auto">
 		<h1 class="text-2xl mb-5">Schedule</h1>
 		<div class="overflow-x-auto border rounded-lg">
 			<div class="overflow-x-hidden min-w-1000" id="table">
 				<div class="grid grid-cols-13">
 					<div
-						class="border py-1"
+						class="border py-1"		
 						v-for="(header, headerIndex) in headers"
 						:key="`header-${headerIndex}`"
 					>
@@ -24,7 +26,7 @@
 						<span class="font-bold">{{ date }}</span>
 					</div>
 					<div
-						class="border p-3 rounded text-sm bg-opacity-60 flex flex-col justify-between"
+						class="border p-3 rounded text-sm bg-opacity-60 flex flex-col justify-between hover:bg-opacity-70"
 						:class="
 							`my-col-start-${course.startCol} my-col-end-${course.endCol}
 							${getColorByDate(date)}`
@@ -42,15 +44,20 @@
 			</div>
 		</div>
 	</div>
+	</div>
 </template>
 
 <script>
 import axios from "../http";
-
+import SpinTableVue from '../components/SpinTable.vue'
 export default {
 	name: "Schedule",
+	components: {
+		SpinTableVue,
+	},
 	data() {
 		return {
+			loading: true,
 			courses: [],
 			headers: ["", 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 		};
@@ -118,89 +125,10 @@ export default {
 				.then(response => {
 					const { data } = response;
 					this.courses = data;
-				});
+				}).finally(() => this.loading = false );
 		}
 	}
 };
 </script>
 
-<style>
-.my-col-start-1 {
-	@apply col-start-1
-}
-.my-col-start-2 {
-	@apply col-start-2
-}
-.my-col-start-3 {
-	@apply col-start-3
-}
-.my-col-start-4 {
-	@apply col-start-4
-}
-.my-col-start-5 {
-	@apply col-start-5
-}
-.my-col-start-6 {
-	@apply col-start-6
-}
-.my-col-start-7 {
-	@apply col-start-7
-}
-.my-col-start-8 {
-	@apply col-start-8
-}
-.my-col-start-9 {
-	@apply col-start-9
-}
-.my-col-start-10 {
-	@apply col-start-10
-}
-.my-col-start-11 {
-	@apply col-start-11
-}
-.my-col-start-12 {
-	@apply col-start-12
-}
-.my-col-start-13 {
-	@apply col-start-13
-}
-.my-col-end-1 {
-	@apply col-end-1
-}
-.my-col-end-2 {
-	@apply col-end-2
-}
-.my-col-end-3 {
-	@apply col-end-3
-}
-.my-col-end-4 {
-	@apply col-end-4
-}
-.my-col-end-5 {
-	@apply col-end-5
-}
-.my-col-end-6 {
-	@apply col-end-6
-}
-.my-col-end-7 {
-	@apply col-end-7
-}
-.my-col-end-8 {
-	@apply col-end-8
-}
-.my-col-end-9 {
-	@apply col-end-9
-}
-.my-col-end-10 {
-	@apply col-end-10
-}
-.my-col-end-11 {
-	@apply col-end-11
-}
-.my-col-end-12 {
-	@apply col-end-12
-}
-.my-col-end-13 {
-	@apply col-end-13
-}
-</style>
+<style></style>
