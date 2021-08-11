@@ -1,7 +1,24 @@
-ลอคอินแล้วได้ตารางเรียน
+# ku-table
 
-รันเซิฟ
-เปิด html
-ใส่ ไอดี รหัส submit
+## Project setup
+```
+yarn install
+```
 
-[https://schedule-ku.vercel.app/login](https://schedule-ku.vercel.app/login) อย่าใส่รหัสจริงนะ เทสอยู่ๆ
+### Compiles and hot-reloads for development
+```
+yarn serve
+```
+
+### Compiles and minifies for production
+```
+yarn build
+```
+
+### Lints and fixes files
+```
+yarn lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
