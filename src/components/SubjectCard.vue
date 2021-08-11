@@ -1,5 +1,5 @@
 <template>
-
+	<h1>{{subject_name_th}}</h1>
 </template>
 
 <script>
