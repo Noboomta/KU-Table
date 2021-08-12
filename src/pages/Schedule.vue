@@ -66,15 +66,8 @@
 						</div>
 					</div>
 				</div>
-				<!-- <div ref="createby">
-					Created by KU-Table <a class="underline text-blue-500" href="https://schedule-ku.vercel.app">https://schedule-ku.vercel.app</a>
-				</div> -->
 			</div>
 		</div>
-		Created by KU-Table
-		<a class="underline text-blue-500" href="https://schedule-ku.vercel.app"
-			>https://schedule-ku.vercel.app</a
-		>
 	</div>
 </template>
 
@@ -121,38 +114,30 @@ export default {
 		},
 	},
 	methods: {
-		// getStartColByCourses(courses) {
-		// const colClass = `col-start-${courses.startCol}`
-		// 	return colClass
-		// },
-		// getEndColByCourses(courses) {
-		// 	const colClass = `col-end-${courses.endCol}`
-		// 	return colClass
-		// },
 		async download() {
 			const el = this.$refs.printcontent
-			const el2 = document.createElement('div')
 			const createBy = document.createElement('div')
-			createBy.innerHTML = 'Created by KU-Table'
-
+			createBy.innerHTML = 'Created by KU-Table '
+			createBy.style.textAlign = 'right'
+			createBy.className = 'temp-link'
 			const kuShareLink = document.createElement('a')
+			kuShareLink.className = 'text-blue-500 px-1'
 			kuShareLink.innerHTML = 'https://schedule-ku.vercel.app'
 			kuShareLink.setAttribute('href', 'https://schedule-ku.vercel.app')
-
-			el2.appendChild(el)
-			// el2.appendChild(this.$refs.createby)
-			el2.appendChild(kuShareLink)
+			createBy.appendChild(kuShareLink)
+			el.appendChild(createBy)
 			const options = {
 				type: 'dataURL',
 				windowWidth: '1280px',
 			}
 
-			const printCanvas = await this.$html2canvas(el2, options)
-
+			const printCanvas = await this.$html2canvas(el, options)
 			const link = document.createElement('a')
 			link.setAttribute('download', 'ku-table.png')
 			link.setAttribute('href', printCanvas)
 			link.click()
+			createBy.id = 'temp-link'
+			document.getElementById('temp-link').remove()
 		},
 		logout() {
 			localStorage.removeItem('accesstoken')
