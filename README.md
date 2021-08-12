@@ -1,5 +1,8 @@
 # ku-table
 
+ตารางเรียนที่อยากได้จากเว็บ KU
+[https://schedule-ku.vercel.app/login](https://schedule-ku.vercel.app/login) อย่าใส่รหัสจริงนะ เทสอยู่ๆ
+
 ## Project setup
 ```
 yarn install
