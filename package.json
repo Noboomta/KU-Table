@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "prepare": "husky install",
+    "pre-commit": "lint-staged"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
@@ -24,11 +26,17 @@
     "@vue/cli-service": "~4.5.0",
     "autoprefixer": "9",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
+    "eslint": "^7.32.0",
     "eslint-plugin-vue": "^6.2.2",
+    "husky": "^7.0.0",
+    "lint-staged": "^11.1.2",
     "postcss": "7",
+    "prettier": "^2.3.2",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "vue-template-compiler": "^2.6.11"
+  },
+  "lint-staged": {
+    "src/**/*.{js,vue}": ["prettier --write","eslint --fix"]
   },
   "eslintConfig": {
     "root": true,
