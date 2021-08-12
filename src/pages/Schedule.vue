@@ -1,8 +1,26 @@
 <template>
 	<div>
 		<spin-table-vue v-if="loading"></spin-table-vue>
-		<div class="py-10 container mx-auto">
-			<h1 class="text-2xl mb-5">Schedule</h1>
+		<div class="pt-7 pb-10 container mx-auto">
+			<div id="top" class="mb-5">
+				<h1 class="text-4xl mb-0 mr-5 inline-block align-bottom">Schedule</h1>
+				<button
+					class="
+						border border-blue-800
+						rounded
+						px-2
+						py-1
+						text-blue-800
+						hover:bg-gray-100
+						transform
+						hover:skew-x-6
+						text-lg
+					"
+				>
+					<font-awesome-icon icon="download" />
+					PNG
+				</button>
+			</div>
 			<div class="overflow-x-auto border rounded-lg">
 				<div class="overflow-x-hidden min-w-1000" id="table">
 					<div class="grid grid-cols-13">
@@ -66,9 +84,9 @@ export default {
 			headers: ['', 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
 		}
 	},
-	created() {
-		this.getSchedule()
-	},
+	// created() {
+	// 	this.getSchedule()
+	// },
 	computed: {
 		orderedDate() {
 			return ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
