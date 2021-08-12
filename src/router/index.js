@@ -7,25 +7,25 @@ import NotFound from '@/pages/NotFound.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    redirect: '/login'
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: Login
-  },
-  {
-    path: '/schedule',
-    name: 'Schedule',
-    component: Schedule,
-    meta: { requiresAuth: true }
-  },
-  {
-    path: '/:catchAll(.*)',
-    component: NotFound
-  }
+	{
+		path: '/',
+		redirect: '/login',
+	},
+	{
+		path: '/login',
+		name: 'Login',
+		component: Login,
+	},
+	{
+		path: '/schedule',
+		name: 'Schedule',
+		component: Schedule,
+		meta: { requiresAuth: true },
+	},
+	{
+		path: '/:catchAll(.*)',
+		component: NotFound,
+	},
 ]
 
 const router = new VueRouter({
@@ -40,13 +40,13 @@ router.beforeEach((to, from, next) => {
 		// if not, redirect to login page.
 		if (!localStorage.getItem('accesstoken')) {
 			next({
-							path: '/login',
+				path: '/login',
 			})
 		} else {
-						next()
+			next()
 		}
 	} else {
-					next() // make sure to always call next()!
+		next() // make sure to always call next()!
 	}
 })
 
