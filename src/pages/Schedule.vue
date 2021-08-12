@@ -13,15 +13,16 @@
 						text-blue-800
 						hover:bg-gray-100
 						transform
-						hover:skew-x-6
+						hover:-skew-x-6
 						text-lg
 					"
+					@click.prevent="download"
 				>
 					<font-awesome-icon icon="download" />
 					PNG
 				</button>
 			</div>
-			<div class="overflow-x-auto border rounded-lg">
+			<div class="overflow-x-auto border rounded-lg" ref="printcontent">
 				<div class="overflow-x-hidden min-w-1000" id="table">
 					<div class="grid grid-cols-13">
 						<div
@@ -50,6 +51,7 @@
 								flex flex-col
 								justify-between
 								hover:bg-opacity-70
+								overflow-hidden
 							"
 							:class="`my-col-start-${course.startCol} my-col-end-${course.endCol}
 							${getColorByDate(date)}`"
@@ -64,8 +66,15 @@
 						</div>
 					</div>
 				</div>
+				<!-- <div ref="createby">
+					Created by KU-Table <a class="underline text-blue-500" href="https://schedule-ku.vercel.app">https://schedule-ku.vercel.app</a>
+				</div> -->
 			</div>
 		</div>
+		Created by KU-Table
+		<a class="underline text-blue-500" href="https://schedule-ku.vercel.app"
+			>https://schedule-ku.vercel.app</a
+		>
 	</div>
 </template>
 
@@ -84,9 +93,9 @@ export default {
 			headers: ['', 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
 		}
 	},
-	// created() {
-	// 	this.getSchedule()
-	// },
+	created() {
+		this.getSchedule()
+	},
 	computed: {
 		orderedDate() {
 			return ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
@@ -120,6 +129,31 @@ export default {
 		// 	const colClass = `col-end-${courses.endCol}`
 		// 	return colClass
 		// },
+		async download() {
+			const el = this.$refs.printcontent
+			const el2 = document.createElement('div')
+			const createBy = document.createElement('div')
+			createBy.innerHTML = 'Created by KU-Table'
+
+			const kuShareLink = document.createElement('a')
+			kuShareLink.innerHTML = 'https://schedule-ku.vercel.app'
+			kuShareLink.setAttribute('href', 'https://schedule-ku.vercel.app')
+
+			el2.appendChild(el)
+			// el2.appendChild(this.$refs.createby)
+			el2.appendChild(kuShareLink)
+			const options = {
+				type: 'dataURL',
+				windowWidth: '1280px',
+			}
+
+			const printCanvas = await this.$html2canvas(el2, options)
+
+			const link = document.createElement('a')
+			link.setAttribute('download', 'ku-table.png')
+			link.setAttribute('href', printCanvas)
+			link.click()
+		},
 		logout() {
 			localStorage.removeItem('accesstoken')
 			localStorage.removeItem('stdId')
