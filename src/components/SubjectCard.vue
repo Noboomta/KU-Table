@@ -1,14 +1,14 @@
 <template>
-	<h1>{{subject_name_th}}</h1>
+	<h1>{{ subject_name_th }}</h1>
 </template>
 
 <script>
 export default {
-	name: "SubjectCard",
+	name: 'SubjectCard',
 	props: {
 		coure: {
-			type: Object
-		}
+			type: Object,
+		},
 	},
 	// USE THIS
 	// data() {
@@ -31,6 +31,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>
