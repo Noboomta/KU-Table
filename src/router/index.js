@@ -2,13 +2,14 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '@/pages/Login.vue'
 import Schedule from '@/pages/Schedule.vue'
+import NotFound from '@/pages/NotFound.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  { 
-    path: '/', 
-    redirect: '/login' 
+  {
+    path: '/',
+    redirect: '/login'
   },
   {
     path: '/login',
@@ -20,6 +21,10 @@ const routes = [
     name: 'Schedule',
     component: Schedule,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/:catchAll(.*)',
+    component: NotFound
   }
 ]
 

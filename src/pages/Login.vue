@@ -50,7 +50,7 @@
 			</footer>
 		</form>
 		<div>
-			<img src="../assets/ku-table-high.jpg" alt="" />
+			<img src="../assets/ku-table-high.jpg" alt="ku-table-high.jpg" />
 		</div>
 	</div>
 </template>
