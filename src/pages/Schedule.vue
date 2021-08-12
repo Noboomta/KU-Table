@@ -168,6 +168,7 @@ export default {
 				.catch(() => {
 					localStorage.clear('accesstoken')
 					localStorage.clear('authStatus')
+					location.reload()
 					this.$router.push('/login')
 				})
 				.finally(() => (this.loading = false))

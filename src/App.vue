@@ -50,7 +50,7 @@ export default {
 		},
 	},
 	created() {
-		if (localStorage.getItem('accesstoken')) {
+		if (localStorage.getItem('authStatus')) {
 			this.authStatus = true
 		}
 	},
