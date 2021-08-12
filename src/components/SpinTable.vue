@@ -1,6 +1,9 @@
 <template>
 	<div>
 		<img src="../assets/table.png" alt="" class="loader z-50 opacity-80" />
+		<span class="centered half-screen z-50">
+			<span class="animate-ping absolute h-full w-full rounded-full bg-gray-500 opacity-75"></span>
+		</span>
 		<div class="loader-wrapper lmask"></div>
 	</div>
 </template>

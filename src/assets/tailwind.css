@@ -36,6 +36,19 @@ input:focus {
 	animation: spin 1s infinite;
 }
 
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+.half-screen {
+	width: 50vw;
+	height: 50vw;
+}
+
 @keyframes spin {
 	0% {
 		transform: rotate(0deg);
