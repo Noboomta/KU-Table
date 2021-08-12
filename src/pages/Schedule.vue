@@ -4,18 +4,9 @@
 		<div class="pt-7 pb-10 container mx-auto">
 			<div id="top" class="mb-5">
 				<h1 class="text-4xl mb-0 mr-5 inline-block align-bottom">Schedule</h1>
+
 				<button
-					class="
-						border border-blue-800
-						rounded
-						px-2
-						py-1
-						text-blue-800
-						hover:bg-gray-100
-						transform
-						hover:-skew-x-6
-						text-lg
-					"
+					class="border border-blue-800 rounded px-2 py-1 text-blue-800 hover:bg-gray-100 text-lg"
 					@click.prevent="download"
 				>
 					<font-awesome-icon icon="download" />
@@ -52,6 +43,7 @@
 								justify-between
 								hover:bg-opacity-70
 								overflow-hidden
+								cursor-pointer
 							"
 							:class="`my-col-start-${course.startCol} my-col-end-${course.endCol}
 							${getColorByDate(date)}`"
@@ -158,6 +150,7 @@ export default {
 		},
 		getSchedule() {
 			this.loading = true
+			// console.log(lo)
 			axios
 				.get('/getSchedule', {
 					headers: {
@@ -168,12 +161,14 @@ export default {
 					},
 				})
 				.then((response) => {
+					console.log(this.loading)
 					const { data } = response
 					this.courses = data
 				})
 				.catch(() => {
 					localStorage.clear('accesstoken')
-					this.$router('/login')
+					localStorage.clear('authStatus')
+					this.$router.push('/login')
 				})
 				.finally(() => (this.loading = false))
 		},
@@ -181,4 +176,10 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+button:active {
+	-moz-box-shadow: inset 0 0 2px gray;
+	-webkit-box-shadow: inset 0 0 2px gray;
+	box-shadow: inset 0 0 2px gray;
+}
+</style>

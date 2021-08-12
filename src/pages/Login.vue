@@ -77,7 +77,7 @@ export default {
 		}
 	},
 	methods: {
-		login: function () {
+		login() {
 			const data = {
 				username: this.username,
 				password: this.password,
@@ -92,6 +92,7 @@ export default {
 				})
 				.then(() => {
 					this.$emit('login')
+					localStorage.setItem('authStatus', true)
 					this.$router.push('/schedule')
 				})
 				.catch((error) => {
@@ -102,7 +103,7 @@ export default {
 		},
 	},
 	mounted() {
-		if (localStorage.getItem('accesstoken')) {
+		if (localStorage.getItem('authStatus') == false) {
 			this.$router.push('/schedule')
 		}
 	},

@@ -55,10 +55,14 @@ export default {
 		}
 	},
 	methods: {
-		checkLogin: function () {
+		toggleAuthStatus() {
+			this.authStatus = !this.authStatus
+		},
+		checkLogin() {
 			if (this.authStatus) {
 				localStorage.removeItem('accesstoken')
 				localStorage.removeItem('stdId')
+				localStorage.setItem('authStatus', false)
 				this.authStatus = false
 				this.$router.push('/login')
 			} else {
