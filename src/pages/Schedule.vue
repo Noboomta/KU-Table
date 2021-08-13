@@ -81,7 +81,7 @@
 							class="
 								border
 								p-2
-								md:p-3
+								md:px-3 md:py-2
 								rounded
 								text-xs
 								md:text-sm
@@ -98,11 +98,25 @@
 							:key="`course-${courseIndex}`"
 						>
 							<p class="flex flex-wrap justify-between mb-2">
-								<span>{{ course.subject_code }}</span>
-								<span>({{ course.time_from }} - {{ course.time_to }})</span>
+								<span>{{ course.subject_code }} </span>
+								<span>[{{ course.time_from }} - {{ course.time_to }}]</span>
 							</p>
 							<p v-if="isCheck">{{ course.subject_name_en }}</p>
 							<p v-else>{{ course.subject_name_th }}</p>
+							<div class="flex justify-between text-gray-700 text-xs">
+								<div>
+									<span v-if="isCheck">ROOM: {{ course.room_name_en }}</span>
+									<span v-else>ห้อง: {{ course.room_name_th }}</span>
+								</div>
+								<div>
+									<span v-if="isCheck" class="text-right"
+										>SEC: {{ course.section_code }} {{ course.section_type_en }}</span
+									>
+									<span v-else class="text-right"
+										>หมู่: {{ course.section_code }} {{ course.section_type_th }}</span
+									>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -136,6 +150,7 @@ export default {
 		},
 		mappedCourses() {
 			if (Array.isArray(this.courses)) {
+				console.log(this.courses)
 				return this.courses.reduce((acc, course) => {
 					const dayKey = course.day_w.trim()
 					const mappedCourse = {
@@ -199,7 +214,6 @@ export default {
 		},
 		getSchedule() {
 			this.loading = true
-			// console.log(lo)
 			axios
 				.get('/getSchedule', {
 					headers: {
@@ -210,7 +224,6 @@ export default {
 					},
 				})
 				.then((response) => {
-					console.log(this.loading)
 					const { data } = response
 					this.courses = data
 				})
