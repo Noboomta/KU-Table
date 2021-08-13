@@ -3,7 +3,7 @@
 
 ![ku-table](src/assets/ku-table.jpg)
 
-[https://schedule-ku.vercel.app](https://schedule-ku.vercel.app)
+[https://ku-table.vercel.app](https://ku-table.vercel.app)
 
 ปลอดภัยๆ ลอคอินแล้วเซฟตารางได้เลยๆ
 
@@ -11,7 +11,7 @@
 
 ![example-table](src/assets/example/ku-table.png)
 
-[![Website schedule-ku.vercel.app](https://img.shields.io/website-up-down-green-red/http/monip.org.svg)](https://schedule-ku.vercel.app)
+[![Website ku-table.vercel.app](https://img.shields.io/website-up-down-green-red/http/monip.org.svg)](https://ku-table.vercel.app)
 [![GitHub contributors](https://img.shields.io/github/contributors/Noboomta/schedule-ku.svg)](https://GitHub.com/Noboomta/schedule-ku/contributors/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 

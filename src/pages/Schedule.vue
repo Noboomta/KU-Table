@@ -195,8 +195,8 @@ export default {
 			createBy.className = 'temp-link'
 			const kuShareLink = document.createElement('a')
 			kuShareLink.className = 'text-blue-500 px-1'
-			kuShareLink.innerHTML = 'https://schedule-ku.vercel.app'
-			kuShareLink.setAttribute('href', 'https://schedule-ku.vercel.app')
+			kuShareLink.innerHTML = 'https://ku-table.vercel.app'
+			kuShareLink.setAttribute('href', 'https://ku-table.vercel.app')
 			createBy.appendChild(kuShareLink)
 			el.appendChild(createBy)
 			const options = {
