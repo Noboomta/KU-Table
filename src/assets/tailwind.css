@@ -150,6 +150,9 @@ input:focus {
 .my-col-start-26 {
 	@apply col-start-26;
 }
+.my-col-start-27 {
+	@apply col-start-27;
+}
 .my-col-end-1 {
 	@apply col-end-1;
 }
@@ -230,4 +233,7 @@ input:focus {
 }
 .my-col-end-26 {
 	@apply col-end-26;
+}
+.my-col-end-27 {
+	@apply col-end-27;
 }

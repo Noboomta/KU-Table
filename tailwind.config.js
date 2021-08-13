@@ -2,8 +2,8 @@ const gridConfig = () => {
   const gridColumnStart = {}
   const gridColumnEnd = {}
   const gridTemplateColumns = { '26': 'repeat(26, minmax(0, 1fr))' }
-  
-  for (let i = 14; i <= 26; i++) {
+
+  for (let i = 14; i <= 27; i++) {
     gridColumnStart[i.toString()] = i.toString()
     gridColumnEnd[i.toString()] = i.toString()
   }
@@ -15,7 +15,7 @@ module.exports = {
     purge: [
       './public/**/*.html',
       './src/**/*.vue',
-    ], 
+    ],
     darkMode: false, // or 'media' or 'class'
     theme: {
       extend: {
