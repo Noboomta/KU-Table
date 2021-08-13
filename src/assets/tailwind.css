@@ -32,7 +32,7 @@ input:focus {
 	left: 50%;
 	top: 50%;
 	width: 14vmax;
-	margin: -7vmax -5vmax; /* ADD THIS (half the W/H) */
+	margin: -5vmax -7vmax; /* ADD THIS (half the W/H) */
 	animation: spin 1s infinite;
 }
 
