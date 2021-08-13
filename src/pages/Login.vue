@@ -1,5 +1,5 @@
 <template>
-	<div class="mx-auto">
+	<div class="mx-auto flex md:flex-grow items-center">
 		<div class="md:flex border rounded-lg m-5 overflow-hidden">
 			<spin-table-vue v-if="loading"></spin-table-vue>
 			<form class="p-5 max-w-sm flex flex-col" @submit.prevent="login">
@@ -56,7 +56,7 @@
 				</footer>
 			</form>
 			<div>
-				<img src="../assets/ku-table-high.jpg" alt="ku-table-high.jpg" class="hidden sm:block" />
+				<img src="../assets/ku-table-high.jpg" alt="ku-table-high.jpg" class="hidden md:block" />
 			</div>
 		</div>
 	</div>
