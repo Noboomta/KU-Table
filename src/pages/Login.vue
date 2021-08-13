@@ -2,7 +2,7 @@
 	<div class="mx-auto">
 		<div class="md:flex border rounded-lg m-5 overflow-hidden">
 			<spin-table-vue v-if="loading"></spin-table-vue>
-			<form class="p-5 max-w-96 flex flex-col" @submit.prevent="login">
+			<form class="p-5 max-w-sm flex flex-col" @submit.prevent="login">
 				<div class="md:flex-grow">
 					<h3 class="text-4xl">Login</h3>
 					<h3 class="text-sm text-gray-600">Sign in to your nontri account</h3>
@@ -56,7 +56,7 @@
 				</footer>
 			</form>
 			<div>
-				<img src="../assets/ku-table-high.jpg" alt="ku-table-high.jpg" class="hidden md:block" />
+				<img src="../assets/ku-table-high.jpg" alt="ku-table-high.jpg" class="hidden sm:block" />
 			</div>
 		</div>
 	</div>
