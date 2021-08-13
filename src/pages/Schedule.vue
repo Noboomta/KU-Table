@@ -120,7 +120,7 @@ export default {
 			el.appendChild(createBy)
 			const options = {
 				type: 'dataURL',
-				windowWidth: '1280px',
+				windowWidth: '2560px',
 			}
 
 			const printCanvas = await this.$html2canvas(el, options)
