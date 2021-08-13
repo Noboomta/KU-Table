@@ -2,60 +2,63 @@
 	<div>
 		<spin-table-vue v-if="loading"></spin-table-vue>
 		<div class="mx-auto container pt-7 pb-10">
-			<div id="top" class="mb-5 mx-2 flex flex-wrap justify-between">
+			<div id="top" class="mx-2 flex flex-wrap justify-between">
 				<div>
-					<h1 class="text-4xl font-bold mb-2 md:mb-0 mr-5 inline-block align-bottom">Schedule</h1>
+					<h1 class="text-4xl font-bold mb-2 md:mb-0 mr-5 inline-block align-top">Schedule</h1>
 				</div>
 				<div class="flex justify-between w-full sm:w-auto">
-					<label for="toggleB" class="flex items-center cursor-pointer">
-						<div class="mr-3 hidden sm:block text-gray-700 text-sm xs:text-md">TH</div>
-						<!-- toggle -->
-						<div class="relative">
-							<!-- input -->
-							<input type="checkbox" id="toggleB" class="sr-only" v-model="isCheck" />
-							<!-- line -->
-							<div
-								v-if="isCheck"
-								class="block bg-gray-300 w-12 h-7 sm:w-14 sm:h-8 rounded-full"
-							></div>
-							<div v-else class="block bg-gray-200 w-12 h-7 sm:w-14 sm:h-8 rounded-full"></div>
-							<!-- dot -->
-							<div
-								class="
-									dot
-									absolute
-									left-1
-									top-1
-									bg-white
-									w-5
-									h-5
-									sm:w-6 sm:h-6
-									rounded-full
-									transition
-								"
-							></div>
-						</div>
-						<!-- label -->
-						<div class="ml-3 mr-4 text-gray-700 text-sm xs:text-md">EN</div>
-					</label>
-					<button
-						class="
-							block
-							border border-green-500
-							rounded
-							px-3
-							py-1
-							mr-2
-							text-green-500
-							hover:bg-gray-100
-							text-md
-							lg:text-lg
-						"
-						@click.prevent="download"
-					>
-						<font-awesome-icon icon="download" />
-						save as PNG
-					</button>
+					<span class="align-top">
+						<label for="toggleB" class="flex items-center cursor-pointer">
+							<div class="mr-3 hidden sm:block text-gray-700 text-sm xs:text-md">TH</div>
+							<!-- toggle -->
+							<div class="relative">
+								<!-- input -->
+								<input type="checkbox" id="toggleB" class="sr-only" v-model="isCheck" />
+								<!-- line -->
+								<div
+									v-if="isCheck"
+									class="block bg-gray-300 w-12 h-7 sm:w-14 sm:h-8 rounded-full"
+								></div>
+								<div v-else class="block bg-gray-200 w-12 h-7 sm:w-14 sm:h-8 rounded-full"></div>
+								<!-- dot -->
+								<div
+									class="
+										dot
+										absolute
+										left-1
+										top-1
+										bg-white
+										w-5
+										h-5
+										sm:w-6 sm:h-6
+										rounded-full
+										transition
+									"
+								></div>
+							</div>
+							<!-- label -->
+							<div class="ml-3 mr-4 text-gray-700 text-sm xs:text-md">EN</div>
+						</label>
+					</span>
+					<div class="text-center mr-2 mb-5">
+						<button
+							class="
+								block
+								border border-green-500
+								rounded
+								px-3
+								py-1
+								text-green-500
+								hover:bg-gray-100
+								text-md
+								lg:text-lg
+							"
+							@click.prevent="download"
+						>
+							<font-awesome-icon icon="download" />
+							Save as PNG
+						</button>
+					</div>
 				</div>
 			</div>
 			<div class="overflow-x-auto border mx-1 rounded-lg" ref="printcontent">
@@ -137,8 +140,22 @@ export default {
 		return {
 			loading: false,
 			courses: [],
-			headers: ['', 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-			isCheck: false,
+			headers: [
+				'Day/Time',
+				'8:00',
+				'9:00',
+				'10:00',
+				'11:00',
+				'12:00',
+				'13:00',
+				'14:00',
+				'15:00',
+				'16:00',
+				'17:00',
+				'18:00',
+				'19:00',
+			],
+			isCheck: true,
 		}
 	},
 	created() {
