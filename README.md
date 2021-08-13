@@ -5,7 +5,8 @@
 
 [https://ku-table.vercel.app](https://ku-table.vercel.app)
 
-ปลอดภัยๆ ลอคอินแล้วเซฟตารางได้เลยๆ
+นับจำนวนคนใช้งานผ่านการเก็บ cache stdId (ไม่ยุ่งกับค่า username password และไม่มีตังจ่าย database)
+เซฟตารางไปใช้ได้เลยครับ
 
 ## Example PNG Table
 
