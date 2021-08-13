@@ -10,7 +10,7 @@
 				</div>
 				<div id="right" class="flex">
 					<router-link
-						class="m-3 text-gray-200 hover:text-white transition duration-300"
+						class="m-3 text-gray-200 hover:text-white transition duration-300 hidden md:block"
 						to="/schedule"
 						>Schedule</router-link
 					>

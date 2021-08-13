@@ -1,23 +1,68 @@
 <template>
 	<div>
 		<spin-table-vue v-if="loading"></spin-table-vue>
-		<div class="pt-7 pb-10 container mx-auto">
-			<div id="top" class="mb-5">
-				<h1 class="text-4xl mb-0 mr-5 inline-block align-bottom">Schedule</h1>
-
-				<button
-					class="border border-blue-800 rounded px-2 py-1 text-blue-800 hover:bg-gray-100 text-lg"
-					@click.prevent="download"
-				>
-					<font-awesome-icon icon="download" />
-					PNG
-				</button>
+		<div class="mx-auto container pt-7 pb-10">
+			<div id="top" class="mb-5 mx-2 flex flex-wrap justify-between">
+				<div>
+					<h1 class="text-4xl font-bold mb-2 md:mb-0 mr-5 inline-block align-bottom">Schedule</h1>
+				</div>
+				<div class="flex justify-between w-full sm:w-auto">
+					<label for="toggleB" class="flex items-center cursor-pointer">
+						<div class="mr-3 hidden sm:block text-gray-700 text-sm xs:text-md">TH</div>
+						<!-- toggle -->
+						<div class="relative">
+							<!-- input -->
+							<input type="checkbox" id="toggleB" class="sr-only" v-model="isCheck" />
+							<!-- line -->
+							<div
+								v-if="isCheck"
+								class="block bg-gray-300 w-12 h-7 sm:w-14 sm:h-8 rounded-full"
+							></div>
+							<div v-else class="block bg-gray-200 w-12 h-7 sm:w-14 sm:h-8 rounded-full"></div>
+							<!-- dot -->
+							<div
+								class="
+									dot
+									absolute
+									left-1
+									top-1
+									bg-white
+									w-5
+									h-5
+									sm:w-6 sm:h-6
+									rounded-full
+									transition
+								"
+							></div>
+						</div>
+						<!-- label -->
+						<div class="ml-3 mr-4 text-gray-700 text-sm xs:text-md">EN</div>
+					</label>
+					<button
+						class="
+							block
+							border border-green-500
+							rounded
+							px-3
+							py-1
+							mr-2
+							text-green-500
+							hover:bg-gray-100
+							text-md
+							lg:text-lg
+						"
+						@click.prevent="download"
+					>
+						<font-awesome-icon icon="download" />
+						save as PNG
+					</button>
+				</div>
 			</div>
-			<div class="overflow-x-auto border rounded-lg" ref="printcontent">
-				<div class="overflow-x-hidden min-w-1000" id="table">
+			<div class="overflow-x-auto border mx-1 rounded-lg" ref="printcontent">
+				<div class="overflow-x-hidden table-w" id="table">
 					<div class="grid grid-cols-13">
 						<div
-							class="border py-1"
+							class="border py-1 pl-1"
 							v-for="(header, headerIndex) in headers"
 							:key="`header-${headerIndex}`"
 						>
@@ -27,17 +72,19 @@
 					<div
 						v-for="(date, dateIndex) in orderedDate"
 						:key="`date-${dateIndex}`"
-						class="grid grid-cols-13 min-h-24 border"
+						class="grid grid-cols-13 min-h-16 md:min-h-24 border"
 					>
-						<div class="p-3 col-span-1 border-r-2" :class="`${getColorByDate(date)}`">
+						<div class="p-1 md:p-3 col-span-1 border-r-2" :class="`${getColorByDate(date)}`">
 							<span class="font-bold">{{ date }}</span>
 						</div>
 						<div
 							class="
 								border
-								p-3
+								p-2
+								md:p-3
 								rounded
-								text-sm
+								text-xs
+								md:text-sm
 								bg-opacity-60
 								flex flex-col
 								justify-between
@@ -54,7 +101,8 @@
 								<span>{{ course.subject_code }}</span>
 								<span>({{ course.time_from }} - {{ course.time_to }})</span>
 							</p>
-							<p>{{ course.subject_name_th }}</p>
+							<p v-if="isCheck">{{ course.subject_name_en }}</p>
+							<p v-else>{{ course.subject_name_th }}</p>
 						</div>
 					</div>
 				</div>
@@ -76,6 +124,7 @@ export default {
 			loading: false,
 			courses: [],
 			headers: ['', 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+			isCheck: false,
 		}
 	},
 	created() {
@@ -182,5 +231,13 @@ button:active {
 	-moz-box-shadow: inset 0 0 2px gray;
 	-webkit-box-shadow: inset 0 0 2px gray;
 	box-shadow: inset 0 0 2px gray;
+}
+/* Toggle B */
+input:checked ~ .dot {
+	transform: translateX(100%);
+	@apply bg-green-400;
+}
+.table-w {
+	min-width: 1000px;
 }
 </style>
