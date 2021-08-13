@@ -111,6 +111,45 @@ input:focus {
 .my-col-start-13 {
 	@apply col-start-13;
 }
+.my-col-start-14 {
+	@apply col-start-14;
+}
+.my-col-start-15 {
+	@apply col-start-15;
+}
+.my-col-start-16 {
+	@apply col-start-16;
+}
+.my-col-start-17 {
+	@apply col-start-17;
+}
+.my-col-start-18 {
+	@apply col-start-18;
+}
+.my-col-start-19 {
+	@apply col-start-19;
+}
+.my-col-start-20 {
+	@apply col-start-20;
+}
+.my-col-start-21 {
+	@apply col-start-21;
+}
+.my-col-start-22 {
+	@apply col-start-22;
+}
+.my-col-start-23 {
+	@apply col-start-23;
+}
+.my-col-start-24 {
+	@apply col-start-24;
+}
+.my-col-start-25 {
+	@apply col-start-25;
+}
+.my-col-start-26 {
+	@apply col-start-26;
+}
 .my-col-end-1 {
 	@apply col-end-1;
 }
@@ -149,4 +188,46 @@ input:focus {
 }
 .my-col-end-13 {
 	@apply col-end-13;
+}
+.my-col-end-14 {
+	@apply col-end-14;
+}
+.my-col-end-15 {
+	@apply col-end-15;
+}
+.my-col-end-16 {
+	@apply col-end-16;
+}
+.my-col-end-17 {
+	@apply col-end-17;
+}
+.my-col-end-18 {
+	@apply col-end-18;
+}
+.my-col-end-19 {
+	@apply col-end-19;
+}
+.my-col-end-20 {
+	@apply col-end-20;
+}
+.my-col-end-13 {
+	@apply col-end-13;
+}
+.my-col-end-21 {
+	@apply col-end-21;
+}
+.my-col-end-22 {
+	@apply col-end-22;
+}
+.my-col-end-23 {
+	@apply col-end-23;
+}
+.my-col-end-24 {
+	@apply col-end-24;
+}
+.my-col-end-25 {
+	@apply col-end-25;
+}
+.my-col-end-26 {
+	@apply col-end-26;
 }

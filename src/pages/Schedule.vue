@@ -60,9 +60,9 @@
 			</div>
 			<div class="overflow-x-auto border mx-1 rounded-lg" ref="printcontent">
 				<div class="overflow-x-hidden table-w" id="table">
-					<div class="grid grid-cols-13">
+					<div class="grid grid-cols-26">
 						<div
-							class="border py-1 pl-1"
+							class="border py-1 pl-1 col-span-2"
 							v-for="(header, headerIndex) in headers"
 							:key="`header-${headerIndex}`"
 						>
@@ -72,9 +72,9 @@
 					<div
 						v-for="(date, dateIndex) in orderedDate"
 						:key="`date-${dateIndex}`"
-						class="grid grid-cols-13 min-h-16 md:min-h-24 border"
+						class="grid grid-cols-26 min-h-16 md:min-h-24 border"
 					>
-						<div class="p-1 md:p-3 col-span-1 border-r-2" :class="`${getColorByDate(date)}`">
+						<div class="p-1 md:p-3 col-span-2 border-r-2" :class="`${getColorByDate(date)}`">
 							<span class="font-bold">{{ date }}</span>
 						</div>
 						<div
@@ -139,8 +139,8 @@ export default {
 				return this.courses.reduce((acc, course) => {
 					const dayKey = course.day_w.trim()
 					const mappedCourse = {
-						startCol: +course.time_from.split(':')[0] - 6,
-						endCol: +course.time_to.split(':')[0] - 6,
+						startCol: this.timeToCol(course.time_from),
+						endCol: this.timeToCol(course.time_to),
 						...course,
 					}
 					if (dayKey in acc) {
@@ -180,6 +180,11 @@ export default {
 			createBy.id = 'temp-link'
 			document.getElementById('temp-link').remove()
 		},
+		timeToCol(timeString) {
+			const time = timeString.split(':')
+			const remainder = +time[1] / 60
+			return (+time[0] + remainder) * 2 - 13
+		},
 		logout() {
 			localStorage.removeItem('accesstoken')
 			localStorage.removeItem('stdId')
@@ -199,7 +204,6 @@ export default {
 		},
 		getSchedule() {
 			this.loading = true
-			// console.log(lo)
 			axios
 				.get('/getSchedule', {
 					headers: {
@@ -210,7 +214,6 @@ export default {
 					},
 				})
 				.then((response) => {
-					console.log(this.loading)
 					const { data } = response
 					this.courses = data
 				})
