@@ -3,8 +3,9 @@
 
 ![ku-table](src/assets/ku-table.jpg)
 
-Click -> [https://schedule-ku.vercel.app](https://schedule-ku.vercel.app)
-ปลอดภัยๆลอคอินแล้วเซฟตารางได้เลยๆ
+[https://schedule-ku.vercel.app](https://schedule-ku.vercel.app)
+
+ปลอดภัยๆ ลอคอินแล้วเซฟตารางได้เลยๆ
 
 ## Example PNG Table
 
