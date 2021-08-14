@@ -124,7 +124,10 @@
 					</div>
 				</div>
 				<span class="hidden" id="create-by"
-					>hellos <a href="https://ku-table.vercel.app" class="">https://ku-table.vercel.app</a>
+					>hellos
+					<a href="https://ku-table.vercel.app" class="text-blue-600 underline"
+						>https://ku-table.vercel.app</a
+					>
 				</span>
 			</div>
 		</div>
