@@ -6,7 +6,7 @@
 
 https://ku-table.vercel.app
 
-# หมายเหตุ
+### หมายเหตุ
 ทาง dev ไม่มีการเก็บค่า username password และไม่มีตังจ่ายค่า serve database<br>
 มีเพียงการนับจำนวนคนใช้งานผ่านการเก็บ cache stdId </br>
 มีการ log ชั้นปีและคณะของผู้ใช้งานเพื่อทราบกลุ่มผู้ใช้ ตรวจสอบโค้ดได้ที่ https://github.com/Noboomta/schedule-ku-server <br>
@@ -29,7 +29,7 @@ https://ku-table.vercel.app
 [![Watch on GitHub](https://img.shields.io/github/watchers/Noboomta/schedule-ku.svg?style=social&label=Watch)](https://github.com/paralect/docker-compose-starter/watchers)
 [![Star on GitHub](https://img.shields.io/github/stars/Noboomta/schedule-ku.svg?style=social&label=Stars)](https://github.com/auxilincom/docker-compose-starter/stargazers)
 
-Getting started with this app.
+## Getting started with this app.
 
 Clone this repository
 
