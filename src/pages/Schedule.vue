@@ -167,7 +167,6 @@ export default {
 		},
 		mappedCourses() {
 			if (Array.isArray(this.courses)) {
-				console.log(this.courses)
 				return this.courses.reduce((acc, course) => {
 					const dayKey = course.day_w.trim()
 					const mappedCourse = {
