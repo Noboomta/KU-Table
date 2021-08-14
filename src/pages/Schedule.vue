@@ -123,6 +123,9 @@
 						</div>
 					</div>
 				</div>
+				<span class="hidden" id="create-by"
+					>hellos <a href="https://ku-table.vercel.app" class="">https://ku-table.vercel.app</a>
+				</span>
 			</div>
 		</div>
 	</div>
@@ -188,16 +191,8 @@ export default {
 	methods: {
 		async download() {
 			const el = this.$refs.printcontent
-			const createBy = document.createElement('div')
-			createBy.innerHTML = 'Created by KU-Table '
-			createBy.style.textAlign = 'right'
-			createBy.className = 'temp-link'
-			const kuShareLink = document.createElement('a')
-			kuShareLink.className = 'text-blue-500 px-1'
-			kuShareLink.innerHTML = 'https://ku-table.vercel.app'
-			kuShareLink.setAttribute('href', 'https://ku-table.vercel.app')
-			createBy.appendChild(kuShareLink)
-			el.appendChild(createBy)
+			const createBy = el.lastElementChild
+			createBy.className = 'mx-1 text-right block'
 			const options = {
 				type: 'dataURL',
 				windowWidth: '2560px',
@@ -208,8 +203,7 @@ export default {
 			link.setAttribute('download', 'ku-table.png')
 			link.setAttribute('href', printCanvas)
 			link.click()
-			createBy.id = 'temp-link'
-			document.getElementById('temp-link').remove()
+			createBy.className = 'hidden'
 		},
 		timeToCol(timeString) {
 			const time = timeString.split(':')
