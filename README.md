@@ -1,14 +1,17 @@
 # KU-TABLE
-ตารางเรียนที่อยากได้จากเว็บ KU
+ตารางเรียนที่อยากได้จากเว็บ KU<br>
+เซฟตารางไปใช้ได้เลยครับ 🤝🏻
 
 ![ku-table](src/assets/ku-table.jpg)
 
-[https://ku-table.vercel.app](https://ku-table.vercel.app)
+https://ku-table.vercel.app
 
-นับจำนวนคนใช้งานผ่านการเก็บ cache stdId 
-(ไม่ยุ่งกับค่า username password และไม่มีตังจ่าย database)</br>
-เว็บนี้ต้องการแสดงความต้องการอยากให้มี ตารางเรียน บนหน้าเว็บของมหาลัย ไม่ได้มีเจตนาหาผลประโยชน์ใดๆจากผู้ใช้</br>
-เซฟตารางไปใช้ได้เลยครับ 🤝🏻
+### หมายเหตุ
+ทาง dev ไม่มีการเก็บค่า username password และไม่มีตังจ่ายค่า serve database<br>
+มีเพียงการนับจำนวนคนใช้งานผ่านการเก็บ cache stdId มีการ log ชั้นปีและคณะของผู้ใช้งานเพื่อทราบกลุ่มผู้ใช้<br>
+ตรวจสอบโค้ดได้ที่ https://github.com/Noboomta/schedule-ku-server <br>
+จุดประสงค์ของ dev อยากให้มี ตารางเรียน บนหน้าเว็บของมหาลัย ไม่ได้มีเจตนาหาผลประโยชน์ใดๆจากผู้ใช้<br>
+ทาง dev ยินดีให้โค้ดทั้งหมดแก่มหาลัยเพียงทำตาม Getting started with this app.<br>
 
 ## Example PNG Table
 
@@ -26,15 +29,43 @@
 [![Watch on GitHub](https://img.shields.io/github/watchers/Noboomta/schedule-ku.svg?style=social&label=Watch)](https://github.com/paralect/docker-compose-starter/watchers)
 [![Star on GitHub](https://img.shields.io/github/stars/Noboomta/schedule-ku.svg?style=social&label=Stars)](https://github.com/auxilincom/docker-compose-starter/stargazers)
 
-## Project setup
+## Getting started with this app.
+
+Clone this repository
+
+```zsh
+git clone https://github.com/Noboomta/Ku-table.git
 ```
-yarn install
+
+Install dependencies using `yarn`
+
+if you don't have `yarn`. Please install it first by
+
+```zsh
+npm install --global yarn
+# or
+brew install yarn
+```
+
+install project's dependencies
+
+```zsh
+yarn
+```
+
+after this step, you will get `node_modules` folder in the root of the project.
+
+add `.env` file
+
+```
+VUE_APP_BASE_SERVER_URL=https://<your-server-domain>
 ```
 
 ### Compiles and hot-reloads for development
 ```
 yarn serve
 ```
+the applciation will run at [localhost:8080](http://localhost:8080)
 
 ### Compiles and minifies for production
 ```

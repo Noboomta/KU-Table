@@ -1,5 +1,5 @@
 <template>
-	<div class="flex mx-auto m-10 overflow-hidden">
+	<div class="flex mx-auto flex-grow items-center">
 		<div class="p-5 flex flex-col justify-center w-96">
 			<h1 class="text-7xl mb-5 text-shadow-gray">ERROR</h1>
 			<h2 class="text-8xl mb-5 text-red-600 text-shadow-red">404</h2>
