@@ -15,7 +15,7 @@ https://ku-table.vercel.app
 
 ## Example PNG Table
 
-![example-table](src/assets/example/ku-table.png)
+![example-table](src/assets/example/table_th.png)
 
 [![Website ku-table.vercel.app](https://img.shields.io/website-up-down-green-red/http/monip.org.svg)](https://ku-table.vercel.app)
 [![GitHub contributors](https://img.shields.io/github/contributors/Noboomta/schedule-ku.svg)](https://GitHub.com/Noboomta/schedule-ku/contributors/)
