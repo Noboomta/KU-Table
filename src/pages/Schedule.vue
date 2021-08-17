@@ -111,18 +111,17 @@
 									<span v-if="isCheck">ROOM: {{ course.room_name_en }}</span>
 									<span v-else>ห้อง: {{ course.room_name_th }}</span>
 								</div>
-								<div>
-									<span v-if="isCheck" class="text-right">
+								<div class="text-right">
+									<span v-if="isCheck" class="text-right w-full">
 										<span> SEC: {{ course.section_code }} </span>
 										<span>
 											{{ course.section_type_en }}
 										</span>
-										>
 									</span>
 									<span v-else class="text-right">
-										<span> SEC: {{ course.section_code }} </span>
+										<span> หมู่: {{ course.section_code }} </span>
 										<span>
-											{{ course.section_type_en }}
+											{{ course.section_type_th }}
 										</span>
 									</span>
 								</div>
