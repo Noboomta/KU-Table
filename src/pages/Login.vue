@@ -45,14 +45,14 @@
 				</div>
 
 				<footer class="text-xs">
-					<h3 class="font-bold">
-						ทั้งหมดนี้<span class="text-red-400">ไม่ใช่</span>เว็บของมหาลัยจริง
-					</h3>
-					<h3>
+					<p class="font-bold">
+						ทั้งหมดนี้ <span class="text-red-400">ไม่ใช่</span> เว็บของมหาลัยจริง
+					</p>
+					<p>
 						KU-Table เป็นเพียงเว็บที่ทำเพื่อความสะดวกสบายด้วยการสร้างตารางเรียนให้นิสิต
 						โดยใช้ข้อมูลจาก
 						<a href="https://my.ku.th/" class="text-blue-500 hover:underline">https://my.ku.th/</a>
-					</h3>
+					</p>
 				</footer>
 			</form>
 			<div>
