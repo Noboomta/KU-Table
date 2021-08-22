@@ -1,23 +1,16 @@
 name: deploy website
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+
+on: [push]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./
-        id: vercel-action
+      - uses: amondnet/vercel-action@v20
         with:
-          vercel-token: ${{ secrets.VER_TOKEN }}
-          vercel-org-id: ${{ secrets.ORG_ID }}
-          vercel-project-id: ${{ secrets.PROJECT_ID }}
-      - name: preview-url
-        run: |
-          echo ${{ steps.vercel-action.outputs.preview-url }}
+          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
+          vercel-args: '--prod' #Optional
+          vercel-org-id: ${{ secrets.ORG_ID}}  #Required
+          vercel-project-id: ${{ secrets.PROJECT_ID}} #Required
+
