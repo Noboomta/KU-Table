@@ -13,8 +13,8 @@ jobs:
       - uses: actions/checkout@v2
       - uses: amondnet/vercel-action@v20
         with:
-          vercel-org-id: ${{ secrets.ORG_ID}}  #Required
+          vercel-org-id: 'KU5d1shcqUaLeK9EMZoMFMhA'  #Required
           vercel-token: 'ep2a8dRRPCmR9EgxJpIxwxUG' # Required
           vercel-args: '--prod' #Optional
-          vercel-project-id: ${{ secrets.PROJECT_ID}} #Required
+          vercel-project-id: 'prj_YmNosCJsym94j2hcEfjNibzvIApm' #Required
           working-directory: ./sub-directory
