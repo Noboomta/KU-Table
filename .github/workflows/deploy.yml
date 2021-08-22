@@ -9,6 +9,22 @@ on:
       - main
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: preview-url
+        run: |
+          echo ${{ steps.vercel-action.outputs.preview-url }}
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: preview-url
+        run: |
+          echo ${{ steps.vercel-action.outputs.preview-url }}
+
   deploy:
     runs-on: ubuntu-latest
     steps:
