@@ -9,16 +9,5 @@
         { "key": "Access-Control-Allow-Headers", "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" }
       ]
     }
-  ],
-  "version": 2,
-  "public": false,
-  "github": {
-    "enabled": false
-  },
-  "builds": [
-    { "src": "./public/**", "use": "@now/static" }
-  ],
-  "routes": [
-    { "src": "/(.*)", "dest": "public/$1" }
   ]
 }
