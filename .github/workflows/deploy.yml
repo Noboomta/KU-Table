@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./
+
         id: vercel-action
         with:
           vercel-token: ${{ secrets.VER_TOKEN }}
