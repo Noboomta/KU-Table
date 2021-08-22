@@ -63,7 +63,7 @@ outputs:
     description: 'deployment preview name'
 runs:
   using: 'node12'
-  main: 'dist/index.js'
+  main: 'src/main.js'
 
 branding:
   icon: 'triangle'
