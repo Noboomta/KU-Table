@@ -1,0 +1,70 @@
+name: 'Vercel Action'
+description: 'This action make a deployment with github actions instead of Vercel builder.'
+inputs:
+  vercel-token:
+    description: 'Vercel token'
+    required: true
+  vercel-args:
+    description: ''
+    required: false
+    default: ''
+  github-comment:
+    required: false
+    default: 'true'
+    description: 'if you want to comment on pr and commit, set true, default: true'
+  github-token:
+    required: false
+    description: 'if you want to comment on pr and commit, set token'
+  github-deployment:
+    required: false
+    default: 'false'
+    description: 'if you want to create github deployment, set true, default: false'
+  working-directory:
+    required: false
+    description: the working directory
+  vercel-project-id:
+    required: false
+    description: 'Vercel CLI 17+, ❗️  The `name` property in vercel.json is deprecated (https://zeit.ink/5F)'
+  vercel-org-id:
+    required: false
+    description: 'Vercel CLI 17+, ❗️  The `name` property in vercel.json is deprecated (https://zeit.ink/5F)'
+  vercel-project-name:
+    required: false
+    description: "The name of the project; if absent we'll use the `vercel inspect` command to determine."
+  scope:
+    required: false
+    description: 'If you are work in team scope, you should set this value to your team id.'
+  zeit-token:
+    description: 'zeit.co token'
+    required: true
+    deprecationMessage: 'Zeit is now Vercel. Use "vercel-token" instead'
+  now-args:
+    description: ''
+    required: false
+    default: ''
+    deprecationMessage: 'Zeit is now Vercel. Use "vercel-args" instead.'
+  now-project-id:
+    required: false
+    description: 'Vercel CLI 17+, ❗️  The `name` property in vercel.json is deprecated (https://zeit.ink/5F)'
+    deprecationMessage: 'Zeit is now Vercel. Use "vercel-project-id" instead.'
+  now-org-id:
+    required: false
+    description: 'Vercel CLI 17+, ❗️  The `name` property in vercel.json is deprecated (https://zeit.ink/5F)'
+    deprecationMessage: 'Zeit is now Vercel. Use "vercel-org-id" instead.'
+  alias-domains:
+    required: false
+    description: 'You can assign a domain to this deployment. Please note that this domain must have been configured in the project. You can use pull request number via `{{PR_NUMBER}}` and branch via `{{BRANCH}}`'
+    default: ''
+
+outputs:
+  preview-url:
+    description: 'deployment preview URL'
+  preview-name:
+    description: 'deployment preview name'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+
+branding:
+  icon: 'triangle'
+  color: 'white'
