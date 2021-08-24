@@ -69,7 +69,11 @@ export default {
 
 		setProgress() {
 			this.units.forEach((item, index) => {
-				this.progress[index].percent = (parseInt(item.done) / parseInt(item.need)) * 100
+				if (item.done < item.need) {
+					this.progress[index].percent = (parseInt(item.done) / parseInt(item.need)) * 100
+				} else {
+					this.progress[index].percent = 100
+				}
 			})
 		},
 
