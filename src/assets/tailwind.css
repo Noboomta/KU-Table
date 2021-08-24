@@ -83,6 +83,20 @@ input:focus {
 	position: fixed;
 }
 
+.no-gap {
+	margin: 0px !important;
+	padding: 0px !important;
+}
+
+.k-progress{
+	font-size: 18px;
+	justify-content: space-between;
+}
+
+.k-progress-text {
+	font-size: 18px
+}
+
 .my-col-start-1 {
 	@apply col-start-1;
 }

@@ -25,6 +25,9 @@ module.exports = {
         }),
         minWidth: {
           '1000': '1000px'
+        },
+        hidden: {
+          
         }
       }
     },

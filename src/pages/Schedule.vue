@@ -124,10 +124,11 @@
 				<span class="hidden" id="create-by"
 					>hellos
 					<a href="https://ku-table.vercel.app" class="text-blue-600 underline"
-						>https://ku-table.vercel.app</a
-					>
+						>https://ku-table.vercel.app
+					</a>
 				</span>
 			</div>
+			<unit :lang="isCheck" />
 		</div>
 	</div>
 </template>
@@ -135,10 +136,12 @@
 <script>
 import axios from '../http'
 import SpinTableVue from '../components/SpinTable.vue'
+import Unit from '../pages/Unit.vue'
 export default {
 	name: 'Schedule',
 	components: {
 		SpinTableVue,
+		Unit,
 	},
 	data() {
 		return {
@@ -230,6 +233,8 @@ export default {
 		},
 		getSchedule() {
 			this.loading = true
+			console.log(localStorage.getItem('accesstoken'))
+			console.log(localStorage.getItem('stdId'))
 			axios
 				.get('/getSchedule', {
 					headers: {
@@ -244,10 +249,10 @@ export default {
 					this.courses = data
 				})
 				.catch(() => {
-					localStorage.clear('accesstoken')
-					localStorage.clear('authStatus')
-					location.reload()
-					this.$router.push('/login')
+					// localStorage.clear('accesstoken')
+					// localStorage.clear('authStatus')
+					// location.reload()
+					// this.$router.push('/login')
 				})
 				.finally(() => (this.loading = false))
 		},
