@@ -124,11 +124,11 @@
 				<span class="hidden" id="create-by"
 					>hellos
 					<a href="https://ku-table.vercel.app" class="text-blue-600 underline"
-						>https://ku-table.vercel.app</a
-					>
+						>https://ku-table.vercel.app
+					</a>
 				</span>
 			</div>
-			<unit />
+			<unit :lang="isCheck" />
 		</div>
 	</div>
 </template>

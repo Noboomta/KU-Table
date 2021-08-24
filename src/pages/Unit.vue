@@ -5,8 +5,9 @@
 		<div class="space-y-3 text-lg container mx-auto">
 			<div class="border-2 m-1 p-3" v-for="(item, index) in units" :key="index">
 				<div class="md:flex md:flex-row md:justify-between text-2xl">
-					<a>{{ unitsName[index] }}</a>
-					<a class="flex text-sm">{{ item.done }}/{{ item.need }} units</a>
+					<span v-if="lang">{{ unitsName.en[index] }}</span>
+					<span v-else>{{ unitsName.th[index] }}</span>
+					<span class="text-lg">{{ item.done }}/{{ item.need }} units</span>
 				</div>
 				<k-progress
 					class="no-gap text-xl"
@@ -17,7 +18,8 @@
 					<tbody>
 						<tr class="text-base md:text-lg" v-for="(sub, index) in item.subjects" :key="index">
 							<td class="w-1/12">{{ sub.subject_code }}</td>
-							<td class="w-10/12">{{ sub.subject_name_en }}</td>
+							<td v-if="lang" class="w-10/12">{{ sub.subject_name_en }}</td>
+							<td v-else class="w-10/12">{{ sub.subject_name_th }}</td>
 							<td class="w-1/12 text-right">{{ sub.credit }}</td>
 						</tr>
 					</tbody>
@@ -34,6 +36,7 @@ import spinTableVue from '../components/SpinTable.vue'
 
 export default {
 	name: 'Unit',
+	props: ['lang'],
 	components: {
 		spinTableVue,
 	},
@@ -43,13 +46,22 @@ export default {
 			loading: true,
 			isCheck: true,
 			units: [],
-			unitsName: [
-				'Wellness',
-				'Entrepreneurship',
-				'Thai Citizen and Global Citizen',
-				'Language and Communication',
-				'Aesthetics',
-			],
+			unitsName: {
+				en: [
+					'Wellness',
+					'Entrepreneurship',
+					'Thai Citizen and Global Citizen',
+					'Language and Communication',
+					'Aesthetics',
+				],
+				th: [
+					'กลุ่มสาระอยู่ดีมีสุข',
+					'กลุ่มสาระศาสตร์แห่งผู้ประกอบการ',
+					'กลุ่มสาระพลเมืองไทยและพลเมืองโลก',
+					'กลุ่มสาระภาษากับการสื่อสาร',
+					'กลุ่มสาระสุนทรียศาสตร์',
+				],
+			},
 			initProgress: [0, 0, 0, 0, 0],
 
 			subjects: [],
