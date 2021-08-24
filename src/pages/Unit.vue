@@ -9,16 +9,16 @@
 					<a class="flex text-sm">{{ item.done }}/{{ item.need }} units</a>
 				</div>
 				<k-progress
-					class=""
+					class="no-gap text-xl"
 					:percent="initProgress[index]"
 					:status="initProgress[index] === 100 ? 'success' : 'warning'"
 				></k-progress>
-				<table class="table-auto space-x-2">
+				<table class="table-auto space-x-2 w-full mr-3">
 					<tbody>
 						<tr class="text-base md:text-lg" v-for="(sub, index) in item.subjects" :key="index">
-							<td class="pr-4">{{ sub.subject_code }}</td>
-							<td class="pr-3">{{ sub.subject_name_en }}</td>
-							<td class="pr-4">{{ sub.credit }}</td>
+							<td class="w-1/12">{{ sub.subject_code }}</td>
+							<td class="w-10/12">{{ sub.subject_name_en }}</td>
+							<td class="w-1/12 text-right">{{ sub.credit }}</td>
 						</tr>
 					</tbody>
 				</table>
