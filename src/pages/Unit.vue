@@ -1,6 +1,6 @@
 <template>
 	<div class="container mx-auto items-center overflow-y-auto my-4 mt-10">
-		<h1 class="pl-2 font-bold text-4xl mb-2">KU GenEd</h1>
+		<h1 class="pl-2 font-bold text-4xl mb-6">KU GenEd</h1>
 		<spin-table-vue v-if="loading"></spin-table-vue>
 		<div class="space-y-3 text-lg container mx-auto">
 			<div class="border-2 m-1 p-3" v-for="(item, index) in units" :key="index">
@@ -79,7 +79,7 @@ export default {
 		processInterval() {
 			const timer = setInterval(() => {
 				this.initProgress = this.initProgress.map((item, index) => {
-					if (this.counter === 40) {
+					if (this.counter === 300) {
 						clearInterval(timer)
 					}
 					console.log('ใช้กูอยู่ไอควาย')
