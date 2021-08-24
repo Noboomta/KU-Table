@@ -46,9 +46,9 @@ export default {
 			unitsName: [
 				'Wellness',
 				'Entrepreneurship',
-				'Aesthetics',
-				'Language and Communication',
 				'Thai Citizen and Global Citizen',
+				'Language and Communication',
+				'Aesthetics',
 			],
 			initProgress: [0, 0, 0, 0, 0],
 
@@ -128,9 +128,9 @@ export default {
 					const { data } = response
 					this.units.push(data.Wellness)
 					this.units.push(data.Entrepreneurship)
-					this.units.push(data.Aesthetics)
-					this.units.push(data.Language_and_Communication)
 					this.units.push(data.Thai_Citizen_and_Global_Citizen)
+					this.units.push(data.Language_and_Communication)
+					this.units.push(data.Aesthetics)
 				})
 				.catch(() => {
 					localStorage.clear('accesstoken')
