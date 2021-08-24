@@ -11,12 +11,14 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faDownload)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('k-progress', KProgress)
 
 Vue.use(VueHtml2Canvas)
 
 Vue.config.productionTip = false
 
 import router from './router'
+import KProgress from 'k-progress'
 
 new Vue({
 	router,

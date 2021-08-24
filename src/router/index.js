@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '@/pages/Login.vue'
 import Schedule from '@/pages/Schedule.vue'
 import NotFound from '@/pages/NotFound.vue'
+import Unit from '@/pages/Unit.vue'
 
 Vue.use(VueRouter)
 
@@ -20,6 +21,12 @@ const routes = [
 		path: '/schedule',
 		name: 'Schedule',
 		component: Schedule,
+		meta: { requiresAuth: true },
+	},
+	{
+		path: '/unit',
+		name: 'Unit',
+		component: Unit,
 		meta: { requiresAuth: true },
 	},
 	{

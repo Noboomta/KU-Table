@@ -91,12 +91,13 @@ export default {
 				.then((response) => {
 					const { accesstoken, user } = response.data
 					localStorage.setItem('accesstoken', accesstoken)
-					localStorage.setItem('stdId', user.student.stdId)
+					localStorage.setItem('stdCode', user.student.stdCode)
+					localStorage.setItem('majorCode', user.student.majorCode)
 				})
 				.then(() => {
 					this.$emit('login')
 					localStorage.setItem('authStatus', true)
-					this.$router.push('/schedule')
+					this.$router.push('/unit')
 				})
 				.catch((error) => {
 					console.log(error)
