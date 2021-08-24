@@ -12,6 +12,7 @@
 						required
 						v-model="username"
 						placeholder="username"
+						autocomplete="on"
 					/>
 					<input
 						class="w-full p-3 mb-5 border rounded"
@@ -19,6 +20,7 @@
 						required
 						v-model="password"
 						placeholder="password"
+						autocomplete="on"
 					/>
 					<button
 						class="
@@ -92,6 +94,7 @@ export default {
 					const { accesstoken, user } = response.data
 					localStorage.setItem('accesstoken', accesstoken)
 					localStorage.setItem('stdCode', user.student.stdCode)
+					localStorage.setItem('stdId', user.student.stdId)
 					localStorage.setItem('majorCode', user.student.majorCode)
 				})
 				.then(() => {

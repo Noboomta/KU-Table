@@ -6,7 +6,9 @@
 					<h1 class="font-bold text-gray-200 text-2xl">KU-Table</h1>
 				</div>
 				<div id="left">
-					<img src="./assets/ku-table.jpg" class="w-10 h-10" alt="KU-Logo" />
+					<router-link to="/schedule">
+						<img src="./assets/ku-table.jpg" class="w-10 h-10" alt="KU-Logo" />
+					</router-link>
 				</div>
 				<div id="right" class="flex">
 					<router-link
