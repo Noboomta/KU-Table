@@ -136,7 +136,7 @@
 <script>
 import axios from '../http'
 import SpinTableVue from '../components/SpinTable.vue'
-import Unit from '../pages/Unit.vue'
+import Unit from '../components/Unit.vue'
 export default {
 	name: 'Schedule',
 	components: {

@@ -32,7 +32,7 @@
 
 <script>
 import axios from '../http'
-import spinTableVue from '../components/SpinTable.vue'
+import spinTableVue from './SpinTable.vue'
 
 export default {
 	name: 'Unit',
