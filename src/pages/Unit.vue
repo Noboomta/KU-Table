@@ -4,7 +4,7 @@
 		<spin-table-vue v-if="loading"></spin-table-vue>
 		<div class="space-y-3 text-lg container mx-auto">
 			<div class="border-2 m-1 p-3" v-for="(item, index) in units" :key="index">
-				<div class="md:flex md:flex-row md:justify-between text-2xl">
+				<div class="flex flex-col md:flex-row justify-between text-2xl">
 					<span v-if="lang">{{ unitsName.en[index] }}</span>
 					<span v-else>{{ unitsName.th[index] }}</span>
 					<span class="text-lg">{{ item.done }}/{{ item.need }} units</span>
@@ -17,7 +17,7 @@
 				<table class="table-auto space-x-2 w-full mr-3">
 					<tbody>
 						<tr class="text-base md:text-lg" v-for="(sub, index) in item.subjects" :key="index">
-							<td class="w-1/12">{{ sub.subject_code }}</td>
+							<td class="w-1/12 pr-2">{{ sub.subject_code }}</td>
 							<td v-if="lang" class="w-10/12">{{ sub.subject_name_en }}</td>
 							<td v-else class="w-10/12">{{ sub.subject_name_th }}</td>
 							<td class="w-1/12 text-right">{{ sub.credit }}</td>
