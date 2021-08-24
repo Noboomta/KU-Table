@@ -1,15 +1,27 @@
 <template>
-	<div class="flex mx-auto flex-grow items-center">
+	<div class="flex justify-center container mx-auto items-center overflow-y-auto my-4">
 		<spin-table-vue v-if="loading"></spin-table-vue>
-		<ul class="space-y-2 text-lg">
-			<li v-for="(item, index) in units" :key="index">
-				<p>{{ unitsName[index] }}</p>
+		<div class="space-y-3 text-lg flex-wrap">
+			<div class="border-2 m-1 p-3" v-for="(item, index) in units" :key="index">
+				<a>{{ unitsName[index] }}</a>
+				<a class="flex text-sm">{{ item.done }}/{{ item.need }}</a>
 				<k-progress
 					:percent="initProgress[index]"
 					:status="initProgress[index] === 100 ? 'success' : 'warning'"
 				></k-progress>
-			</li>
-		</ul>
+				<div
+					class="flex flex-row space-x-4 text-xs items-baseline"
+					v-for="(sub, index) in item.subjects"
+					:key="index"
+				>
+					<div class="flex flex-row space-x-2">
+						<a class="w-16">{{ sub.subject_code }}</a>
+						<a class="w-36">{{ sub.subject_name_en }}</a>
+						<a>{{ sub.credit }}</a>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div></div>
 	</div>
 </template>
@@ -38,6 +50,8 @@ export default {
 			],
 			initProgress: [0, 0, 0, 0, 0],
 
+			subjects: [],
+
 			progress: [
 				{ percent: 0, ifUp: 'true' },
 				{ percent: 0, ifUp: 'true' },
@@ -53,6 +67,8 @@ export default {
 		this.getUnit()
 			.then(() => this.setProgress())
 			.then(() => this.processInterval())
+			.then(() => console.log(this.units))
+			.then(() => this.units.forEach((item) => console.log(item.subjects)))
 	},
 	computed: {},
 	methods: {
@@ -86,6 +102,7 @@ export default {
 			localStorage.removeItem('stdId')
 			this.$router.push('/')
 		},
+
 		getUnit() {
 			this.loading = true
 			return axios
