@@ -9,7 +9,7 @@ https://ku-table.vercel.app
 ### หมายเหตุ
 ทาง dev ไม่มีการเก็บค่า username password และไม่มีตังจ่ายค่า server database<br>
 มีเพียงการนับจำนวนคนใช้งานผ่านการเก็บ cache stdId มีการ log ชั้นปีและคณะของผู้ใช้งานเพื่อทราบกลุ่มผู้ใช้<br>
-ตรวจสอบโค้ดได้ที่ https://github.com/Noboomta/schedule-ku-server <br>
+ตรวจสอบโค้ดได้ที่ https://github.com/Noboomta/KU-Table-server <br>
 จุดประสงค์ของ dev อยากให้มี ตารางเรียน บนหน้าเว็บของมหาลัย ไม่ได้มีเจตนาหาผลประโยชน์ใดๆจากผู้ใช้<br>
 ทาง dev ยินดีให้โค้ดทั้งหมดแก่มหาลัยเพียงทำตาม Getting started with this app.<br>
 
