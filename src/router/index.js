@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '@/pages/Login.vue'
 import Schedule from '@/pages/Schedule.vue'
 import NotFound from '@/pages/NotFound.vue'
-import Unit from '@/pages/Unit.vue'
+import Unit from '@/components/Unit.vue'
 
 Vue.use(VueRouter)
 
