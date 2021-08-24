@@ -97,7 +97,7 @@ export default {
 				.then(() => {
 					this.$emit('login')
 					localStorage.setItem('authStatus', true)
-					this.$router.push('/unit')
+					this.$router.push('/schedule')
 				})
 				.catch((error) => {
 					console.log(error)

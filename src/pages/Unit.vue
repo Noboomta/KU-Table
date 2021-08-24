@@ -56,7 +56,7 @@ export default {
 			// eslint-disable-next-line no-unused-vars
 			setInterval(() => {
 				this.initProgress = this.initProgress.map((item, index) => {
-					if (item == this.progress[index].percent) {
+					if (item >= this.progress[index].percent) {
 						this.progress[index].ifUp = false
 						return item
 					}
