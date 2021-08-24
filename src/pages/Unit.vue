@@ -1,5 +1,6 @@
 <template>
 	<div class="flex mx-auto flex-grow items-center">
+		<spin-table-vue v-if="loading"></spin-table-vue>
 		<ul class="space-y-2 text-lg">
 			<li v-for="(item, index) in units" :key="index">
 				<p>{{ unitsName[index] }}</p>
@@ -15,9 +16,13 @@
 
 <script>
 import axios from '../http'
+import spinTableVue from '../components/SpinTable.vue'
+
 export default {
 	name: 'Unit',
-	components: {},
+	components: {
+		spinTableVue,
+	},
 	data() {
 		return {
 			a: '30',
@@ -52,7 +57,6 @@ export default {
 	computed: {},
 	methods: {
 		processInterval() {
-			console.log(this.progress)
 			// eslint-disable-next-line no-unused-vars
 			setInterval(() => {
 				this.initProgress = this.initProgress.map((item, index) => {
@@ -103,18 +107,13 @@ export default {
 					this.units.push(data.Thai_Citizen_and_Global_Citizen)
 				})
 				.catch(() => {
-					// localStorage.clear('accesstoken')
-					// localStorage.clear('authStatus')
-					// location.reload()
-					// this.$router.push('/login')
+					localStorage.clear('accesstoken')
+					localStorage.clear('authStatus')
+					location.reload()
+					this.$router.push('/login')
 				})
 				.finally(() => (this.loading = false))
 		},
-		// getPercentProcess(done, need){
-		// 	console.log(done);
-		// 	console.log(need);
-		// 	return (parseInt(done)/parseInt(need))*100
-		// }
 	},
 }
 </script>
