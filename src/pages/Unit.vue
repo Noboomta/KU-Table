@@ -1,25 +1,27 @@
 <template>
-	<div class="flex justify-center container mx-auto items-center overflow-y-auto my-4">
+	<div class="container mx-auto items-center overflow-y-auto my-4 mt-10">
+		<h1 class="pl-2 font-bold text-4xl mb-2">KU GenEd</h1>
 		<spin-table-vue v-if="loading"></spin-table-vue>
-		<div class="space-y-3 text-lg flex-wrap">
+		<div class="space-y-3 text-lg container mx-auto">
 			<div class="border-2 m-1 p-3" v-for="(item, index) in units" :key="index">
-				<a>{{ unitsName[index] }}</a>
-				<a class="flex text-sm">{{ item.done }}/{{ item.need }}</a>
+				<div class="md:flex md:flex-row md:justify-between text-2xl">
+					<a>{{ unitsName[index] }}</a>
+					<a class="flex text-sm">{{ item.done }}/{{ item.need }} units</a>
+				</div>
 				<k-progress
+					class=""
 					:percent="initProgress[index]"
 					:status="initProgress[index] === 100 ? 'success' : 'warning'"
 				></k-progress>
-				<div
-					class="flex flex-row space-x-4 text-xs items-baseline"
-					v-for="(sub, index) in item.subjects"
-					:key="index"
-				>
-					<div class="flex flex-row space-x-2">
-						<a class="w-16">{{ sub.subject_code }}</a>
-						<a class="w-36">{{ sub.subject_name_en }}</a>
-						<a>{{ sub.credit }}</a>
-					</div>
-				</div>
+				<table class="table-auto space-x-2">
+					<tbody>
+						<tr class="text-base md:text-lg" v-for="(sub, index) in item.subjects" :key="index">
+							<td class="pr-4">{{ sub.subject_code }}</td>
+							<td class="pr-3">{{ sub.subject_name_en }}</td>
+							<td class="pr-4">{{ sub.credit }}</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 		<div></div>
@@ -61,6 +63,8 @@ export default {
 			],
 
 			progressBarColor: [],
+
+			counter: 0,
 		}
 	},
 	created() {
@@ -73,11 +77,16 @@ export default {
 	computed: {},
 	methods: {
 		processInterval() {
-			// eslint-disable-next-line no-unused-vars
-			setInterval(() => {
+			const timer = setInterval(() => {
 				this.initProgress = this.initProgress.map((item, index) => {
+					if (this.counter === 40) {
+						clearInterval(timer)
+					}
+					console.log('ใช้กูอยู่ไอควาย')
 					if (item >= this.progress[index].percent) {
 						this.progress[index].ifUp = false
+						console.log(this.counter)
+						this.counter += 1
 						return item
 					}
 					if (this.progress[index].ifUp) {
