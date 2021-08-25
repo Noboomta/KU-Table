@@ -1,6 +1,21 @@
 <template>
-	<div class="container mx-auto items-center overflow-y-auto my-4 mt-10">
-		<h1 class="pl-2 font-bold text-4xl mb-6">KU GenEd</h1>
+	<div v-if="!data">
+		<h1 class="pl-2 font-bold text-4xl mb-6 mt-6">KU GenEd</h1>
+
+		<div class="text-red-500 text-xl flex container mx-auto justify-center">
+			<div class="text-center m-2">
+				<span class="text-center" v-if="lang">
+					Sorry, we don't have information about your faculty department ({{ major }}) at this
+					moment.
+				</span>
+				<span class="text-center" v-else>
+					ขออภัย ทางเรายังไม่มีข้อมูลเกี่ยวกับคณะ ({{ major }}) ของท่านในตอนนี้ครับ
+				</span>
+			</div>
+		</div>
+	</div>
+	<div v-else class="container mx-auto items-center overflow-y-auto my-4 mt-10">
+		<h1 class="pl-2 font-bold text-4xl mb-6">KU GenEd ({{ major }})</h1>
 		<spin-table-vue v-if="loading"></spin-table-vue>
 		<div class="space-y-3 text-lg container mx-auto">
 			<div class="border-2 m-1 p-3" v-for="(item, index) in units" :key="index">
@@ -77,14 +92,18 @@ export default {
 			progressBarColor: [],
 
 			counter: 0,
+
+			data: true,
+
+			major: '',
 		}
 	},
 	created() {
 		this.getUnit()
 			.then(() => this.setProgress())
 			.then(() => this.processInterval())
-			.then(() => console.log(this.units))
-			.then(() => this.units.forEach((item) => console.log(item.subjects)))
+			.then(() => (this.major = localStorage.getItem('majorCode')))
+		console.log(localStorage.getItem('majorCode'))
 	},
 	computed: {},
 	methods: {
@@ -94,10 +113,8 @@ export default {
 					if (this.counter === 300) {
 						clearInterval(timer)
 					}
-					console.log('ใช้กูอยู่ไอควาย')
 					if (item >= this.progress[index].percent) {
 						this.progress[index].ifUp = false
-						console.log(this.counter)
 						this.counter += 1
 						return item
 					}
@@ -110,7 +127,8 @@ export default {
 
 		setProgress() {
 			this.units.forEach((item, index) => {
-				if (item.done < item.need) {
+				if (item.need == 0) this.data = false
+				else if (item.done < item.need) {
 					this.progress[index].percent = (parseInt(item.done) / parseInt(item.need)) * 100
 				} else {
 					this.progress[index].percent = 100

@@ -233,8 +233,6 @@ export default {
 		},
 		getSchedule() {
 			this.loading = true
-			console.log(localStorage.getItem('accesstoken'))
-			console.log(localStorage.getItem('stdId'))
 			axios
 				.get('/getSchedule', {
 					headers: {
@@ -249,10 +247,10 @@ export default {
 					this.courses = data
 				})
 				.catch(() => {
-					// localStorage.clear('accesstoken')
-					// localStorage.clear('authStatus')
-					// location.reload()
-					// this.$router.push('/login')
+					localStorage.clear('accesstoken')
+					localStorage.clear('authStatus')
+					location.reload()
+					this.$router.push('/login')
 				})
 				.finally(() => (this.loading = false))
 		},

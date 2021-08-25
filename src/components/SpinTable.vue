@@ -26,7 +26,10 @@ div.masked:before {
 	content: '';
 	width: 100%;
 	height: 100%;
-	background-color: rgba(70, 70, 70, 0.7);
-	background-color: transparent;
+	background-color: rgb(114, 110, 110, 0.7);
+}
+
+span.ping {
+	background-color: rgb(143, 174, 144);
 }
 </style>
