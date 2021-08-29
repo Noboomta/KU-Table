@@ -2,7 +2,7 @@
 	<div v-if="!data">
 		<h1 class="pl-2 font-bold text-4xl mb-6 mt-6">KU GenEd</h1>
 
-		<div class="text-red-500 text-xl flex container mx-auto justify-center">
+		<div class="text-red-500 text-md md:text-xl flex container mx-auto justify-center">
 			<div class="text-center m-2">
 				<span class="text-center" v-if="lang">
 					Sorry, we don't have information about your faculty department ({{ major }})
@@ -26,7 +26,10 @@
 		</div>
 	</div>
 	<div v-else class="container mx-auto items-center overflow-y-auto my-4 mt-10">
-		<h1 class="pl-2 font-bold text-4xl mb-6">KU GenEd ({{ major }})</h1>
+		<div class="flex">
+			<h1 class="pl-2 font-bold text-4xl mb-6">KU GenEd</h1>
+			<h1 class="text-4xl font-bold pl-2" v-if="!loading">({{ major }})</h1>
+		</div>
 		<spin-table-vue v-if="loading"></spin-table-vue>
 		<div class="space-y-3 text-lg container mx-auto">
 			<div class="border-2 m-1 p-3" v-for="(item, index) in units" :key="index">
@@ -51,12 +54,11 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="container mx-auto flex text-center pl-2">
-				<span class="text-xs md:text-lg"
-					>More information:
-					<a class="text-blue-700" href="https://www.ku.ac.th/th/bachelor-degree"
-						>https://www.ku.ac.th/th/bachelor-degree</a
-					></span
+			<div class="container mx-auto flex text-center pl-2 text-xs md:text-lg">
+				<span v-if="lang" class="">More information: </span>
+				<span v-else class="">หมายเหตุ: </span>
+				<a class="text-blue-700 pl-1" href="https://www.ku.ac.th/th/bachelor-degree"
+					>https://www.ku.ac.th/th/bachelor-degree</a
 				>
 			</div>
 		</div>
