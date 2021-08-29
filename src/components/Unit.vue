@@ -5,12 +5,23 @@
 		<div class="text-red-500 text-xl flex container mx-auto justify-center">
 			<div class="text-center m-2">
 				<span class="text-center" v-if="lang">
-					Sorry, we don't have information about your faculty department ({{ major }}) at this
-					moment.
+					Sorry, we don't have information about your faculty department ({{ major }})
 				</span>
 				<span class="text-center" v-else>
-					ขออภัย ทางเรายังไม่มีข้อมูลเกี่ยวกับคณะ ({{ major }}) ของท่านในตอนนี้ครับ
+					ขออภัย ทางเรายังไม่มีข้อมูลเกี่ยวกับคณะ ({{ major }}) ของท่าน.
 				</span>
+				<p class="text-center text-black" v-if="lang">
+					More information:
+					<a class="text-blue-700" href="https://www.ku.ac.th/th/bachelor-degree"
+						>https://www.ku.ac.th/th/bachelor-degree</a
+					>
+				</p>
+				<p class="text-center text-black" v-else>
+					หมายเหตุ:
+					<a class="text-blue-700" href="https://www.ku.ac.th/th/bachelor-degree"
+						>https://www.ku.ac.th/th/bachelor-degree</a
+					>
+				</p>
 			</div>
 		</div>
 	</div>
@@ -39,6 +50,14 @@
 						</tr>
 					</tbody>
 				</table>
+			</div>
+			<div class="container mx-auto flex text-center pl-2">
+				<span class="text-xs md:text-lg"
+					>More information:
+					<a class="text-blue-700" href="https://www.ku.ac.th/th/bachelor-degree"
+						>https://www.ku.ac.th/th/bachelor-degree</a
+					></span
+				>
 			</div>
 		</div>
 		<div></div>
