@@ -124,7 +124,6 @@ export default {
 			.then(() => this.setProgress())
 			.then(() => this.processInterval())
 			.then(() => (this.major = localStorage.getItem('majorCode')))
-		console.log(localStorage.getItem('majorCode'))
 	},
 	computed: {},
 	methods: {
