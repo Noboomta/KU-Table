@@ -4,7 +4,7 @@
 			<spin-table-vue v-if="loading"></spin-table-vue>
 			<form class="p-5 max-w-sm flex flex-col" @submit.prevent="login">
 				<div class="md:flex-grow">
-					<h3 class="text-4xl">Login</h3>
+					<h3 class="text-4xl">ขออภัย เซิฟเวอร์มหาลัยกำลังปรับปรุงครับ</h3>
 					<h3 class="text-sm text-gray-600">Sign in to your nontri account</h3>
 					<input
 						type="text"
@@ -42,7 +42,7 @@
 						Login
 					</button>
 					<div class="mt-3" v-if="err">
-						<h1 class="text-red-500">ลอคอินไม่ได้จ้า</h1>
+						<h1 class="text-red-500">ล็อกอินไม่ได้จ้า</h1>
 					</div>
 				</div>
 
