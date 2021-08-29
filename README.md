@@ -6,13 +6,6 @@
 
 https://ku-table.vercel.app
 
-### หมายเหตุ
-ทาง dev ไม่มีการเก็บค่า username password และไม่มีตังจ่ายค่า server database<br>
-มีเพียงการนับจำนวนคนใช้งานผ่านการเก็บ cache stdId มีการ log ชั้นปีและคณะของผู้ใช้งานเพื่อทราบกลุ่มผู้ใช้<br>
-ตรวจสอบโค้ดได้ที่ https://github.com/Noboomta/KU-Table-server <br>
-จุดประสงค์ของ dev อยากให้มี ตารางเรียน บนหน้าเว็บของมหาลัย ไม่ได้มีเจตนาหาผลประโยชน์ใดๆจากผู้ใช้<br>
-ทาง dev ยินดีให้โค้ดทั้งหมดแก่มหาลัยเพียงทำตาม <strong>Getting started with this app.</strong><br>
-
 ## Example PNG Table
 
 ![example-table](src/assets/example/table_th.png)
@@ -28,6 +21,17 @@ https://ku-table.vercel.app
 
 [![Watch on GitHub](https://img.shields.io/github/watchers/Noboomta/schedule-ku.svg?style=social&label=Watch)](https://github.com/paralect/docker-compose-starter/watchers)
 [![Star on GitHub](https://img.shields.io/github/stars/Noboomta/schedule-ku.svg?style=social&label=Stars)](https://github.com/auxilincom/docker-compose-starter/stargazers)
+
+### หมายเหตุ
+ทาง dev ไม่มีการเก็บค่า username password และไม่มีตังจ่ายค่า server database<br>
+มีเพียงการนับจำนวนคนใช้งานผ่านการเก็บ cache stdId มีการ log ชั้นปีและคณะของผู้ใช้งานเพื่อทราบกลุ่มผู้ใช้<br>
+ตรวจสอบโค้ดได้ที่ https://github.com/Noboomta/KU-Table-server <br>
+จุดประสงค์ของ dev อยากให้มี ตารางเรียน บนหน้าเว็บของมหาลัย ไม่ได้มีเจตนาหาผลประโยชน์ใดๆจากผู้ใช้<br>
+ทาง dev ยินดีให้โค้ดทั้งหมดแก่มหาลัยเพียงทำตาม <strong>Getting started with this app.</strong><br>
+
+### ที่มาข้อมูล
+https://www.ku.ac.th/th/bachelor-degree <br>
+https://github.com/marsDev31/KUnit
 
 ## Getting started with this app.
 
