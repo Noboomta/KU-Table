@@ -27,8 +27,18 @@
 	</div>
 	<div v-else class="container mx-auto items-center overflow-y-auto my-4 mt-10">
 		<div class="flex">
-			<h1 class="pl-2 font-bold text-4xl mb-6">KU GenEd</h1>
+			<h1 class="pl-2 font-bold text-4xl mb-2">KU GenEd</h1>
 			<h1 class="text-4xl font-bold pl-2" v-if="!loading">({{ major }})</h1>
+		</div>
+		<div class="container text-sm font-bold mx-auto p-2 text-red-500">
+			<span v-if="!lang">
+				**โปรดตรวจสอบข้อมูลเงื่อนไขการลงทะเบียนของท่านอีกครั้ง
+				อาจมีเงื่อนไขแตกต่างกันออกไปในแต่ละสาขาและชั้นปีครับ</span
+			>
+			<span v-else>
+				**Please check your registration conditions again. There may be different conditions for
+				each department and year.</span
+			>
 		</div>
 		<spin-table-vue v-if="loading"></spin-table-vue>
 		<div class="space-y-3 text-lg container mx-auto">
