@@ -49,7 +49,7 @@
 					<span class="text-lg">{{ item.done }}/{{ item.need }} units</span>
 				</div>
 				<k-progress
-					class="no-gap text-xl"
+					class="no-gap text-xl dark:text-gray-300"
 					:percent="initProgress[index]"
 					:status="initProgress[index] === 100 ? 'success' : 'warning'"
 				></k-progress>
@@ -67,7 +67,9 @@
 			<div class="container mx-auto flex text-center pl-2 text-xs md:text-lg">
 				<span v-if="lang" class="">More information: </span>
 				<span v-else class="">หมายเหตุ: </span>
-				<a class="text-blue-700 pl-1" href="https://www.ku.ac.th/th/bachelor-degree"
+				<a
+					class="text-blue-700 dark:text-gray-200 pl-1 underline"
+					href="https://www.ku.ac.th/th/bachelor-degree"
 					>https://www.ku.ac.th/th/bachelor-degree</a
 				>
 			</div>

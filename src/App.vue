@@ -1,9 +1,22 @@
 <template>
-	<div id="app">
+	<div id="app" class="bg-white dark:bg-gray-900">
 		<div>
-			<nav class="h-16 flex items-center bg-green-500 px-5 justify-between z-10 fixed w-full">
+			<nav
+				class="
+					h-16
+					flex
+					items-center
+					bg-green-500
+					dark:bg-gray-800
+					px-5
+					justify-between
+					z-10
+					fixed
+					w-full
+				"
+			>
 				<div id="middle" class="h-16 flex items-center m-auto justify-center absolute">
-					<h1 class="font-bold text-gray-200 text-2xl">KU-Table</h1>
+					<h1 class="font-bold text-gray-200 dark:text-green-300 text-2xl">KU-Table</h1>
 				</div>
 				<div id="left">
 					<router-link to="/schedule">
@@ -11,8 +24,33 @@
 					</router-link>
 				</div>
 				<div id="right" class="flex">
+					<a
+						href="#"
+						class="
+							m-3
+							text-gray-200
+							dark:text-green-300
+							hover:text-white
+							dark:hover:text-white
+							transition
+							duration-300
+						"
+						@click.prevent="toggleTheme"
+					>
+						<font-awesome-icon icon="moon" v-if="theme === 'light'" />
+						<font-awesome-icon icon="sun" v-else />
+					</a>
 					<div
-						class="m-3 text-gray-200 hover:text-white transition duration-300 cursor-pointer"
+						class="
+							m-3
+							text-gray-200
+							dark:text-green-300
+							hover:text-white
+							dark:hover:text-white
+							transition
+							duration-300
+							cursor-pointer
+						"
 						@click="checkLogin"
 					>
 						{{ buttonText }}
@@ -29,6 +67,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import KuFooter from '@/components/KuFooter.vue'
 
 export default {
@@ -41,9 +80,20 @@ export default {
 			authStatus: false,
 		}
 	},
+	beforeMount() {
+		this.$store.dispatch('init_theme')
+	},
 	computed: {
 		buttonText() {
 			return this.authStatus ? 'Logout' : 'Login'
+		},
+		...mapGetters({ theme: 'getTheme' }),
+	},
+	watch: {
+		theme(newTheme) {
+			newTheme === 'light'
+				? document.querySelector('html').classList.remove('dark')
+				: document.querySelector('html').classList.add('dark')
 		},
 	},
 	created() {
@@ -68,6 +118,9 @@ export default {
 				}
 			}
 		},
+		toggleTheme() {
+			this.$store.dispatch('toggle_theme')
+		},
 	},
 }
 </script>
@@ -77,6 +130,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
+	transition: all 0.5s;
 }
 nav {
 	box-shadow: 0px 4px 4px 0px #00000040;

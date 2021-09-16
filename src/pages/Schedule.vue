@@ -4,12 +4,16 @@
 		<div class="mx-auto container pt-7 pb-10">
 			<div id="top" class="mx-2 flex flex-wrap justify-between">
 				<div>
-					<h1 class="text-4xl font-bold mb-2 md:mb-0 mr-5 inline-block align-top">Schedule</h1>
+					<h1 class="text-4xl font-bold mb-2 md:mb-0 mr-5 inline-block align-top dark:text-white">
+						Schedule
+					</h1>
 				</div>
 				<div class="flex justify-between w-full sm:w-auto">
 					<span class="align-top">
 						<label for="toggleB" class="flex items-center cursor-pointer">
-							<div class="mr-3 hidden sm:block text-gray-700 text-sm xs:text-md">TH</div>
+							<div class="mr-3 hidden sm:block text-gray-700 dark:text-gray-200 text-sm xs:text-md">
+								TH
+							</div>
 							<!-- toggle -->
 							<div class="relative">
 								<!-- input -->
@@ -17,9 +21,12 @@
 								<!-- line -->
 								<div
 									v-if="isCheck"
-									class="block bg-gray-300 w-12 h-7 sm:w-14 sm:h-8 rounded-full"
+									class="block bg-gray-300 dark:bg-gray-600 w-12 h-7 sm:w-14 sm:h-8 rounded-full"
 								></div>
-								<div v-else class="block bg-gray-200 w-12 h-7 sm:w-14 sm:h-8 rounded-full"></div>
+								<div
+									v-else
+									class="block bg-gray-200 dark:bg-gray-600 w-12 h-7 sm:w-14 sm:h-8 rounded-full"
+								></div>
 								<!-- dot -->
 								<div
 									class="
@@ -37,7 +44,7 @@
 								></div>
 							</div>
 							<!-- label -->
-							<div class="ml-3 mr-4 text-gray-700 text-sm xs:text-md">EN</div>
+							<div class="ml-3 mr-4 text-gray-700 dark:text-gray-200 text-sm xs:text-md">EN</div>
 						</label>
 					</span>
 					<div class="text-center mr-2 mb-5">
@@ -65,7 +72,7 @@
 				<div class="overflow-x-hidden table-w" id="table">
 					<div class="grid grid-cols-26">
 						<div
-							class="border py-1 pl-1 col-span-2"
+							class="border py-1 pl-1 col-span-2 dark:text-white dark:border-gray-700"
 							v-for="(header, headerIndex) in headers"
 							:key="`header-${headerIndex}`"
 						>
@@ -75,10 +82,13 @@
 					<div
 						v-for="(date, dateIndex) in orderedDate"
 						:key="`date-${dateIndex}`"
-						class="grid grid-cols-26 min-h-16 md:min-h-24 border"
+						class="grid grid-cols-26 min-h-16 md:min-h-24 border dark:border-gray-700"
 					>
-						<div class="p-1 md:p-3 col-span-2 border-r-2" :class="`${getColorByDate(date)}`">
-							<span class="font-bold">{{ date }}</span>
+						<div
+							class="p-1 md:p-3 col-span-2 border-r-2 dark:border-gray-700"
+							:class="`${getColorByDate(date)}`"
+						>
+							<span class="font-bold dark:text-gray-900">{{ date }}</span>
 						</div>
 						<div
 							class="
@@ -94,6 +104,7 @@
 								hover:bg-opacity-70
 								overflow-hidden
 								cursor-pointer
+								dark:bg-opacity-100 dark:border-gray-700
 							"
 							:class="`my-col-start-${course.startCol} my-col-end-${course.endCol}
 							${getColorByDate(date)}`"
@@ -128,12 +139,13 @@
 					</a>
 				</span>
 			</div>
-			<unit :lang="isCheck" />
+			<unit class="dark:text-white" :lang="isCheck" />
 		</div>
 	</div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import axios from '../http'
 import SpinTableVue from '../components/SpinTable.vue'
 import Unit from '../components/Unit.vue'
@@ -191,21 +203,25 @@ export default {
 			}
 			return ''
 		},
+		...mapGetters({ theme: 'getTheme' }),
 	},
 	methods: {
 		async download() {
 			const el = this.$refs.printcontent
 			const createBy = el.lastElementChild
-			createBy.className = 'mx-1 text-right block'
+			createBy.className = 'mx-1 text-right block dark:text-white'
 			const options = {
 				type: 'dataURL',
 				windowWidth: '2560px',
 			}
-
+			if (this.theme === 'dark') {
+				options.backgroundColor = '#111827'
+			}
 			const printCanvas = await this.$html2canvas(el, options)
 			const link = document.createElement('a')
 			link.setAttribute('download', 'ku-table.png')
 			link.setAttribute('href', printCanvas)
+			link.className = 'dark:text-white'
 			link.click()
 			createBy.className = 'hidden'
 		},
