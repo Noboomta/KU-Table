@@ -81,7 +81,7 @@ export default {
 		}
 	},
 	beforeMount() {
-		this.$store.dispatch('init_theme')
+		this.$store.dispatch('initTheme')
 	},
 	computed: {
 		buttonText() {
@@ -119,7 +119,7 @@ export default {
 			}
 		},
 		toggleTheme() {
-			this.$store.dispatch('toggle_theme')
+			this.$store.dispatch('toggleTheme')
 		},
 	},
 }

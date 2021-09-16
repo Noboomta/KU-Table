@@ -3,30 +3,30 @@ export default {
 		theme: {},
 	},
 	mutations: {
-		set_theme(state, theme) {
+		setTheme(state, theme) {
 			state.theme = theme
 			localStorage.theme = theme
 		},
 	},
 	actions: {
-		init_theme({ commit }) {
+		initTheme({ commit }) {
 			const cached = localStorage.theme ? localStorage.theme : false
 			const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
 			if (cached) {
-				commit('set_theme', cached)
+				commit('setTheme', cached)
 			} else if (prefersDark) {
-				commit('set_theme', 'dark')
+				commit('setTheme', 'dark')
 			} else {
-				commit('set_theme', 'light')
+				commit('setTheme', 'light')
 			}
 		},
-		toggle_theme({ commit }) {
+		toggleTheme({ commit }) {
 			switch (localStorage.theme) {
 				case 'light':
-					commit('set_theme', 'dark')
+					commit('setTheme', 'dark')
 					break
 				case 'dark':
-					commit('set_theme', 'light')
+					commit('setTheme', 'light')
 					break
 			}
 		},

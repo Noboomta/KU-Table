@@ -8,14 +8,14 @@
 					<h3 class="text-sm text-gray-600 dark:text-white">Sign in to your nontri account</h3>
 					<input
 						type="text"
-						class="w-full my-5 p-3 border rounded"
+						class="w-full my-5 p-3 border rounded dark:bg-gray-600"
 						required
 						v-model="username"
 						placeholder="username"
 						autocomplete="on"
 					/>
 					<input
-						class="w-full p-3 mb-5 border rounded"
+						class="w-full p-3 mb-5 border rounded dark:bg-gray-600"
 						type="password"
 						required
 						v-model="password"

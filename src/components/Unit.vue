@@ -42,7 +42,7 @@
 		</div>
 		<spin-table-vue v-if="loading"></spin-table-vue>
 		<div class="space-y-3 text-lg container mx-auto">
-			<div class="border-2 m-1 p-3" v-for="(item, index) in units" :key="index">
+			<div class="border-2 m-1 p-3 rounded-md" v-for="(item, index) in units" :key="index">
 				<div class="flex flex-col md:flex-row justify-between text-2xl">
 					<span v-if="lang">{{ unitsName.en[index] }}</span>
 					<span v-else>{{ unitsName.th[index] }}</span>
