@@ -37,8 +37,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
 	name: 'kuFooter',
+	computed: {
+		...mapGetters({ theme: 'getTheme' }),
+	},
 }
 </script>
 
