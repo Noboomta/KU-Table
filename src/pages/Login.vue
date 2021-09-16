@@ -1,11 +1,11 @@
 <template>
 	<div class="mx-auto flex md:flex-grow items-center">
-		<div class="md:flex border rounded-lg m-5 overflow-hidden">
+		<div class="md:flex border rounded-lg m-5 overflow-hidden dark:border-opacity-0">
 			<spin-table-vue v-if="loading"></spin-table-vue>
-			<form class="p-5 max-w-sm flex flex-col" @submit.prevent="login">
+			<form class="p-5 max-w-sm flex flex-col dark:bg-gray-800" @submit.prevent="login">
 				<div class="md:flex-grow">
-					<h3 class="text-4xl">Login</h3>
-					<h3 class="text-sm text-gray-600">Sign in to your nontri account</h3>
+					<h3 class="text-4xl dark:text-green-300">Login</h3>
+					<h3 class="text-sm text-gray-600 dark:text-white">Sign in to your nontri account</h3>
 					<input
 						type="text"
 						class="w-full my-5 p-3 border rounded"
@@ -47,13 +47,13 @@
 				</div>
 
 				<footer class="text-xs">
-					<p class="font-bold">
+					<p class="font-bold dark:text-white">
 						ทั้งหมดนี้ <span class="text-red-400">ไม่ใช่</span> เว็บของมหาลัยจริง
 					</p>
-					<p>
+					<p class="dark:text-white">
 						KU-Table เป็นเพียงเว็บที่ทำเพื่อความสะดวกสบายด้วยการสร้างตารางเรียนให้นิสิต
 						โดยใช้ข้อมูลจาก
-						<a href="https://my.ku.th/" class="text-blue-500 hover:underline">https://my.ku.th/</a>
+						<a href="https://my.ku.th/" class="text-gray-200 hover:underline">https://my.ku.th/</a>
 					</p>
 				</footer>
 			</form>
