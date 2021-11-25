@@ -11,14 +11,14 @@
 					</h3>
 					<input
 						type="text"
-						class="w-full my-5 p-3 border rounded dark:bg-gray-600"
+						class="w-full my-5 p-3 border rounded"
 						required
 						v-model="username"
 						placeholder="username"
 						autocomplete="on"
 					/>
 					<input
-						class="w-full p-3 mb-5 border rounded dark:bg-gray-600"
+						class="w-full p-3 mb-5 border rounded"
 						type="password"
 						required
 						v-model="password"
