@@ -6,6 +6,9 @@
 				<div>
 					<h1 class="text-4xl font-bold mb-2 md:mb-0 mr-5 inline-block align-top dark:text-white">
 						Schedule
+						<p class="md:text-xl text-sm font-normal text-gray-600 dark:text-white">
+							Period: {{ period_date }}
+						</p>
 					</h1>
 				</div>
 				<div class="flex justify-between w-full sm:w-auto">
@@ -159,6 +162,7 @@ export default {
 		return {
 			loading: false,
 			courses: [],
+			period_date: '',
 			headers: [
 				'Day/Time',
 				'8:00',
@@ -260,7 +264,8 @@ export default {
 				})
 				.then((response) => {
 					const { data } = response
-					this.courses = data
+					this.courses = data.course
+					this.period_date = data.peroid_date
 				})
 				.catch(() => {
 					localStorage.clear('accesstoken')

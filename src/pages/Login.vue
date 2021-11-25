@@ -6,6 +6,9 @@
 				<div class="md:flex-grow">
 					<h3 class="text-4xl dark:text-green-300">Login</h3>
 					<h3 class="text-sm text-gray-600 dark:text-white">Sign in to your nontri account</h3>
+					<h3 class="text-sm text-gray-600 dark:text-white">
+						**ตารางเรียนจะอัพเดทตามตารางล่าสุดในเว็บมหาลัย
+					</h3>
 					<input
 						type="text"
 						class="w-full my-5 p-3 border rounded dark:bg-gray-600"
