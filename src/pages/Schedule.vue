@@ -133,7 +133,7 @@
 					</div>
 				</div>
 				<span class="hidden" id="create-by"
-					>hellos
+					>created by
 					<a href="https://ku-table.vercel.app" class="text-blue-600 underline"
 						>https://ku-table.vercel.app
 					</a>
