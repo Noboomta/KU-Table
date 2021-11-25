@@ -45,7 +45,7 @@
 						Login
 					</button>
 					<div class="mt-3" v-if="err">
-						<h1 class="text-red-500">ล็อกอินไม่ได้จ้า</h1>
+						<h1 class="text-red-500">ล็อกอินไม่ได้จ้า.</h1>
 					</div>
 				</div>
 
