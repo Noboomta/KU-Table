@@ -113,7 +113,7 @@ export default {
 		},
 	},
 	mounted() {
-		if (localStorage.getItem('authStatus') == false) {
+		if (localStorage.getItem('authStatus')) {
 			this.$router.push('/schedule')
 		}
 	},
