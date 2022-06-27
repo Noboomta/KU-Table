@@ -11,6 +11,7 @@ import { faDownload, faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import theme from './modules/theme'
+import auth from './modules/auth'
 
 library.add(faDownload, faMoon, faSun)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
@@ -25,11 +26,9 @@ import router from './router'
 import KProgress from 'k-progress'
 
 const store = new Vuex.Store({
-	state: {},
-	mutations: {},
-	actions: {},
 	modules: {
 		theme,
+		auth,
 	},
 })
 

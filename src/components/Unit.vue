@@ -79,6 +79,7 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex'
 import axios from '../http'
 import spinTableVue from './SpinTable.vue'
 
@@ -111,9 +112,7 @@ export default {
 				],
 			},
 			initProgress: [0, 0, 0, 0, 0],
-
 			subjects: [],
-
 			progress: [
 				{ percent: 0, ifUp: 'true' },
 				{ percent: 0, ifUp: 'true' },
@@ -121,24 +120,23 @@ export default {
 				{ percent: 0, ifUp: 'true' },
 				{ percent: 0, ifUp: 'true' },
 			],
-
 			progressBarColor: [],
-
 			counter: 0,
-
 			data: true,
-
 			major: '',
 		}
 	},
-	created() {
+	mounted() {
 		this.getUnit()
 			.then(() => this.setProgress())
 			.then(() => this.processInterval())
 			.then(() => (this.major = localStorage.getItem('majorCode')))
 	},
-	computed: {},
+	computed: {
+		...mapState('auth', ['studentInfo']),
+	},
 	methods: {
+		...mapMutations('auth', ['clearAuthData']),
 		processInterval() {
 			const timer = setInterval(() => {
 				this.initProgress = this.initProgress.map((item, index) => {
@@ -156,7 +154,6 @@ export default {
 				})
 			}, 20)
 		},
-
 		setProgress() {
 			this.units.forEach((item, index) => {
 				if (item.need == 0) this.data = false
@@ -167,23 +164,18 @@ export default {
 				}
 			})
 		},
-
 		logout() {
 			localStorage.removeItem('accesstoken')
 			localStorage.removeItem('stdId')
 			this.$router.push('/')
 		},
-
 		getUnit() {
 			this.loading = true
 			return axios
 				.get('/getGenEd', {
-					headers: {
-						accesstoken: localStorage.getItem('accesstoken'),
-					},
 					params: {
-						stdCode: localStorage.getItem('stdCode'),
-						majorCode: localStorage.getItem('majorCode'),
+						stdCode: this.studentInfo.stdCode,
+						majorCode: this.studentInfo.majorCode,
 					},
 				})
 				.then((response) => {
@@ -195,10 +187,7 @@ export default {
 					this.units.push(data.Aesthetics)
 				})
 				.catch(() => {
-					localStorage.clear('accesstoken')
-					localStorage.clear('authStatus')
-					location.reload()
-					this.$router.push('/login')
+					this.clearAuthData()
 				})
 				.finally(() => (this.loading = false))
 		},
