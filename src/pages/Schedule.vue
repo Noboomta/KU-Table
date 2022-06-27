@@ -148,7 +148,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations, mapState } from 'vuex'
 import axios from '../http'
 import SpinTableVue from '../components/SpinTable.vue'
 import Unit from '../components/Unit.vue'
@@ -181,10 +181,12 @@ export default {
 			isCheck: true,
 		}
 	},
-	created() {
+	mounted() {
 		this.getSchedule()
 	},
 	computed: {
+		...mapGetters({ theme: 'theme/getTheme' }),
+		...mapState('auth', ['studentInfo']),
 		orderedDate() {
 			return ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
 		},
@@ -207,9 +209,9 @@ export default {
 			}
 			return ''
 		},
-		...mapGetters({ theme: 'getTheme' }),
 	},
 	methods: {
+		...mapMutations('auth', ['clearAuthData']),
 		async download() {
 			const el = this.$refs.printcontent
 			const createBy = el.lastElementChild
@@ -255,11 +257,8 @@ export default {
 			this.loading = true
 			axios
 				.get('/getSchedule', {
-					headers: {
-						accesstoken: localStorage.getItem('accesstoken'),
-					},
 					params: {
-						stdId: localStorage.getItem('stdId'),
+						stdId: this.studentInfo.stdId,
 					},
 				})
 				.then((response) => {
@@ -268,10 +267,7 @@ export default {
 					this.period_date = data.peroid_date
 				})
 				.catch(() => {
-					localStorage.clear('accesstoken')
-					localStorage.clear('authStatus')
-					location.reload()
-					this.$router.push('/login')
+					this.clearAuthData()
 				})
 				.finally(() => (this.loading = false))
 		},

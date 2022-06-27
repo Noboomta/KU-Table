@@ -40,9 +40,9 @@
 import { mapGetters } from 'vuex'
 
 export default {
-	name: 'kuFooter',
+	name: 'KuFooter',
 	computed: {
-		...mapGetters({ theme: 'getTheme' }),
+		...mapGetters({ theme: 'theme/getTheme' }),
 	},
 }
 </script>

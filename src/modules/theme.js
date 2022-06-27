@@ -1,6 +1,7 @@
 export default {
+	namespaced: true,
 	state: {
-		theme: {},
+		theme: null,
 	},
 	mutations: {
 		setTheme(state, theme) {

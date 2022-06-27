@@ -45,7 +45,7 @@
 						Login
 					</button>
 					<div class="mt-3" v-if="err">
-						<h1 class="text-red-500">ล็อกอินไม่ได้จ้า.</h1>
+						<h1 class="text-red-500">เกิดข้อผิดพลาดในการเข้าสู่ระบบ.</h1>
 					</div>
 				</div>
 
@@ -70,6 +70,7 @@
 <script>
 import axios from '../http'
 import spinTableVue from '../components/SpinTable.vue'
+import { mapMutations } from 'vuex'
 
 export default {
 	name: 'Login',
@@ -85,6 +86,7 @@ export default {
 		}
 	},
 	methods: {
+		...mapMutations('auth', ['authenticate']),
 		login() {
 			const data = {
 				username: this.username,
@@ -95,15 +97,14 @@ export default {
 				.post('/login', data)
 				.then((response) => {
 					const { accesstoken, user } = response.data
-					localStorage.setItem('accesstoken', accesstoken)
-					localStorage.setItem('stdCode', user.student.stdCode)
-					localStorage.setItem('stdId', user.student.stdId)
-					localStorage.setItem('majorCode', user.student.majorCode)
-				})
-				.then(() => {
-					this.$emit('login')
-					localStorage.setItem('authStatus', true)
-					this.$router.push('/schedule')
+					this.authenticate({
+						studentInfo: {
+							stdCode: user.student.stdCode,
+							stdId: user.student.stdId,
+							majorCode: user.student.majorCode,
+						},
+						accessToken: accesstoken,
+					})
 				})
 				.catch((error) => {
 					console.log(error)
@@ -113,7 +114,7 @@ export default {
 		},
 	},
 	mounted() {
-		if (localStorage.getItem('authStatus')) {
+		if (localStorage.getItem('accessToken')) {
 			this.$router.push('/schedule')
 		}
 	},

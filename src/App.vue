@@ -40,7 +40,8 @@
 						<font-awesome-icon icon="moon" v-if="theme === 'light'" />
 						<font-awesome-icon icon="sun" v-else />
 					</a>
-					<div
+					<button
+						v-if="!isAuthenticated"
 						class="
 							m-3
 							text-gray-200
@@ -51,43 +52,53 @@
 							duration-300
 							cursor-pointer
 						"
-						@click="checkLogin"
+						@click="navigateToLogin"
 					>
-						{{ buttonText }}
-					</div>
+						Login
+					</button>
+					<button
+						v-else
+						class="
+							m-3
+							text-gray-200
+							dark:text-green-300
+							hover:text-white
+							dark:hover:text-white
+							transition
+							duration-300
+							cursor-pointer
+						"
+						@click="logout"
+					>
+						Logout
+					</button>
 				</div>
 			</nav>
 			<div class="h-16"></div>
 		</div>
 		<div class="flex-grow flex flex-col">
-			<router-view @login="authStatus = true" />
+			<router-view />
 		</div>
 		<ku-footer></ku-footer>
 	</div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import KuFooter from '@/components/KuFooter.vue'
 
 export default {
 	components: {
 		KuFooter,
 	},
-	name: 'navbar',
-	data() {
-		return {
-			authStatus: false,
-		}
-	},
-	beforeMount() {
-		this.$store.dispatch('initTheme')
-	},
+	name: 'App',
 	computed: {
-		buttonText() {
-			return this.authStatus ? 'Logout' : 'Login'
-		},
-		...mapGetters({ theme: 'getTheme' }),
+		...mapGetters({
+			theme: 'theme/getTheme',
+		}),
+		...mapGetters({
+			isAuthenticated: 'auth/getIsAuthenticated',
+		}),
 	},
 	watch: {
 		theme(newTheme) {
@@ -95,32 +106,28 @@ export default {
 				? document.querySelector('html').classList.remove('dark')
 				: document.querySelector('html').classList.add('dark')
 		},
-	},
-	created() {
-		if (localStorage.getItem('authStatus')) {
-			this.authStatus = true
-		}
-	},
-	methods: {
-		toggleAuthStatus() {
-			this.authStatus = !this.authStatus
-		},
-		checkLogin() {
-			if (this.authStatus) {
-				localStorage.removeItem('accesstoken')
-				localStorage.removeItem('stdId')
-				localStorage.setItem('authStatus', false)
-				this.authStatus = false
-				this.$router.push('/login')
+		isAuthenticated(newValue) {
+			if (newValue) {
+				this.$router.push('/schedule')
 			} else {
-				if (this.$route.path != '/login') {
-					this.$router.push('/login')
-				}
+				this.$router.push('/login')
 			}
 		},
-		toggleTheme() {
-			this.$store.dispatch('toggleTheme')
+	},
+	methods: {
+		...mapActions('theme', ['initTheme', 'toggleTheme']),
+		...mapMutations('auth', ['clearAuthData']),
+		navigateToLogin() {
+			if (this.$route.path !== '/login') {
+				this.$router.push('/login')
+			}
 		},
+		logout() {
+			this.clearAuthData()
+		},
+	},
+	mounted() {
+		this.initTheme()
 	},
 }
 </script>
