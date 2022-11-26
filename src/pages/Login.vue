@@ -50,6 +50,9 @@
 				</div>
 
 				<footer class="text-xs">
+					<a href="mailto:puvana.s@ku.th" class="text-sm text-blue-400"
+						>ใครสนใจช่วย Design ใหม่ ทักเมลมาได้นะครับ puvana.s@ku.th</a
+					>
 					<p class="font-bold dark:text-white">
 						ทั้งหมดนี้ <span class="text-red-400">ไม่ใช่</span> เว็บของมหาลัยจริง
 					</p>
