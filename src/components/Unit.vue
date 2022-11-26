@@ -130,7 +130,7 @@ export default {
 		this.getUnit()
 			.then(() => this.setProgress())
 			.then(() => this.processInterval())
-			.then(() => (this.major = localStorage.getItem('majorCode')))
+			.then(() => (this.major = JSON.parse(localStorage.getItem('studentInfo'))?.majorCode))
 	},
 	computed: {
 		...mapState('auth', ['studentInfo']),
