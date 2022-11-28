@@ -232,7 +232,10 @@ export default {
 			createBy.className = 'hidden'
 		},
 		timeToCol(timeString) {
-			const time = timeString.split(':')
+			const time = timeString?.split(':') || []
+			if (time.length != 2) {
+				return 0
+			}
 			const remainder = +time[1] / 60
 			return (+time[0] + remainder) * 2 - 13
 		},
@@ -266,10 +269,13 @@ export default {
 					this.courses = data.course
 					this.period_date = data.peroid_date
 				})
-				.catch(() => {
+				.catch((error) => {
+					console.log(error)
 					this.clearAuthData()
 				})
-				.finally(() => (this.loading = false))
+				.finally(() => {
+					this.loading = false
+				})
 		},
 	},
 }

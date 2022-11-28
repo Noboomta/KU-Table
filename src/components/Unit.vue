@@ -186,10 +186,13 @@ export default {
 					this.units.push(data.Language_and_Communication)
 					this.units.push(data.Aesthetics)
 				})
-				.catch(() => {
+				.catch((error) => {
+					console.log(error)
 					this.clearAuthData()
 				})
-				.finally(() => (this.loading = false))
+				.finally(() => {
+					this.loading = false
+				})
 		},
 	},
 }
