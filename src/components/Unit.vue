@@ -6,9 +6,11 @@
 			<div class="text-center m-2">
 				<span class="text-center" v-if="lang">
 					Sorry, we don't have information about your faculty department ({{ major }})
+					<a class="text-blue-700" href="ฟอร์มขอเพิ่มหมวด">https://forms.gle/xPs2cc2xxWnGiTvY6</a>
 				</span>
 				<span class="text-center" v-else>
 					ขออภัย ทางเรายังไม่มีข้อมูลเกี่ยวกับคณะ ({{ major }}) ของท่าน.
+					<a class="text-blue-700" href="ฟอร์มขอเพิ่มหมวด">https://forms.gle/xPs2cc2xxWnGiTvY6</a>
 				</span>
 				<p class="text-center text-black" v-if="lang">
 					More information:
