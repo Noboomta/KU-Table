@@ -31,6 +31,7 @@ https://ku-table.vercel.app
 
 ### ที่มาข้อมูล
 https://www.ku.ac.th/th/bachelor-degree <br>
+https://registrar.ku.ac.th/cur/all <br>
 [https://registrar.ku.ac.th/wp-content/uploads/2017/...](https://registrar.ku.ac.th/wp-content/uploads/2017/05/%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9B%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%9B%E0%B8%A3%E0%B8%B8%E0%B8%87%E0%B8%AB%E0%B8%A1%E0%B8%A7%E0%B8%94%E0%B8%A7%E0%B8%B4%E0%B8%8A%E0%B8%B2%E0%B8%A8%E0%B8%B6%E0%B8%81%E0%B8%A9%E0%B8%B2%E0%B8%97%E0%B8%B1%E0%B9%88%E0%B8%A7%E0%B9%84%E0%B8%9B-2564-%E0%B8%AA%E0%B8%A0%E0%B8%B2-%E0%B8%A1%E0%B8%81.-%E0%B8%AD.pdf) <br>
 https://github.com/marsDev31/KUnit
 

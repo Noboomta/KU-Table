@@ -17,11 +17,19 @@
 					<a class="text-blue-700" href="https://www.ku.ac.th/th/bachelor-degree"
 						>https://www.ku.ac.th/th/bachelor-degree</a
 					>
+					 or
+					<a class="text-blue-700" href="https://registrar.ku.ac.th/cur/all"
+						>https://registrar.ku.ac.th/cur/all</a
+					>
 				</p>
 				<p class="text-center text-black" v-else>
 					หมายเหตุ:
 					<a class="text-blue-700" href="https://www.ku.ac.th/th/bachelor-degree"
 						>https://www.ku.ac.th/th/bachelor-degree</a
+					>
+					 or
+					<a class="text-blue-700" href="https://registrar.ku.ac.th/cur/all"
+						>https://registrar.ku.ac.th/cur/all</a
 					>
 				</p>
 			</div>
@@ -74,6 +82,10 @@
 					href="https://www.ku.ac.th/th/bachelor-degree"
 					>https://www.ku.ac.th/th/bachelor-degree</a
 				>
+				 or
+					<a class="text-blue-700" href="https://registrar.ku.ac.th/cur/all"
+						>https://registrar.ku.ac.th/cur/all</a
+					>
 			</div>
 		</div>
 		<div></div>
