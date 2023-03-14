@@ -15,7 +15,7 @@
 				<p class="text-center text-black" v-if="lang">
 					More information:
 					<a class="text-blue-700" href="https://www.ku.ac.th/th/bachelor-degree"
-						>https://www.ku.ac.th/th/bachelor-degree </a
+						>https://www.ku.ac.th/th/bachelor-degree</a
 					>
 					or
 					<a class="text-blue-700" href="https://registrar.ku.ac.th/cur/all"
@@ -25,7 +25,7 @@
 				<p class="text-center text-black" v-else>
 					หมายเหตุ:
 					<a class="text-blue-700" href="https://www.ku.ac.th/th/bachelor-degree"
-						>https://www.ku.ac.th/th/bachelor-degree </a
+						>https://www.ku.ac.th/th/bachelor-degree</a
 					>
 					หรือ
 					<a class="text-blue-700" href="https://registrar.ku.ac.th/cur/all"
@@ -80,7 +80,7 @@
 				<a
 					class="text-blue-700 dark:text-gray-200 pl-1 underline"
 					href="https://www.ku.ac.th/th/bachelor-degree"
-					>https://www.ku.ac.th/th/bachelor-degree </a
+					>https://www.ku.ac.th/th/bachelor-degree</a
 				>
 				หรือ
 					<a class="text-blue-700" href="https://registrar.ku.ac.th/cur/all"
