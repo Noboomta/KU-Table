@@ -4,7 +4,7 @@
 			<h1 class="font-bold text-4xl inline-block">KU GenEd</h1>
 			<h1 class="text-4xl font-bold inline-block" v-if="!loading">({{ major }})</h1>
 			<p class="mb-2">
-				**กำลังแสดงหลักสูตรปี {{ unitYear }} หากหน่วยกิตไม่ถูกต้อง โปรด
+				**กำลังแสดงหลักสูตรปี {{ unitYear }} หากจำนวนหน่วยกิตไม่ถูกต้อง โปรด
 				<a class="underline" href="https://forms.gle/HJw8KFbKpuN3RrxE6">กรอกฟอร์ม</a>
 				เพื่อแจ้งให้เพิ่ม
 			</p>
