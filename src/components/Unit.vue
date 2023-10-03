@@ -1,46 +1,26 @@
 <template>
-	<div v-if="!data">
-		<h1 class="pl-2 font-bold text-4xl mb-6 mt-6">KU GenEd</h1>
-
-		<div class="text-red-500 text-md md:text-xl flex container mx-auto justify-center">
-			<div class="text-center m-2">
-				<span class="text-center" v-if="lang">
-					Sorry, we don't have information about your faculty department ({{ major }})
-					<a class="text-blue-700" href="ฟอร์มขอเพิ่มหมวด">https://forms.gle/xPs2cc2xxWnGiTvY6</a>
-				</span>
-				<span class="text-center" v-else>
-					ขออภัย ทางเรายังไม่มีข้อมูลเกี่ยวกับคณะ ({{ major }}) ของท่าน.
-					<a class="text-blue-700" href="ฟอร์มขอเพิ่มหมวด">https://forms.gle/xPs2cc2xxWnGiTvY6</a>
-				</span>
-				<p class="text-center text-black" v-if="lang">
-					More information:
-					<a class="text-blue-700" href="https://www.ku.ac.th/th/bachelor-degree"
-						>https://www.ku.ac.th/th/bachelor-degree</a
-					>
-					or
-					<a class="text-blue-700" href="https://registrar.ku.ac.th/cur/all"
-						>https://registrar.ku.ac.th/cur/all</a
-					>
-				</p>
-				<p class="text-center text-black" v-else>
-					หมายเหตุ:
-					<a class="text-blue-700" href="https://www.ku.ac.th/th/bachelor-degree"
-						>https://www.ku.ac.th/th/bachelor-degree</a
-					>
-					หรือ
-					<a class="text-blue-700" href="https://registrar.ku.ac.th/cur/all"
-						>https://registrar.ku.ac.th/cur/all</a
-					>
-				</p>
-			</div>
-		</div>
-	</div>
-	<div v-else class="container mx-auto items-center overflow-y-auto my-4 mt-10">
-		<div class="flex">
-			<h1 class="pl-2 font-bold text-4xl mb-2">KU GenEd</h1>
-			<h1 class="text-4xl font-bold pl-2" v-if="!loading">({{ major }})</h1>
+	<div class="container mx-auto items-center overflow-y-auto my-4 mt-10">
+		<div class="flex flex-wrap items-baseline mb-2 space-x-2">
+			<h1 class="font-bold text-4xl inline-block">KU GenEd</h1>
+			<h1 class="text-4xl font-bold inline-block" v-if="!loading">({{ major }})</h1>
+			<p class="mb-2">
+				**กำลังแสดงหลักสูตรปี {{ unitYear }} หากหน่วยกิตไม่ถูกต้อง โปรด
+				<a class="underline" href="https://forms.gle/HJw8KFbKpuN3RrxE6">กรอกฟอร์ม</a>
+				เพื่อแจ้งให้เพิ่ม
+			</p>
 		</div>
 		<div class="container text-sm font-bold mx-auto p-2 text-red-500">
+			<div v-if="major" class="mb-2">
+				<span class="text-center" v-if="lang">
+					**Sorry, we don't have information about your faculty department. you can
+					<a class="underline" href="https://forms.gle/xPs2cc2xxWnGiTvY6">fill form here.</a>
+				</span>
+				<span class="text-center" v-else>
+					**ขออภัย ทางเรายังไม่มีข้อมูลเกี่ยวกับคณะ ({{ major }}) ของท่าน กรุณากรอก
+					<a class="underline" href="https://forms.gle/xPs2cc2xxWnGiTvY6">ฟอร์มขอเพิ่มหมวด</a>
+				</span>
+			</div>
+
 			<span v-if="!lang">
 				**โปรดตรวจสอบข้อมูลเงื่อนไขการลงทะเบียนของท่านอีกครั้ง
 				อาจมีเงื่อนไขแตกต่างกันออกไปในแต่ละสาขาและชั้นปีครับ</span
@@ -83,9 +63,9 @@
 					>https://www.ku.ac.th/th/bachelor-degree</a
 				>
 				หรือ
-					<a class="text-blue-700" href="https://registrar.ku.ac.th/cur/all"
-						>https://registrar.ku.ac.th/cur/all</a
-					>
+				<a class="text-blue-700" href="https://registrar.ku.ac.th/cur/all"
+					>https://registrar.ku.ac.th/cur/all</a
+				>
 			</div>
 		</div>
 		<div></div>
@@ -108,6 +88,7 @@ export default {
 			a: '30',
 			loading: true,
 			isCheck: true,
+			unitYear: 0,
 			units: [],
 			unitsName: {
 				en: [
@@ -194,6 +175,7 @@ export default {
 				})
 				.then((response) => {
 					const { data } = response
+					this.unitYear = data.unitYear
 					this.units.push(data.Wellness)
 					this.units.push(data.Entrepreneurship)
 					this.units.push(data.Thai_Citizen_and_Global_Citizen)

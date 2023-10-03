@@ -44,7 +44,7 @@
 					>
 						Login
 					</button>
-					<div class="mt-3" v-if="err">
+					<div v-if="err">
 						<p class="text-red-500" v-html="err" />
 					</div>
 				</div>
@@ -109,12 +109,11 @@ export default {
 				.catch((error) => {
 					console.log(error)
 
-					const errorCode = error.response.status
-					if (errorCode === 500) {
+					if (this.err) {
 						this.err =
 							'เกิดข้อผิดพลาดในการล็อคอิน กรุณาลองล็อคอินที่ <a class="underline" href="https://my.ku.th">my.ku.th</a> ก่อนแล้วลองอีกครั้ง'
 					} else {
-						this.err = 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ.'
+						this.err = 'เกิดข้อผิดพลาดในการล็อคอิน โปรดลองอีกครั้ง'
 					}
 				})
 				.finally(() => (this.loading = false))
