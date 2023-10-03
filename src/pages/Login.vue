@@ -38,14 +38,14 @@
 							hover:bg-blue-700
 							transform
 							hover:scale-110
-							mb-5
+							mb-3
 						"
 						type="submit"
 					>
 						Login
 					</button>
 					<div class="mt-3" v-if="err">
-						<h1 class="text-red-500">เกิดข้อผิดพลาดในการเข้าสู่ระบบ.</h1>
+						<p class="text-red-500" v-html="err" />
 					</div>
 				</div>
 
@@ -81,7 +81,7 @@ export default {
 		return {
 			username: '',
 			password: '',
-			err: false,
+			err: '',
 			loading: false,
 		}
 	},
@@ -108,7 +108,14 @@ export default {
 				})
 				.catch((error) => {
 					console.log(error)
-					this.err = true
+
+					const errorCode = error.response.status
+					if (errorCode === 500) {
+						this.err =
+							'เกิดข้อผิดพลาดในการล็อคอิน กรุณาลองล็อคอินที่ <a class="underline" href="https://my.ku.th">my.ku.th</a> ก่อนแล้วลองอีกครั้ง'
+					} else {
+						this.err = 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ.'
+					}
 				})
 				.finally(() => (this.loading = false))
 		},
