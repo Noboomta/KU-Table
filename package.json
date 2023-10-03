@@ -1,66 +1,66 @@
 {
-  "name": "ku-table",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "prepare": "husky install",
-    "pre-commit": "lint-staged"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.36",
-    "@fortawesome/free-solid-svg-icons": "^5.15.4",
-    "@fortawesome/vue-fontawesome": "^2.0.2",
-    "axios": "^0.21.1",
-    "core-js": "^3.6.5",
-    "k-progress": "^1.5.0",
-    "vue": "^2.6.11",
-    "vue-html2canvas": "^0.0.4",
-    "vue-router": "^3.2.0",
-    "vuex": "^3.6.2"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss7-compat": "^2.2.7",
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "autoprefixer": "9",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^6.2.2",
-    "husky": "^7.0.0",
-    "lint-staged": "^11.1.2",
-    "postcss": "7",
-    "prettier": "^2.3.2",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "vue-template-compiler": "^2.6.11"
-  },
-  "lint-staged": {
-    "src/**/*.{js,vue}": [
-      "prettier --write",
-      "eslint --fix"
-    ]
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+	"name": "ku-table",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"serve": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
+		"build": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build",
+		"lint": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service lint",
+		"prepare": "husky install",
+		"pre-commit": "lint-staged"
+	},
+	"dependencies": {
+		"@fortawesome/fontawesome-svg-core": "^1.2.36",
+		"@fortawesome/free-solid-svg-icons": "^5.15.4",
+		"@fortawesome/vue-fontawesome": "^2.0.2",
+		"axios": "^0.21.1",
+		"core-js": "^3.6.5",
+		"k-progress": "^1.5.0",
+		"vue": "^2.6.11",
+		"vue-html2canvas": "^0.0.4",
+		"vue-router": "^3.2.0",
+		"vuex": "^3.6.2"
+	},
+	"devDependencies": {
+		"@tailwindcss/postcss7-compat": "^2.2.7",
+		"@vue/cli-plugin-babel": "~4.5.0",
+		"@vue/cli-plugin-eslint": "~4.5.0",
+		"@vue/cli-plugin-router": "~4.5.0",
+		"@vue/cli-service": "~4.5.0",
+		"autoprefixer": "9",
+		"babel-eslint": "^10.1.0",
+		"eslint": "^7.32.0",
+		"eslint-plugin-vue": "^6.2.2",
+		"husky": "^7.0.0",
+		"lint-staged": "^11.1.2",
+		"postcss": "7",
+		"prettier": "^2.3.2",
+		"tailwindcss": "npm:@tailwindcss/postcss7-compat",
+		"vue-template-compiler": "^2.6.11"
+	},
+	"lint-staged": {
+		"src/**/*.{js,vue}": [
+			"prettier --write",
+			"eslint --fix"
+		]
+	},
+	"eslintConfig": {
+		"root": true,
+		"env": {
+			"node": true
+		},
+		"extends": [
+			"plugin:vue/essential",
+			"eslint:recommended"
+		],
+		"parserOptions": {
+			"parser": "babel-eslint"
+		},
+		"rules": {}
+	},
+	"browserslist": [
+		"> 1%",
+		"last 2 versions",
+		"not dead"
+	]
 }
