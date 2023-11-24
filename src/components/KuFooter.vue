@@ -25,7 +25,7 @@
 			<a
 				class="font-bold mb-2 text-blue-500 dark:text-gray-200 underline"
 				href="https://forms.gle/Kks5AEnYtGCTfueSA"
-				>กดที่นี่เพื่อแจ้งปัญหา</a
+				>กดที่นี่เพื่อแจ้งปัญหา (เมลมาจะไวกว่าครับ puvana.s@ku.th)</a
 			>
 		</a>
 		<span class="text-center mt-3">
