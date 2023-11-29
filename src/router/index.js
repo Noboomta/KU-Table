@@ -1,11 +1,8 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import Login from '@/pages/Login.vue'
 import Schedule from '@/pages/Schedule.vue'
 import NotFound from '@/pages/NotFound.vue'
 import Unit from '@/components/Unit.vue'
-
-Vue.use(VueRouter)
 
 const routes = [
 	{
@@ -35,9 +32,8 @@ const routes = [
 	},
 ]
 
-const router = new VueRouter({
-	mode: 'history',
-	base: process.env.BASE_URL,
+const router = createRouter({
+	history: createWebHistory(),
 	routes,
 })
 

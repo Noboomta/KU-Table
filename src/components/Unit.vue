@@ -121,11 +121,14 @@ export default {
 			major: '',
 		}
 	},
-	mounted() {
-		this.getUnit()
-			.then(() => this.setProgress())
-			.then(() => this.processInterval())
-			.then(() => (this.major = JSON.parse(localStorage.getItem('studentInfo'))?.majorCode))
+	async mounted() {
+		await this.getUnit()
+
+		this.major = JSON.parse(localStorage.getItem('studentInfo'))?.majorCode
+
+		this.setProgress()
+
+		this.processInterval()
 	},
 	computed: {
 		...mapState('auth', ['studentInfo']),

@@ -1,5 +1,4 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createApp } from 'vue'
 import App from './App.vue'
 
 import VueHtml2Canvas from 'vue-html2canvas'
@@ -12,28 +11,26 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import theme from './modules/theme'
 import auth from './modules/auth'
+import router from './router'
+import KProgress from 'k-progress-v3'
+import { createStore } from 'vuex'
 
 library.add(faDownload, faMoon, faSun)
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-Vue.component('k-progress', KProgress)
 
-Vue.use(Vuex)
-Vue.use(VueHtml2Canvas)
-
-Vue.config.productionTip = false
-
-import router from './router'
-import KProgress from 'k-progress'
-
-const store = new Vuex.Store({
+const store = createStore({
 	modules: {
 		theme,
 		auth,
 	},
 })
 
-new Vue({
-	router,
-	store,
-	render: (h) => h(App),
-}).$mount('#app')
+const app = createApp(App)
+
+app.component('font-awesome-icon', FontAwesomeIcon)
+app.component('k-progress', KProgress)
+
+app.use(store)
+app.use(router)
+app.use(VueHtml2Canvas)
+
+app.mount('#app')
