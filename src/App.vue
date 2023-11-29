@@ -80,12 +80,6 @@
 			<router-view />
 		</div>
 		<ku-footer></ku-footer>
-		<div
-			id="adsgoeshere"
-			style="text-align: center"
-			class="bg-gray-300 dark:bg-gray-800 p-4"
-			v-html="adsenseContent"
-		></div>
 	</div>
 </template>
 
