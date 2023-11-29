@@ -80,6 +80,12 @@
 			<router-view />
 		</div>
 		<ku-footer></ku-footer>
+		<div
+			id="adsgoeshere"
+			style="text-align: center"
+			class="bg-gray-300 dark:bg-gray-800 p-4"
+			v-html="adsenseContent"
+		></div>
 	</div>
 </template>
 
@@ -99,6 +105,11 @@ export default {
 		...mapGetters({
 			isAuthenticated: 'auth/getIsAuthenticated',
 		}),
+	},
+	data() {
+		return {
+			adsenseContent: '',
+		}
 	},
 	watch: {
 		theme(newTheme) {
@@ -127,6 +138,7 @@ export default {
 		},
 	},
 	mounted() {
+		this.adsenseContent = document.getElementById('divadsensedisplaynone').innerHTML
 		this.initTheme()
 	},
 }
