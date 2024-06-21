@@ -3,9 +3,10 @@
 	"version": "1.0.0",
 	"private": true,
 	"scripts": {
-		"serve": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
-		"build": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build",
-		"lint": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service lint",
+		"dev": "NODE_OPTIONS=--openssl-legacy-provider vite",
+		"build": "NODE_OPTIONS=--openssl-legacy-provider vite build",
+		"serve": "NODE_OPTIONS=--openssl-legacy-provider vite preview",
+		"lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
 		"prepare": "husky install",
 		"pre-commit": "lint-staged"
 	},
@@ -14,8 +15,8 @@
 		"@fortawesome/free-solid-svg-icons": "^5.15.4",
 		"@fortawesome/vue-fontawesome": "^3.0.5",
 		"axios": "^0.21.1",
-		"core-js": "^3.6.5",
 		"k-progress-v3": "^1.0.0",
+		"regenerator-runtime": "^0.14.1",
 		"vue": "^3.3.9",
 		"vue-html2canvas": "^0.0.4",
 		"vue-router": "^4.2.5",
@@ -23,40 +24,16 @@
 	},
 	"devDependencies": {
 		"@tailwindcss/postcss7-compat": "^2.2.7",
-		"@vue/cli-plugin-babel": "~4.5.0",
-		"@vue/cli-plugin-eslint": "~4.5.0",
-		"@vue/cli-plugin-router": "~4.5.0",
-		"@vue/cli-service": "~4.5.0",
+		"@vitejs/plugin-vue": "^5.0.5",
 		"autoprefixer": "9",
-		"babel-eslint": "^10.1.0",
-		"eslint": "^7.32.0",
-		"eslint-plugin-vue": "^6.2.2",
+		"eslint": "8",
+		"eslint-plugin-vue": "8",
 		"husky": "^7.0.0",
 		"lint-staged": "^11.1.2",
 		"postcss": "7",
 		"prettier": "^2.3.2",
 		"tailwindcss": "npm:@tailwindcss/postcss7-compat",
-		"vue-template-compiler": "^2.6.11"
-	},
-	"lint-staged": {
-		"src/**/*.{js,vue}": [
-			"prettier --write",
-			"eslint --fix"
-		]
-	},
-	"eslintConfig": {
-		"root": true,
-		"env": {
-			"node": true
-		},
-		"extends": [
-			"plugin:vue/essential",
-			"eslint:recommended"
-		],
-		"parserOptions": {
-			"parser": "babel-eslint"
-		},
-		"rules": {}
+		"vite": "^5.3.1"
 	},
 	"browserslist": [
 		"> 1%",

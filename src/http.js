@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const axiosInstance = axios.create({
-	baseURL: process.env.VUE_APP_BASE_SERVER_URL,
+	baseURL: import.meta.env.VITE_BASE_SERVER_URL,
 })
 
 const accessToken = localStorage.getItem('accessToken')
