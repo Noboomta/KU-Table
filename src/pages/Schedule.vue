@@ -32,18 +32,7 @@
 								></div>
 								<!-- dot -->
 								<div
-									class="
-										dot
-										absolute
-										left-1
-										top-1
-										bg-white
-										w-5
-										h-5
-										sm:w-6 sm:h-6
-										rounded-full
-										transition
-									"
+									class="dot absolute left-1 top-1 bg-white w-5 h-5 sm:w-6 sm:h-6 rounded-full transition"
 								></div>
 							</div>
 							<!-- label -->
@@ -52,17 +41,7 @@
 					</span>
 					<div class="text-center mr-2 mb-5">
 						<button
-							class="
-								block
-								border border-green-500
-								rounded
-								px-3
-								py-1
-								text-green-500
-								hover:bg-gray-100
-								text-md
-								lg:text-lg
-							"
+							class="block border border-green-500 rounded px-3 py-1 text-green-500 hover:bg-gray-100 text-md lg:text-lg"
 							@click.prevent="download"
 						>
 							<font-awesome-icon icon="download" />
@@ -73,9 +52,9 @@
 			</div>
 			<div class="overflow-x-auto border mx-1 rounded-lg" ref="printcontent">
 				<div class="overflow-x-hidden table-w" id="table">
-					<div class="grid grid-cols-26">
+					<div class="grid grid-cols-168">
 						<div
-							class="border py-1 pl-1 col-span-2 dark:text-white dark:border-gray-700"
+							class="border py-1 pl-1 col-span-12 dark:text-white dark:border-gray-700"
 							v-for="(header, headerIndex) in headers"
 							:key="`header-${headerIndex}`"
 						>
@@ -85,31 +64,17 @@
 					<div
 						v-for="(date, dateIndex) in orderedDate"
 						:key="`date-${dateIndex}`"
-						class="grid grid-cols-26 min-h-16 md:min-h-24 border dark:border-gray-700"
+						class="grid grid-cols-168 min-h-16 md:min-h-24 border dark:border-gray-700"
 					>
 						<div
-							class="p-1 md:p-3 col-span-2 border-r-2 dark:border-gray-700"
+							class="p-1 md:p-3 col-span-12 border-r-2 dark:border-gray-700"
 							:class="`${getColorByDate(date)}`"
 						>
 							<span class="font-bold dark:text-gray-900">{{ date }}</span>
 						</div>
 						<div
-							class="
-								border
-								p-2
-								md:px-3 md:py-2
-								rounded
-								text-xs
-								md:text-sm
-								bg-opacity-60
-								flex flex-col
-								justify-between
-								hover:bg-opacity-70
-								overflow-hidden
-								cursor-pointer
-								dark:bg-opacity-100 dark:border-gray-700
-							"
-							:class="`my-col-start-${course.startCol} my-col-end-${course.endCol}
+							class="border p-2 md:px-3 md:py-2 rounded text-xs md:text-sm bg-opacity-60 flex flex-col justify-between hover:bg-opacity-70 overflow-hidden cursor-pointer dark:bg-opacity-100 dark:border-gray-700"
+							:class="`col-start-${course.startCol} col-end-${course.endCol}
 							${getColorByDate(date)}`"
 							v-for="(course, courseIndex) in mappedCourses[date]"
 							:key="`course-${courseIndex}`"
@@ -177,6 +142,7 @@ export default {
 				'17:00',
 				'18:00',
 				'19:00',
+				'20:00',
 			],
 			isCheck: true,
 		}
@@ -236,8 +202,13 @@ export default {
 			if (time.length != 2) {
 				return 0
 			}
-			const remainder = +time[1] / 60
-			return (+time[0] + remainder) * 2 - 13
+			const hours = +time[0]
+			const minutes = +time[1]
+
+			const hourCol = (hours - 8) * 12
+			const minuteCol = Math.floor(minutes / 5)
+
+			return hourCol + minuteCol + 12 + 1 // 12 is the first column (1 hour slot) + 1 for the first column
 		},
 		logout() {
 			localStorage.removeItem('accesstoken')

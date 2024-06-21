@@ -1,3 +1,5 @@
+import 'regenerator-runtime/runtime'
+
 import { createApp } from 'vue'
 import App from './App.vue'
 
