@@ -1,9 +1,9 @@
 const gridConfig = () => {
   const gridColumnStart = {}
   const gridColumnEnd = {}
-  const gridTemplateColumns = { '26': 'repeat(26, minmax(0, 1fr))' }
+  const gridTemplateColumns = { '168': 'repeat(168, minmax(0, 1fr))' }
 
-  for (let i = 14; i <= 27; i++) {
+  for (let i = 14; i <= 169; i++) {
     gridColumnStart[i.toString()] = i.toString()
     gridColumnEnd[i.toString()] = i.toString()
   }
@@ -27,7 +27,7 @@ module.exports = {
           '1000': '1000px'
         },
         hidden: {
-          
+
         },
       }
     },
