@@ -80,14 +80,14 @@
 							:key="`course-${courseIndex}`"
 						>
 							<div class="mb-2">
-								<p>{{ course.subject_code }}</p>
-								<p>[{{ course.time_from }} - {{ course.time_to }}]</p>
+								<p class="truncate">[{{ course.time_from }}-{{ course.time_to }}]</p>
+								<p class="truncate">{{ course.subject_code }}</p>
 							</div>
-							<p v-if="isCheck">{{ course.subject_name_en }}</p>
-							<p v-else>{{ course.subject_name_th }}</p>
+							<p class="truncate" v-if="isCheck">{{ course.subject_name_en }}</p>
+							<p class="truncate" v-else>{{ course.subject_name_th }}</p>
 							<div class="text-gray-700 text-xs">
-								<p v-if="isCheck">{{ course.room_name_en }} | {{ course.section_type_en }} {{ course.section_code }}</p>
-								<p v-else>{{ course.room_name_th }} | {{ course.section_type_th }} {{ course.section_code }}</p>
+								<p class="truncate" v-if="isCheck">{{ course.room_name_en }} | {{ course.section_type_en }} {{ course.section_code }}</p>
+								<p class="truncate" v-else>{{ course.room_name_th }} | {{ course.section_type_th }} {{ course.section_code }}</p>
 							</div>
 						</div>
 					</div>
@@ -176,7 +176,7 @@ export default {
 			createBy.className = 'mx-1 text-right block dark:text-white'
 			const options = {
 				type: 'dataURL',
-				windowWidth: '2560px',
+				windowWidth: 2560,
 			}
 			if (this.theme === 'dark') {
 				options.backgroundColor = '#111827'
