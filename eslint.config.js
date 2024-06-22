@@ -1,12 +1,12 @@
-const globals = require('globals')
-const js = require('@eslint/js')
-
-const { FlatCompat } = require('@eslint/eslintrc')
-
-const { includeIgnoreFile } = require('@eslint/compat')
-const pluginVue = require('eslint-plugin-vue')
-
-const path = require('node:path')
+import globals from 'globals'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import js from '@eslint/js'
+import { FlatCompat } from '@eslint/eslintrc'
+import { includeIgnoreFile } from '@eslint/compat'
+import pluginVue from 'eslint-plugin-vue'
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 const compat = new FlatCompat({
   baseDirectory: __dirname,
   recommendedConfig: js.configs.recommended,
@@ -14,17 +14,17 @@ const compat = new FlatCompat({
 })
 const gitignorePath = path.resolve(__dirname, '.gitignore')
 
-module.exports = [
+export default [
   includeIgnoreFile(gitignorePath),
-  ...compat.extends('eslint:recommended', 'prettier'),
+  ...compat.extends('eslint:recommended'),
   ...pluginVue.configs['flat/recommended'],
   {
-    files: ['src/**/*.(js|vue)'],
     languageOptions: {
       globals: {
         ...globals.node,
       },
     },
+
     rules: {},
   },
 ]
