@@ -43,7 +43,7 @@ Clone this repository
 git clone https://github.com/Noboomta/Ku-table.git
 ```
 
-Install dependencies using `yarn`
+Install dependencies using `yarn` (Make sure you are using Node version 18.x)
 
 if you don't have `yarn`. Please install it first by
 
@@ -69,7 +69,7 @@ VUE_APP_BASE_SERVER_URL=https://<your-server-domain>
 
 ### Compiles and hot-reloads for development
 ```
-yarn serve
+yarn dev
 ```
 the applciation will run at [localhost:8080](http://localhost:8080)
 
