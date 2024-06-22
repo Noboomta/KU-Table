@@ -14,7 +14,7 @@ const gridConfig = () => {
 const getGridClass = () => {
 	const result = []
 
-	for (let i = 14; i <= 169; i++) {
+	for (let i = 1; i <= 169; i++) {
 		result.push(`col-start-${i}`, `col-end-${i}`)
 	}
 
