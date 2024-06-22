@@ -79,23 +79,15 @@
 							v-for="(course, courseIndex) in mappedCourses[date]"
 							:key="`course-${courseIndex}`"
 						>
-							<p class="flex flex-wrap justify-between mb-2">
-								<span>{{ course.subject_code }} </span>
-								<span>[{{ course.time_from }} - {{ course.time_to }}]</span>
-							</p>
-							<p v-if="isCheck">{{ course.subject_name_en }}</p>
-							<p v-else>{{ course.subject_name_th }}</p>
-							<div class="flex justify-between text-gray-700 text-xs">
-								<div>
-									<span v-if="isCheck">ROOM: {{ course.room_name_en }}</span>
-									<span v-else>ห้อง: {{ course.room_name_th }}</span>
-								</div>
-								<div class="text-right">
-									<span v-if="isCheck">
-										SEC{{ course.section_code }} {{ course.section_type_en }}
-									</span>
-									<span v-else> หมู่{{ course.section_code }} {{ course.section_type_th }} </span>
-								</div>
+							<div class="mb-2">
+								<p class="truncate">[{{ course.time_from }}-{{ course.time_to }}]</p>
+								<p class="truncate">{{ course.subject_code }}</p>
+							</div>
+							<p class="truncate" v-if="isCheck">{{ course.subject_name_en }}</p>
+							<p class="truncate" v-else>{{ course.subject_name_th }}</p>
+							<div class="text-gray-700 text-xs">
+								<p class="truncate" v-if="isCheck">{{ course.room_name_en }} | {{ course.section_type_en }} {{ course.section_code }}</p>
+								<p class="truncate" v-else>{{ course.room_name_th }} | {{ course.section_type_th }} {{ course.section_code }}</p>
 							</div>
 						</div>
 					</div>
@@ -184,7 +176,7 @@ export default {
 			createBy.className = 'mx-1 text-right block dark:text-white'
 			const options = {
 				type: 'dataURL',
-				windowWidth: '2560px',
+				windowWidth: 2560,
 			}
 			if (this.theme === 'dark') {
 				options.backgroundColor = '#111827'
