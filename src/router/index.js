@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Schedule from '@/pages/Schedule.vue'
-import NotFound from '@/pages/NotFound.vue'
-import Unit from '@/components/Unit.vue'
-import Login from '@/pages/Login.vue'
+
+const Schedule = () => import('@/pages/Schedule.vue')
+const NotFound = () => import('@/pages/NotFound.vue')
+const Unit = () => import('@/components/Unit.vue')
+const Login = () => import('@/pages/Login.vue')
 
 const routes = [
   {
