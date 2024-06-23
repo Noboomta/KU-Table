@@ -73,11 +73,13 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
+
 import spinTableVue from '../components/SpinTable.vue'
 import { mapMutations } from 'vuex'
 import axios from '../http'
 
-export default {
+export default defineComponent({
   name: 'LoginCard',
   components: {
     spinTableVue,
@@ -129,7 +131,7 @@ export default {
         .finally(() => (this.loading = false))
     },
   },
-}
+})
 </script>
 
 <style></style>

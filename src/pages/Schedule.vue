@@ -153,11 +153,13 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
+
 import { mapGetters, mapMutations, mapState } from 'vuex'
 import SpinTableVue from '../components/SpinTable.vue'
 import Unit from '../components/Unit.vue'
 import axios from '../http'
-export default {
+export default defineComponent({
   name: 'ScheduleCard',
   components: {
     SpinTableVue,
@@ -289,7 +291,7 @@ export default {
         })
     },
   },
-}
+})
 </script>
 
 <style>

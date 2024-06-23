@@ -1,3 +1,9 @@
+import type { Module } from 'vuex'
+
+interface ThemeStore {
+  theme: null | 'light' | 'dark'
+}
+
 export default {
   namespaced: true,
   state: {
@@ -37,4 +43,4 @@ export default {
       return state.theme
     },
   },
-}
+} as Module<ThemeStore, any>

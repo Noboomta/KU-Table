@@ -1,46 +1,25 @@
 <template>
-  <div
-    id="app"
-    class="bg-white dark:bg-gray-900"
-  >
+  <div id="app" class="bg-white dark:bg-gray-900">
     <div>
       <nav
         class="h-16 flex items-center bg-green-500 dark:bg-gray-800 px-5 justify-between z-10 fixed w-full"
       >
-        <div
-          id="middle"
-          class="h-16 flex items-center m-auto justify-center absolute"
-        >
-          <h1 class="font-bold text-gray-200 dark:text-green-300 text-2xl">
-            KU-Table
-          </h1>
+        <div id="middle" class="h-16 flex items-center m-auto justify-center absolute">
+          <h1 class="font-bold text-gray-200 dark:text-green-300 text-2xl">KU-Table</h1>
         </div>
         <div id="left">
           <router-link to="/schedule">
-            <img
-              src="./assets/ku-table.jpg"
-              class="w-10 h-10"
-              alt="KU-Logo"
-            >
+            <img src="./assets/ku-table.jpg" class="w-10 h-10" alt="KU-Logo" />
           </router-link>
         </div>
-        <div
-          id="right"
-          class="flex"
-        >
+        <div id="right" class="flex">
           <a
             href="#"
             class="m-3 text-gray-200 dark:text-green-300 hover:text-white dark:hover:text-white transition duration-300"
             @click.prevent="toggleTheme"
           >
-            <font-awesome-icon
-              v-if="theme === 'light'"
-              icon="moon"
-            />
-            <font-awesome-icon
-              v-else
-              icon="sun"
-            />
+            <font-awesome-icon v-if="theme === 'light'" icon="moon" />
+            <font-awesome-icon v-else icon="sun" />
           </a>
           <button
             v-if="!isAuthenticated"
@@ -67,11 +46,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 import KuFooter from '@/components/KuFooter.vue'
 
-export default {
+export default defineComponent({
   name: 'App',
   components: {
     KuFooter,
@@ -92,8 +73,8 @@ export default {
   watch: {
     theme(newTheme) {
       newTheme === 'light'
-        ? document.querySelector('html').classList.remove('dark')
-        : document.querySelector('html').classList.add('dark')
+        ? document.querySelector('html')!.classList.remove('dark')
+        : document.querySelector('html')!.classList.add('dark')
     },
     isAuthenticated(newValue) {
       if (newValue) {
@@ -104,7 +85,7 @@ export default {
     },
   },
   mounted() {
-    this.adsenseContent = document.getElementById('divadsensedisplaynone').innerHTML
+    this.adsenseContent = document.getElementById('divadsensedisplaynone')!.innerHTML
     this.initTheme()
   },
   methods: {
@@ -119,7 +100,7 @@ export default {
       this.clearAuthData()
     },
   },
-}
+})
 </script>
 
 <style>
