@@ -28,7 +28,7 @@
     "@eslint/compat": "^1.1.0",
     "@types/node": "^20.14.8",
     "@vitejs/plugin-vue": "^5.0.5",
-    "@vue/eslint-config-typescript": "^13.0.0",
+    "@vue/tsconfig": "^0.5.1",
     "autoprefixer": "^10.4.19",
     "eslint": "^9.5.0",
     "eslint-config-prettier": "^9.1.0",
