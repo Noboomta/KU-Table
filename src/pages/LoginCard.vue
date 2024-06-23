@@ -1,7 +1,62 @@
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import SpinTableVue from '../components/SpinTable.vue'
+import { useStore } from 'vuex'
+import axios from '../http'
+
+const username = ref('')
+const password = ref('')
+const err = ref('')
+const loading = ref(false)
+const router = useRouter()
+const store = useStore()
+
+onMounted(() => {
+  if (localStorage.getItem('accessToken')) {
+    router.push('/schedule')
+  }
+})
+
+function login() {
+  const data = {
+    username: username.value,
+    password: password.value,
+  }
+  loading.value = true
+  axios
+    .post('/login', data)
+    .then((response) => {
+      const { accesstoken, user } = response.data
+      store.commit('auth/authenticate', {
+        studentInfo: {
+          stdCode: user.student.stdCode,
+          stdId: user.student.stdId,
+          majorCode: user.student.majorCode,
+        },
+        accessToken: accesstoken,
+      })
+    })
+    .catch((error) => {
+      console.log(error)
+
+      if (err.value) {
+        err.value =
+          'เกิดข้อผิดพลาดในการล็อคอิน กรุณาลองล็อคอินที่ <a class="underline" href="https://my.ku.th">my.ku.th</a> ก่อนแล้วลองอีกครั้ง'
+      } else {
+        err.value = 'เกิดข้อผิดพลาดในการล็อคอิน โปรดลองอีกครั้ง'
+      }
+    })
+    .finally(() => {
+      loading.value = false
+    })
+}
+</script>
+
 <template>
   <div class="mx-auto flex md:flex-grow items-center">
     <div class="md:flex border rounded-lg m-5 overflow-hidden dark:border-0">
-      <spin-table-vue v-if="loading" />
+      <SpinTableVue v-if="loading" />
       <form
         class="p-5 max-w-sm flex flex-col dark:bg-gray-800"
         @submit.prevent="login"
@@ -71,67 +126,5 @@
     </div>
   </div>
 </template>
-
-<script>
-import { defineComponent } from 'vue'
-
-import spinTableVue from '../components/SpinTable.vue'
-import { mapMutations } from 'vuex'
-import axios from '../http'
-
-export default defineComponent({
-  name: 'LoginCard',
-  components: {
-    spinTableVue,
-  },
-  data() {
-    return {
-      username: '',
-      password: '',
-      err: '',
-      loading: false,
-    }
-  },
-  mounted() {
-    if (localStorage.getItem('accessToken')) {
-      this.$router.push('/schedule')
-    }
-  },
-  methods: {
-    ...mapMutations('auth', ['authenticate']),
-    login() {
-      const data = {
-        username: this.username,
-        password: this.password,
-      }
-      this.loading = true
-      axios
-        .post('/login', data)
-        .then((response) => {
-          const { accesstoken, user } = response.data
-          this.authenticate({
-            studentInfo: {
-              stdCode: user.student.stdCode,
-              stdId: user.student.stdId,
-              majorCode: user.student.majorCode,
-            },
-            accessToken: accesstoken,
-          })
-        })
-        .catch((error) => {
-          console.log(error)
-
-          if (this.err) {
-            this.err =
-              'เกิดข้อผิดพลาดในการล็อคอิน กรุณาลองล็อคอินที่ <a class="underline" href="https://my.ku.th">my.ku.th</a> ก่อนแล้วลองอีกครั้ง'
-          } else {
-            this.err = 'เกิดข้อผิดพลาดในการล็อคอิน โปรดลองอีกครั้ง'
-          }
-        })
-        .finally(() => (this.loading = false))
-    },
-  },
-})
-</script>
 
 <style></style>

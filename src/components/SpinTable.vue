@@ -12,16 +12,6 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  name: 'SpinTable',
-})
-/*z-10 h-screen w-full bg-tranparent masked */
-// center w-72 spin
-</script>
-
 <style>
 div.masked {
   position: relative;

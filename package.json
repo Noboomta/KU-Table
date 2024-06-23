@@ -19,8 +19,9 @@
     "k-progress-v3": "^1.0.0",
     "regenerator-runtime": "^0.14.1",
     "vue": "^3.3.9",
-    "vue-html2canvas": "^0.0.4",
+    "vue-demi": "^0.14.8",
     "vue-router": "^4.2.5",
+    "vue3-html2canvas": "^0.0.3",
     "vuex": "^4.1.0"
   },
   "devDependencies": {
