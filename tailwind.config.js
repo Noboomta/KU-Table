@@ -12,7 +12,7 @@ const gridConfig = () => {
 }
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ['./public/**/*.html', './src/**/*.vue'],
   safelist: [
     {
