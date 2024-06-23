@@ -62,6 +62,7 @@
         </div>
       </div>
       <div
+        id="print-content"
         ref="printcontent"
         class="overflow-x-auto border mx-1 rounded-lg"
       >
@@ -121,28 +122,20 @@
                   v-if="isCheck"
                   class="truncate"
                 >
-                  {{ course.room_name_en }} | {{ course.section_type_en }} {{ course.section_code }}
+                  {{ course.room_name_en }} | {{ course.section_type_en }}
+                  {{ course.section_code }}
                 </p>
                 <p
                   v-else
                   class="truncate"
                 >
-                  {{ course.room_name_th }} | {{ course.section_type_th }} {{ course.section_code }}
+                  {{ course.room_name_th }} | {{ course.section_type_th }}
+                  {{ course.section_code }}
                 </p>
               </div>
             </div>
           </div>
         </div>
-        <span
-          id="create-by"
-          class="hidden"
-        >created by
-          <a
-            href="https://ku-table.vercel.app"
-            class="text-blue-600 underline"
-          >https://ku-table.vercel.app
-          </a>
-        </span>
       </div>
       <unit
         class="dark:text-white"
@@ -157,6 +150,7 @@ import { mapGetters, mapMutations, mapState } from 'vuex'
 import SpinTableVue from '../components/SpinTable.vue'
 import Unit from '../components/Unit.vue'
 import axios from '../http'
+import appendCopyright from '../utils/appendCopyright'
 export default {
   name: 'ScheduleCard',
   components: {
@@ -220,11 +214,12 @@ export default {
     ...mapMutations('auth', ['clearAuthData']),
     async download() {
       const el = this.$refs.printcontent
-      const createBy = el.lastElementChild
-      createBy.className = 'mx-1 text-right block dark:text-white'
+
+      /** @type {import('html2canvas').Options} */
       const options = {
         type: 'dataURL',
-        windowWidth: '2560px',
+        windowWidth: 2560,
+        onclone: appendCopyright,
       }
       if (this.theme === 'dark') {
         options.backgroundColor = '#111827'
@@ -235,7 +230,6 @@ export default {
       link.setAttribute('href', printCanvas)
       link.className = 'dark:text-white'
       link.click()
-      createBy.className = 'hidden'
     },
     timeToCol(timeString) {
       const time = timeString?.split(':') || []
