@@ -11,20 +11,14 @@ const gridConfig = () => {
   return { gridTemplateColumns, gridColumnStart, gridColumnEnd }
 }
 
-const getGridClass = () => {
-  const result = []
-
-  for (let i = 14; i <= 169; i++) {
-    result.push(`col-start-${i}`, `col-end-${i}`)
-  }
-
-  return result
-}
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./public/**/*.html', './src/**/*.vue'],
-  safelist: getGridClass(),
+  safelist: [
+    {
+      pattern: /col-(start|end)-(.)*/,
+    },
+  ],
   darkMode: 'selector', // or 'media' or 'class'
   theme: {
     extend: {
