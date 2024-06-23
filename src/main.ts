@@ -3,6 +3,7 @@ import 'regenerator-runtime/runtime'
 import { createApp } from 'vue'
 import App from './App.vue'
 
+// @ts-expect-error
 import VueHtml2Canvas from 'vue-html2canvas'
 
 import './assets/tailwind.css'
@@ -11,6 +12,7 @@ import { faDownload, faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
+// @ts-expect-error
 import KProgress from 'k-progress-v3'
 import theme from './modules/theme'
 import { createStore } from 'vuex'

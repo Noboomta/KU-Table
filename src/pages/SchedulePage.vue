@@ -2,10 +2,7 @@
   <div>
     <spin-table-vue v-if="loading" />
     <div class="mx-auto container pt-7 pb-10">
-      <div
-        id="top"
-        class="mx-2 flex flex-wrap justify-between"
-      >
+      <div id="top" class="mx-2 flex flex-wrap justify-between">
         <div>
           <h1 class="text-4xl font-bold mb-2 md:mb-0 mr-5 inline-block align-top dark:text-white">
             Schedule
@@ -16,22 +13,14 @@
         </div>
         <div class="flex justify-between w-full sm:w-auto">
           <span class="align-top">
-            <label
-              for="toggleB"
-              class="flex items-center cursor-pointer"
-            >
+            <label for="toggleB" class="flex items-center cursor-pointer">
               <div class="mr-3 hidden sm:block text-gray-700 dark:text-gray-200 text-sm xs:text-md">
                 TH
               </div>
               <!-- toggle -->
               <div class="relative">
                 <!-- input -->
-                <input
-                  id="toggleB"
-                  v-model="isCheck"
-                  type="checkbox"
-                  class="sr-only"
-                >
+                <input id="toggleB" v-model="isCheck" type="checkbox" class="sr-only" />
                 <!-- line -->
                 <div
                   v-if="isCheck"
@@ -61,14 +50,8 @@
           </div>
         </div>
       </div>
-      <div
-        ref="printcontent"
-        class="overflow-x-auto border mx-1 rounded-lg"
-      >
-        <div
-          id="table"
-          class="overflow-x-hidden table-w"
-        >
+      <div ref="printcontent" class="overflow-x-auto border mx-1 rounded-lg">
+        <div id="table" class="overflow-x-hidden table-w">
           <div class="grid grid-cols-168">
             <div
               v-for="(header, headerIndex) in headers"
@@ -97,68 +80,49 @@
 							${getColorByDate(date)}`"
             >
               <div class="mb-2">
-                <p class="truncate">
-                  [{{ course.time_from }}-{{ course.time_to }}]
-                </p>
+                <p class="truncate">[{{ course.time_from }}-{{ course.time_to }}]</p>
                 <p class="truncate">
                   {{ course.subject_code }}
                 </p>
               </div>
-              <p
-                v-if="isCheck"
-                class="truncate"
-              >
+              <p v-if="isCheck" class="truncate">
                 {{ course.subject_name_en }}
               </p>
-              <p
-                v-else
-                class="truncate"
-              >
+              <p v-else class="truncate">
                 {{ course.subject_name_th }}
               </p>
               <div class="text-gray-700 text-xs">
-                <p
-                  v-if="isCheck"
-                  class="truncate"
-                >
+                <p v-if="isCheck" class="truncate">
                   {{ course.room_name_en }} | {{ course.section_type_en }} {{ course.section_code }}
                 </p>
-                <p
-                  v-else
-                  class="truncate"
-                >
+                <p v-else class="truncate">
                   {{ course.room_name_th }} | {{ course.section_type_th }} {{ course.section_code }}
                 </p>
               </div>
             </div>
           </div>
         </div>
-        <span
-          id="create-by"
-          class="hidden"
-        >created by
-          <a
-            href="https://ku-table.vercel.app"
-            class="text-blue-600 underline"
-          >https://ku-table.vercel.app
+        <span id="create-by" class="hidden"
+          >created by
+          <a href="https://ku-table.vercel.app" class="text-blue-600 underline"
+            >https://ku-table.vercel.app
           </a>
         </span>
       </div>
-      <unit
-        class="dark:text-white"
-        :lang="isCheck"
-      />
+      <unit class="dark:text-white" :lang="isCheck" />
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue'
 
 import { mapGetters, mapMutations, mapState } from 'vuex'
 import SpinTableVue from '../components/SpinTable.vue'
 import Unit from '../components/UnitSection.vue'
 import axios from '../http'
+import type { Options } from 'html2canvas'
+
 export default defineComponent({
   name: 'ScheduleCard',
   components: {
@@ -168,7 +132,7 @@ export default defineComponent({
   data() {
     return {
       loading: false,
-      courses: [],
+      courses: [] as any[],
       period_date: '',
       headers: [
         'Day/Time',
@@ -220,26 +184,34 @@ export default defineComponent({
   },
   methods: {
     ...mapMutations('auth', ['clearAuthData']),
+    savePhoto(base64: string) {
+      const link = document.createElement('a')
+
+      link.setAttribute('download', 'ku-table.png')
+      link.setAttribute('href', base64)
+      link.className = 'dark:text-white'
+      link.click()
+    },
     async download() {
-      const el = this.$refs.printcontent
-      const createBy = el.lastElementChild
+      const el = this.$refs.printcontent as HTMLElement
+      const createBy = el.lastElementChild as HTMLElement
       createBy.className = 'mx-1 text-right block dark:text-white'
-      const options = {
+      const options: Partial<Options> & { type: string } = {
         type: 'dataURL',
-        windowWidth: '2560px',
+        windowWidth: 2560,
       }
       if (this.theme === 'dark') {
         options.backgroundColor = '#111827'
       }
+
+      // @ts-expect-error
       const printCanvas = await this.$html2canvas(el, options)
-      const link = document.createElement('a')
-      link.setAttribute('download', 'ku-table.png')
-      link.setAttribute('href', printCanvas)
-      link.className = 'dark:text-white'
-      link.click()
+
+      this.savePhoto(printCanvas)
+
       createBy.className = 'hidden'
     },
-    timeToCol(timeString) {
+    timeToCol(timeString: string) {
       const time = timeString?.split(':') || []
       if (time.length != 2) {
         return 0
@@ -257,8 +229,8 @@ export default defineComponent({
       localStorage.removeItem('stdId')
       this.$router.push('/')
     },
-    getColorByDate(date) {
-      const color = {
+    getColorByDate(date: string) {
+      const color: Record<string, string> = {
         MON: 'bg-yellow-200',
         TUE: 'bg-pink-400',
         WED: 'bg-green-400',

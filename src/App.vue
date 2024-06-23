@@ -15,8 +15,8 @@ const isAuthenticated = computed(() => store.getters['auth/getIsAuthenticated'])
 
 watch(theme, (newTheme) => {
   newTheme === 'light'
-    ? document.querySelector('html').classList.remove('dark')
-    : document.querySelector('html').classList.add('dark')
+    ? document.querySelector('html')!.classList.remove('dark')
+    : document.querySelector('html')!.classList.add('dark')
 })
 
 watch(isAuthenticated, (newValue) => {
@@ -29,7 +29,7 @@ watch(isAuthenticated, (newValue) => {
 
 // Mounted lifecycle hook
 onMounted(() => {
-  adsenseContent.value = document.getElementById('divadsensedisplaynone').innerHTML
+  adsenseContent.value = document.getElementById('divadsensedisplaynone')!.innerHTML
   initTheme()
 })
 
