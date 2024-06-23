@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/no-v-html -->
 <template>
   <div class="mx-auto flex md:flex-grow items-center">
     <div class="md:flex border rounded-lg m-5 overflow-hidden dark:border-0">
