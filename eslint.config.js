@@ -26,6 +26,7 @@ export default [
   ...compat.extends('eslint:recommended', 'prettier'),
   ...pluginVue.configs['flat/recommended'],
   {
+    files: ['src/**/*.(js|vue)'],
     languageOptions: {
       globals: {
         ...globals.node,
