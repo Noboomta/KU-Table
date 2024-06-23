@@ -2,8 +2,10 @@
   <h1>{{ subject_name_th }}</h1>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   name: 'SubjectCard',
   props: {
     coure: {
@@ -29,7 +31,7 @@ export default {
   //     day_w: ""
   // 	}
   // }
-}
+})
 </script>
 
 <style></style>

@@ -37,13 +37,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'KuFooter',
   computed: {
     ...mapGetters({ theme: 'theme/getTheme' }),
   },
-}
+})
 </script>
 
 <style></style>

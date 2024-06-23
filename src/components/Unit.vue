@@ -123,12 +123,14 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+
 import { mapMutations, mapState } from 'vuex'
 import spinTableVue from './SpinTable.vue'
 import axios from '../http'
 
-export default {
+export default defineComponent({
   name: 'UnitSection',
   components: {
     spinTableVue,
@@ -250,7 +252,7 @@ export default {
         })
     },
   },
-}
+})
 </script>
 
 <style></style>
