@@ -1,5 +1,5 @@
 import axiosInstance from '../http'
-import { Module } from 'vuex'
+import type { Module } from 'vuex'
 
 interface IsAuthStore {
   studentInfo: string | null
