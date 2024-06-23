@@ -1,10 +1,11 @@
-import { createStore, Store } from 'vuex'
+import { Module } from 'vuex'
 
 interface ThemeStore {
   theme: null | 'light' | 'dark'
 }
 
-export default createStore<ThemeStore>({
+export default {
+  namespaced: true,
   state: {
     theme: null,
   },
@@ -42,4 +43,4 @@ export default createStore<ThemeStore>({
       return state.theme
     },
   },
-})
+} as Module<ThemeStore, any>

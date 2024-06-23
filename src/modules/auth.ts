@@ -1,4 +1,10 @@
 import axiosInstance from '../http'
+import { Module } from 'vuex'
+
+interface IsAuthStore {
+  studentInfo: string | null
+  accessToken: string | null
+}
 
 export default {
   namespaced: true,
@@ -27,4 +33,4 @@ export default {
       return state.accessToken !== null
     },
   },
-}
+} as Module<IsAuthStore, any>
