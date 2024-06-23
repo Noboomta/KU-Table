@@ -2,7 +2,10 @@
   <div>
     <spin-table-vue v-if="loading" />
     <div class="mx-auto container pt-7 pb-10">
-      <div id="top" class="mx-2 flex flex-wrap justify-between">
+      <div
+        id="top"
+        class="mx-2 flex flex-wrap justify-between"
+      >
         <div>
           <h1 class="text-4xl font-bold mb-2 md:mb-0 mr-5 inline-block align-top dark:text-white">
             Schedule
@@ -13,14 +16,22 @@
         </div>
         <div class="flex justify-between w-full sm:w-auto">
           <span class="align-top">
-            <label for="toggleB" class="flex items-center cursor-pointer">
+            <label
+              for="toggleB"
+              class="flex items-center cursor-pointer"
+            >
               <div class="mr-3 hidden sm:block text-gray-700 dark:text-gray-200 text-sm xs:text-md">
                 TH
               </div>
               <!-- toggle -->
               <div class="relative">
                 <!-- input -->
-                <input id="toggleB" v-model="isCheck" type="checkbox" class="sr-only" />
+                <input
+                  id="toggleB"
+                  v-model="isCheck"
+                  type="checkbox"
+                  class="sr-only"
+                >
                 <!-- line -->
                 <div
                   v-if="isCheck"
@@ -50,8 +61,14 @@
           </div>
         </div>
       </div>
-      <div ref="printcontent" class="overflow-x-auto border mx-1 rounded-lg">
-        <div id="table" class="overflow-x-hidden table-w">
+      <div
+        ref="printcontent"
+        class="overflow-x-auto border mx-1 rounded-lg"
+      >
+        <div
+          id="table"
+          class="overflow-x-hidden table-w"
+        >
           <div class="grid grid-cols-168">
             <div
               v-for="(header, headerIndex) in headers"
@@ -79,39 +96,58 @@
               :class="`col-start-${course.startCol} col-end-${course.endCol}
 							${getColorByDate(date)}`"
             >
-              <p class="flex flex-wrap justify-between mb-2">
-                <span>{{ course.subject_code }} </span>
-                <span>[{{ course.time_from }} - {{ course.time_to }}]</span>
-              </p>
-              <p v-if="isCheck">
+              <div class="mb-2">
+                <p class="truncate">
+                  [{{ course.time_from }}-{{ course.time_to }}]
+                </p>
+                <p class="truncate">
+                  {{ course.subject_code }}
+                </p>
+              </div>
+              <p
+                v-if="isCheck"
+                class="truncate"
+              >
                 {{ course.subject_name_en }}
               </p>
-              <p v-else>
+              <p
+                v-else
+                class="truncate"
+              >
                 {{ course.subject_name_th }}
               </p>
-              <div class="flex justify-between text-gray-700 text-xs">
-                <div>
-                  <span v-if="isCheck">ROOM: {{ course.room_name_en }}</span>
-                  <span v-else>ห้อง: {{ course.room_name_th }}</span>
-                </div>
-                <div class="text-right">
-                  <span v-if="isCheck">
-                    SEC{{ course.section_code }} {{ course.section_type_en }}
-                  </span>
-                  <span v-else> หมู่{{ course.section_code }} {{ course.section_type_th }} </span>
-                </div>
+              <div class="text-gray-700 text-xs">
+                <p
+                  v-if="isCheck"
+                  class="truncate"
+                >
+                  {{ course.room_name_en }} | {{ course.section_type_en }} {{ course.section_code }}
+                </p>
+                <p
+                  v-else
+                  class="truncate"
+                >
+                  {{ course.room_name_th }} | {{ course.section_type_th }} {{ course.section_code }}
+                </p>
               </div>
             </div>
           </div>
         </div>
-        <span id="create-by" class="hidden"
-          >created by
-          <a href="https://ku-table.vercel.app" class="text-blue-600 underline"
-            >https://ku-table.vercel.app
+        <span
+          id="create-by"
+          class="hidden"
+        >created by
+          <a
+            href="https://ku-table.vercel.app"
+            class="text-blue-600 underline"
+          >https://ku-table.vercel.app
           </a>
         </span>
       </div>
-      <unit class="dark:text-white" :lang="isCheck" />
+      <unit
+        class="dark:text-white"
+        :lang="isCheck"
+      />
     </div>
   </div>
 </template>
