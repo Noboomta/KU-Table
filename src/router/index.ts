@@ -1,11 +1,11 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 const Schedule = () => import('@/pages/Schedule.vue')
 const NotFound = () => import('@/pages/NotFound.vue')
 const Unit = () => import('@/components/Unit.vue')
 const Login = () => import('@/pages/Login.vue')
 
-const routes = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     redirect: '/login',
@@ -45,6 +45,7 @@ router.beforeEach((to, from, next) => {
     if (!localStorage.getItem('accessToken')) {
       next({
         path: '/login',
+        replace: true,
       })
     } else {
       next()

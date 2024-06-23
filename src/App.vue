@@ -67,11 +67,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 import KuFooter from '@/components/KuFooter.vue'
 
-export default {
+export default defineComponent({
   name: 'App',
   components: {
     KuFooter,
@@ -119,7 +121,7 @@ export default {
       this.clearAuthData()
     },
   },
-}
+})
 </script>
 
 <style>
