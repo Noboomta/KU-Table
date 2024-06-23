@@ -4,10 +4,14 @@ const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BASE_SERVER_URL,
 })
 
-const accessToken = localStorage.getItem('accessToken')
+axiosInstance.interceptors.request.use((config) => {
+  const accessToken = localStorage.getItem('accessToken')
 
-if (accessToken !== null) {
-  axiosInstance.defaults.headers.common['accesstoken'] = accessToken
-}
+  if (accessToken) {
+    config.headers['accesstoken'] = accessToken
+  }
+
+  return config
+})
 
 export default axiosInstance
