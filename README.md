@@ -1,4 +1,5 @@
 # KU-TABLE
+
 ตารางเรียนที่อยากได้จากเว็บ KU<br>
 เซฟตารางไปใช้ได้เลยครับ 🤝🏻
 
@@ -23,6 +24,7 @@ https://ku-table.vercel.app
 [![Star on GitHub](https://img.shields.io/github/stars/Noboomta/schedule-ku.svg?style=social&label=Stars)](https://github.com/auxilincom/docker-compose-starter/stargazers)
 
 ### หมายเหตุ
+
 ทาง dev ไม่มีการเก็บค่า username password และไม่มีตังจ่ายค่า server database<br>
 มีเพียงการนับจำนวนคนใช้งานผ่านการเก็บ cache stdId มีการ log ชั้นปีและคณะของผู้ใช้งานเพื่อทราบกลุ่มผู้ใช้<br>
 ตรวจสอบโค้ดได้ที่ https://github.com/Noboomta/KU-Table-server <br>
@@ -30,6 +32,7 @@ https://ku-table.vercel.app
 ทาง dev ยินดีให้โค้ดทั้งหมดแก่มหาลัยเพียงทำตาม <strong>Getting started with this app.</strong><br>
 
 ### ที่มาข้อมูล
+
 https://www.ku.ac.th/th/bachelor-degree <br>
 https://registrar.ku.ac.th/cur/all <br>
 [https://registrar.ku.ac.th/wp-content/uploads/2017/...](https://registrar.ku.ac.th/wp-content/uploads/2017/05/%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9B%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%9B%E0%B8%A3%E0%B8%B8%E0%B8%87%E0%B8%AB%E0%B8%A1%E0%B8%A7%E0%B8%94%E0%B8%A7%E0%B8%B4%E0%B8%8A%E0%B8%B2%E0%B8%A8%E0%B8%B6%E0%B8%81%E0%B8%A9%E0%B8%B2%E0%B8%97%E0%B8%B1%E0%B9%88%E0%B8%A7%E0%B9%84%E0%B8%9B-2564-%E0%B8%AA%E0%B8%A0%E0%B8%B2-%E0%B8%A1%E0%B8%81.-%E0%B8%AD.pdf) <br>
@@ -68,20 +71,25 @@ VUE_APP_BASE_SERVER_URL=https://<your-server-domain>
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
 yarn dev
 ```
+
 the applciation will run at [localhost:8080](http://localhost:8080)
 
 ### Compiles and minifies for production
+
 ```
 yarn build
 ```
 
 ### Lints and fixes files
+
 ```
 yarn lint
 ```
 
 ### Customize configuration
+
 See [Configuration Reference](https://cli.vuejs.org/config/).

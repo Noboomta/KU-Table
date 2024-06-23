@@ -16,35 +16,35 @@
 @tailwind utilities;
 
 body {
-	font-family: 'Kanit', sans-serif;
-	line-height: 1.5;
-	/* line-height-step: 1.5; */
+  font-family: 'Kanit', sans-serif;
+  line-height: 1.5;
+  /* line-height-step: 1.5; */
 }
 
 input:hover {
-	box-shadow: 0 0 5pt 0.1pt #d3d3d3;
+  box-shadow: 0 0 5pt 0.1pt #d3d3d3;
 }
 input:focus {
-	box-shadow: 0 0 5pt 0.2pt #d3d3d3;
-	outline-width: 0px;
+  box-shadow: 0 0 5pt 0.2pt #d3d3d3;
+  outline-width: 0px;
 }
 
 .loader-wrapper {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw; /* USE VIEWPORT UNITS */
-	height: 100vh; /* USE VIEWPORT UNITS */
-	z-index: 40; /* MOVE Z-INDEX HERE! */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw; /* USE VIEWPORT UNITS */
+  height: 100vh; /* USE VIEWPORT UNITS */
+  z-index: 40; /* MOVE Z-INDEX HERE! */
 }
 
 .loader {
-	position: fixed;
-	left: 50%;
-	top: 50%;
-	width: 14vmax;
-	margin: -5vmax -7vmax; /* ADD THIS (half the W/H) */
-	animation: spin 1s infinite;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 14vmax;
+  margin: -5vmax -7vmax; /* ADD THIS (half the W/H) */
+  animation: spin 1s infinite;
 }
 
 .centered {
@@ -56,44 +56,43 @@ input:focus {
 }
 
 .half-screen {
-	width: 50vw;
-	height: 50vw;
+  width: 50vw;
+  height: 50vw;
 }
 
 @keyframes spin {
-	0% {
-		transform: rotate(0deg);
-	}
-	100% {
-		transform: rotate(360deg);
-	}
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .lmask {
-	position: absolute;
-	height: 100%;
-	width: 100%;
-	background-color: #000;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	top: 0;
-	z-index: 40;
-	opacity: 0.4;
-	position: fixed;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #000;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 40;
+  opacity: 0.4;
+  position: fixed;
 }
 
 .no-gap {
-	margin: 0px !important;
-	padding: 0px !important;
+  margin: 0px !important;
+  padding: 0px !important;
 }
 
-.k-progress{
-	font-size: 18px;
-	justify-content: space-between;
+.k-progress {
+  font-size: 18px;
+  justify-content: space-between;
 }
 
 .k-progress-text {
-	font-size: 18px
+  font-size: 18px;
 }
-
