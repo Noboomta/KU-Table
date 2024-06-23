@@ -23,7 +23,7 @@ const gitignorePath = path.resolve(__dirname, '.gitignore')
 
 export default [
   includeIgnoreFile(gitignorePath),
-  ...compat.extends('eslint:recommended'),
+  ...compat.extends('eslint:recommended', 'prettier'),
   ...pluginVue.configs['flat/recommended'],
   {
     languageOptions: {
