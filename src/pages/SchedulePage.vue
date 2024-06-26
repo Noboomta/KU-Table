@@ -6,7 +6,7 @@ import Unit from '../components/UnitSection.vue'
 import axios from '../http'
 import html2canvas from 'html2canvas'
 import type { Options } from 'html2canvas'
-import { createCaptureStyleTag } from '@/utils/createCaptureStyle'
+import appendCopyright from '@/utils/appendCopyright'
 
 const store = useStore()
 const theme = computed(() => store.getters['theme/getTheme'])
@@ -67,12 +67,10 @@ const savePhoto = (base64: string) => {
 }
 
 const download = async () => {
-  const createBy = printcontent.value.lastElementChild as HTMLElement
-  createBy.className = 'mx-1 text-right block dark:text-white'
   const options: Partial<Options> = {
     windowWidth: 2560,
-    onclone: (cloneDocument) => {
-      createCaptureStyleTag(cloneDocument)
+    onclone: (_, element) => {
+      appendCopyright(element)
     },
   }
   if (theme.value === 'dark') {
@@ -82,8 +80,6 @@ const download = async () => {
   const printCanvas = await html2canvas(printcontent.value, options)
 
   savePhoto(printCanvas.toDataURL())
-
-  createBy.className = 'hidden'
 }
 
 const timeToCol = (timeString: string) => {
@@ -191,7 +187,7 @@ onMounted(() => {
           </div>
         </div>
       </div>
-      <div ref="printcontent" class="overflow-x-auto border mx-1 rounded-lg">
+      <div id="print-content" ref="printcontent" class="overflow-x-auto border mx-1 rounded-lg">
         <div id="table" class="overflow-x-hidden table-w">
           <div class="grid grid-cols-168">
             <div
@@ -243,12 +239,6 @@ onMounted(() => {
             </div>
           </div>
         </div>
-        <span id="create-by" class="hidden"
-          >created by
-          <a href="https://ku-table.vercel.app" class="text-blue-600 underline"
-            >https://ku-table.vercel.app
-          </a>
-        </span>
       </div>
       <unit class="dark:text-white" :lang="isCheck" />
     </div>
