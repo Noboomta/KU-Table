@@ -14,8 +14,15 @@ import theme from './modules/theme'
 import { createStore } from 'vuex'
 import auth from './modules/auth'
 import router from './router'
+import { createI18n } from 'vue-i18n'
 
 library.add(faDownload, faMoon, faSun)
+
+const i18n = createI18n({
+  legacy: false,
+  locale: localStorage.getItem('locale') || 'th',
+  fallbackLocale: 'th',
+})
 
 const store = createStore({
   modules: {
@@ -31,5 +38,6 @@ app.component('KProgress', KProgress)
 
 app.use(store)
 app.use(router)
+app.use(i18n)
 
 app.mount('#app')
