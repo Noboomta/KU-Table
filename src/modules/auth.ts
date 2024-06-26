@@ -1,4 +1,3 @@
-import axiosInstance from '../http'
 import type { Module } from 'vuex'
 
 interface IsAuthStore {
@@ -19,7 +18,7 @@ export default {
       const { studentInfo, accessToken } = payload
       localStorage.setItem('accessToken', accessToken)
       localStorage.setItem('studentInfo', JSON.stringify(studentInfo))
-      axiosInstance.defaults.headers.common['accesstoken'] = accessToken
+
       state.studentInfo = studentInfo
       state.accessToken = accessToken
     },
