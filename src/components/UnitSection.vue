@@ -3,11 +3,42 @@ import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import spinTableVue from './SpinTable.vue'
 import axios from '../http'
+import { useI18n } from 'vue-i18n'
 
-defineProps({
-  lang: {
-    type: Boolean,
-    default: false,
+const { t, locale } = useI18n({
+  messages: {
+    th: {
+      genEd: {
+        wellness: 'กลุ่มสาระอยู่ดีมีสุข',
+        entrepreneurship: 'กลุ่มสาระศาสตร์แห่งผู้ประกอบการ',
+        citizen: 'กลุ่มสาระพลเมืองไทยและพลเมืองโลก',
+        language: 'กลุ่มสาระภาษากับการสื่อสาร',
+        aesthetics: 'กลุ่มสาระสุนทรียศาสตร์',
+      },
+      notFound: {
+        title: '**ขออภัย ทางเรายังไม่มีข้อมูลเกี่ยวกับคณะ ({major}) ของท่าน กรุณากรอก',
+        link: 'ฟอร์มขอเพิ่มหมวด',
+      },
+      registerCondition:
+        ' **โปรดตรวจสอบข้อมูลเงื่อนไขการลงทะเบียนของท่านอีกครั้ง\nอาจมีเงื่อนไขแตกต่างกันออกไปในแต่ละสาขาและชั้นปีครับ',
+      moreInfo: 'หมายเหตุ:: ',
+    },
+    en: {
+      genEd: {
+        wellness: 'Wellness',
+        entrepreneurship: 'Entrepreneurship',
+        citizen: 'Thai Citizen and Global Citizen',
+        language: 'Language and Communication',
+        aesthetics: 'Aesthetics',
+      },
+      notFound: {
+        title: "**Sorry, we don't have information about your faculty department. you can",
+        link: 'fill form here.',
+      },
+      registerCondition:
+        '**Please check your registration conditions again. There may be different conditions for\neach department and year.',
+      moreInfo: 'More information: ',
+    },
   },
 })
 
@@ -15,22 +46,14 @@ const loading = ref(true)
 const unitYear = ref(0)
 
 const units = ref<any[]>([])
-const unitsName = ref({
-  en: [
-    'Wellness',
-    'Entrepreneurship',
-    'Thai Citizen and Global Citizen',
-    'Language and Communication',
-    'Aesthetics',
-  ],
-  th: [
-    'กลุ่มสาระอยู่ดีมีสุข',
-    'กลุ่มสาระศาสตร์แห่งผู้ประกอบการ',
-    'กลุ่มสาระพลเมืองไทยและพลเมืองโลก',
-    'กลุ่มสาระภาษากับการสื่อสาร',
-    'กลุ่มสาระสุนทรียศาสตร์',
-  ],
-})
+const unitsName = [
+  t('genEd.wellness'),
+  t('genEd.entrepreneurship'),
+  t('genEd.citizen'),
+  t('genEd.language'),
+  t('genEd.aesthetics'),
+]
+
 const initProgress = ref([0, 0, 0, 0, 0])
 const progress = ref([
   { percent: 0, ifUp: 'true' },
@@ -77,6 +100,7 @@ function processInterval() {
 
 function setProgress() {
   units.value.forEach((item, index) => {
+    console.log(item)
     if (item.need == 0) data.value = false
     else if (item.done < item.need) {
       progress.value[index].percent = (parseInt(item.done) / parseInt(item.need)) * 100
@@ -124,31 +148,21 @@ async function getUnit() {
     </div>
     <div class="container text-sm font-bold mx-auto p-2 text-red-500">
       <div v-if="major" class="mb-2">
-        <span v-if="lang" class="text-center">
-          **Sorry, we don't have information about your faculty department. you can
-          <a class="underline" href="https://forms.gle/xPs2cc2xxWnGiTvY6">fill form here.</a>
-        </span>
-        <span v-else class="text-center">
-          **ขออภัย ทางเรายังไม่มีข้อมูลเกี่ยวกับคณะ ({{ major }}) ของท่าน กรุณากรอก
-          <a class="underline" href="https://forms.gle/xPs2cc2xxWnGiTvY6">ฟอร์มขอเพิ่มหมวด</a>
+        <span class="text-center">
+          {{ t('notFound.title', { major }) }}
+          <a class="underline" href="https://forms.gle/xPs2cc2xxWnGiTvY6">
+            {{ t('notFound.link') }}</a
+          >
         </span>
       </div>
 
-      <span v-if="!lang">
-        **โปรดตรวจสอบข้อมูลเงื่อนไขการลงทะเบียนของท่านอีกครั้ง
-        อาจมีเงื่อนไขแตกต่างกันออกไปในแต่ละสาขาและชั้นปีครับ</span
-      >
-      <span v-else>
-        **Please check your registration conditions again. There may be different conditions for
-        each department and year.</span
-      >
+      <span> {{ t('registerCondition') }}</span>
     </div>
     <spin-table-vue v-if="loading" />
     <div class="space-y-3 text-lg container mx-auto">
       <div v-for="(item, index) in units" :key="index" class="border-2 m-1 p-3 rounded-md">
         <div class="flex flex-col md:flex-row justify-between text-2xl">
-          <span v-if="lang">{{ unitsName.en[index] }}</span>
-          <span v-else>{{ unitsName.th[index] }}</span>
+          <span>{{ unitsName[index] }}</span>
           <span class="text-lg">{{ item.done }}/{{ item.need }} units</span>
         </div>
         <k-progress
@@ -166,7 +180,7 @@ async function getUnit() {
               <td class="w-1/12 pr-2">
                 {{ sub.subject_code }}
               </td>
-              <td v-if="lang" class="w-10/12">
+              <td v-if="locale === 'en'" class="w-10/12">
                 {{ sub.subject_name_en }}
               </td>
               <td v-else class="w-10/12">
@@ -180,8 +194,7 @@ async function getUnit() {
         </table>
       </div>
       <div class="container mx-auto flex text-center pl-2 text-xs md:text-lg">
-        <span v-if="lang" class="">More information: </span>
-        <span v-else class="">หมายเหตุ: </span>
+        <span class=""> {{ t('moreInfo') }} </span>
         <a
           class="text-blue-700 dark:text-gray-200 pl-1 underline"
           href="https://www.ku.ac.th/th/bachelor-degree"
