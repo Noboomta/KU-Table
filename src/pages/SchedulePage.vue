@@ -1,3 +1,144 @@
+<script setup lang="ts">
+import { ref, computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import SpinTableVue from '../components/SpinTable.vue'
+import Unit from '../components/UnitSection.vue'
+import axios from '../http'
+import html2canvas from 'html2canvas'
+import type { Options } from 'html2canvas'
+import { createCaptureStyleTag } from '@/utils/createCaptureStyle'
+
+const store = useStore()
+const theme = computed(() => store.getters['theme/getTheme'])
+const studentInfo = computed(() => store.state.auth.studentInfo)
+
+const printcontent = ref<HTMLElement>(null!)
+const loading = ref(false)
+const courses = ref<any[]>([])
+const period_date = ref('')
+const headers = ref([
+  'Day/Time',
+  '8:00',
+  '9:00',
+  '10:00',
+  '11:00',
+  '12:00',
+  '13:00',
+  '14:00',
+  '15:00',
+  '16:00',
+  '17:00',
+  '18:00',
+  '19:00',
+  '20:00',
+])
+const isCheck = ref(true)
+
+const orderedDate = computed(() => ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'])
+
+const mappedCourses = computed(() => {
+  if (Array.isArray(courses.value)) {
+    return courses.value.reduce(
+      (acc, course) => {
+        const dayKey = course.day_w.trim()
+        const mappedCourse = {
+          startCol: timeToCol(course.time_from),
+          endCol: timeToCol(course.time_to),
+          ...course,
+        }
+        if (dayKey in acc) {
+          acc[dayKey].push(mappedCourse)
+        } else {
+          acc[dayKey] = [mappedCourse]
+        }
+        return acc
+      },
+      {} as Record<string, any[]>
+    )
+  }
+  return ''
+})
+
+const savePhoto = (base64: string) => {
+  const link = document.createElement('a')
+  link.setAttribute('download', 'ku-table.png')
+  link.setAttribute('href', base64)
+  link.click()
+}
+
+const download = async () => {
+  const createBy = printcontent.value.lastElementChild as HTMLElement
+  createBy.className = 'mx-1 text-right block dark:text-white'
+  const options: Partial<Options> = {
+    windowWidth: 2560,
+    onclone: (cloneDocument) => {
+      createCaptureStyleTag(cloneDocument)
+    },
+  }
+  if (theme.value === 'dark') {
+    options.backgroundColor = '#111827'
+  }
+
+  const printCanvas = await html2canvas(printcontent.value, options)
+
+  savePhoto(printCanvas.toDataURL())
+
+  createBy.className = 'hidden'
+}
+
+const timeToCol = (timeString: string) => {
+  const time = timeString?.split(':') || []
+  if (time.length != 2) {
+    return 0
+  }
+  const hours = +time[0]
+  const minutes = +time[1]
+
+  const hourCol = (hours - 8) * 12
+  const minuteCol = Math.floor(minutes / 5)
+
+  return hourCol + minuteCol + 12 + 1 // 12 is the first column (1 hour slot) + 1 for the first column
+}
+
+const getColorByDate = (date: string) => {
+  const color: Record<string, string> = {
+    MON: 'bg-yellow-200',
+    TUE: 'bg-pink-400',
+    WED: 'bg-green-400',
+    THU: 'bg-yellow-400',
+    FRI: 'bg-blue-400',
+    SAT: 'bg-purple-400',
+    SUN: 'bg-red-400',
+  }
+  return color[date]
+}
+
+const getSchedule = () => {
+  loading.value = true
+  axios
+    .get('/getSchedule', {
+      params: {
+        stdId: studentInfo.value.stdId,
+      },
+    })
+    .then((response) => {
+      const { data } = response
+      courses.value = data.course
+      period_date.value = data.peroid_date
+    })
+    .catch((error) => {
+      console.log(error)
+      store.commit('auth/clearAuthData')
+    })
+    .finally(() => {
+      loading.value = false
+    })
+}
+
+onMounted(() => {
+  getSchedule()
+})
+</script>
 <template>
   <div>
     <spin-table-vue v-if="loading" />
@@ -114,159 +255,7 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-import { mapGetters, mapMutations, mapState } from 'vuex'
-import SpinTableVue from '../components/SpinTable.vue'
-import Unit from '../components/UnitSection.vue'
-import axios from '../http'
-import type { Options } from 'html2canvas'
-
-export default defineComponent({
-  name: 'ScheduleCard',
-  components: {
-    SpinTableVue,
-    Unit,
-  },
-  data() {
-    return {
-      loading: false,
-      courses: [] as any[],
-      period_date: '',
-      headers: [
-        'Day/Time',
-        '8:00',
-        '9:00',
-        '10:00',
-        '11:00',
-        '12:00',
-        '13:00',
-        '14:00',
-        '15:00',
-        '16:00',
-        '17:00',
-        '18:00',
-        '19:00',
-        '20:00',
-      ],
-      isCheck: true,
-    }
-  },
-  computed: {
-    ...mapGetters({ theme: 'theme/getTheme' }),
-    ...mapState('auth', ['studentInfo']),
-    orderedDate() {
-      return ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
-    },
-    mappedCourses() {
-      if (Array.isArray(this.courses)) {
-        return this.courses.reduce((acc, course) => {
-          const dayKey = course.day_w.trim()
-          const mappedCourse = {
-            startCol: this.timeToCol(course.time_from),
-            endCol: this.timeToCol(course.time_to),
-            ...course,
-          }
-          if (dayKey in acc) {
-            acc[dayKey].push(mappedCourse)
-          } else {
-            acc[dayKey] = [mappedCourse]
-          }
-          return acc
-        }, {})
-      }
-      return ''
-    },
-  },
-  mounted() {
-    this.getSchedule()
-  },
-  methods: {
-    ...mapMutations('auth', ['clearAuthData']),
-    savePhoto(base64: string) {
-      const link = document.createElement('a')
-
-      link.setAttribute('download', 'ku-table.png')
-      link.setAttribute('href', base64)
-      link.className = 'dark:text-white'
-      link.click()
-    },
-    async download() {
-      const el = this.$refs.printcontent as HTMLElement
-      const createBy = el.lastElementChild as HTMLElement
-      createBy.className = 'mx-1 text-right block dark:text-white'
-      const options: Partial<Options> & { type: string } = {
-        type: 'dataURL',
-        windowWidth: 2560,
-      }
-      if (this.theme === 'dark') {
-        options.backgroundColor = '#111827'
-      }
-
-      // @ts-expect-error
-      const printCanvas = await this.$html2canvas(el, options)
-
-      this.savePhoto(printCanvas)
-
-      createBy.className = 'hidden'
-    },
-    timeToCol(timeString: string) {
-      const time = timeString?.split(':') || []
-      if (time.length != 2) {
-        return 0
-      }
-      const hours = +time[0]
-      const minutes = +time[1]
-
-      const hourCol = (hours - 8) * 12
-      const minuteCol = Math.floor(minutes / 5)
-
-      return hourCol + minuteCol + 12 + 1 // 12 is the first column (1 hour slot) + 1 for the first column
-    },
-    logout() {
-      localStorage.removeItem('accesstoken')
-      localStorage.removeItem('stdId')
-      this.$router.push('/')
-    },
-    getColorByDate(date: string) {
-      const color: Record<string, string> = {
-        MON: 'bg-yellow-200',
-        TUE: 'bg-pink-400',
-        WED: 'bg-green-400',
-        THU: 'bg-yellow-400',
-        FRI: 'bg-blue-400',
-        SAT: 'bg-purple-400',
-        SUN: 'bg-red-400',
-      }
-      return color[date]
-    },
-    getSchedule() {
-      this.loading = true
-      axios
-        .get('/getSchedule', {
-          params: {
-            stdId: this.studentInfo.stdId,
-          },
-        })
-        .then((response) => {
-          const { data } = response
-          this.courses = data.course
-          this.period_date = data.peroid_date
-        })
-        .catch((error) => {
-          console.log(error)
-          this.clearAuthData()
-        })
-        .finally(() => {
-          this.loading = false
-        })
-    },
-  },
-})
-</script>
-
-<style>
+<style scoped>
 button:active {
   -moz-box-shadow: inset 0 0 2px gray;
   -webkit-box-shadow: inset 0 0 2px gray;

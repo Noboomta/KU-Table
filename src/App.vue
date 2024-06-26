@@ -44,7 +44,7 @@ const navigateToLogin = () => {
 }
 
 const logout = () => {
-  store.commit('auth')
+  store.commit('auth/clearAuthData')
 }
 </script>
 
