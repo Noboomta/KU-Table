@@ -1,3 +1,12 @@
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+function back() {
+  router.replace('/login')
+}
+</script>
 <template>
   <div class="flex mx-auto flex-grow items-center">
     <div class="p-5 flex flex-col justify-center w-96">
@@ -24,19 +33,6 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  name: 'NotFoundPage',
-  methods: {
-    back() {
-      this.$router.push('/login')
-    },
-  },
-})
-</script>
 
 <style>
 .text-shadow-gray {

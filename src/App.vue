@@ -1,3 +1,53 @@
+<script setup lang="ts">
+import { ref, computed, watch, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter, useRoute } from 'vue-router'
+import KuFooter from './components/KuFooter.vue'
+
+const store = useStore()
+const router = useRouter()
+const route = useRoute()
+
+const adsenseContent = ref('')
+
+const theme = computed(() => store.getters['theme/getTheme'])
+const isAuthenticated = computed(() => store.getters['auth/getIsAuthenticated'])
+
+watch(theme, (newTheme) => {
+  newTheme === 'light'
+    ? document.querySelector('html')!.classList.remove('dark')
+    : document.querySelector('html')!.classList.add('dark')
+})
+
+watch(isAuthenticated, (newValue) => {
+  if (newValue) {
+    router.push('/schedule')
+  } else {
+    router.push('/login')
+  }
+})
+
+// Mounted lifecycle hook
+onMounted(() => {
+  adsenseContent.value = document.getElementById('divadsensedisplaynone')!.innerHTML
+  initTheme()
+})
+
+// Methods
+const initTheme = () => store.dispatch('theme/initTheme')
+const toggleTheme = () => store.dispatch('theme/toggleTheme')
+
+const navigateToLogin = () => {
+  if (route.path !== '/login') {
+    router.push('/login')
+  }
+}
+
+const logout = () => {
+  store.commit('auth/clearAuthData')
+}
+</script>
+
 <template>
   <div id="app" class="bg-white dark:bg-gray-900">
     <div>
@@ -45,63 +95,6 @@
     <ku-footer />
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-import { mapGetters, mapActions, mapMutations } from 'vuex'
-import KuFooter from '@/components/KuFooter.vue'
-
-export default defineComponent({
-  name: 'App',
-  components: {
-    KuFooter,
-  },
-  data() {
-    return {
-      adsenseContent: '',
-    }
-  },
-  computed: {
-    ...mapGetters({
-      theme: 'theme/getTheme',
-    }),
-    ...mapGetters({
-      isAuthenticated: 'auth/getIsAuthenticated',
-    }),
-  },
-  watch: {
-    theme(newTheme) {
-      newTheme === 'light'
-        ? document.querySelector('html')!.classList.remove('dark')
-        : document.querySelector('html')!.classList.add('dark')
-    },
-    isAuthenticated(newValue) {
-      if (newValue) {
-        this.$router.push('/schedule')
-      } else {
-        this.$router.push('/login')
-      }
-    },
-  },
-  mounted() {
-    this.adsenseContent = document.getElementById('divadsensedisplaynone')!.innerHTML
-    this.initTheme()
-  },
-  methods: {
-    ...mapActions('theme', ['initTheme', 'toggleTheme']),
-    ...mapMutations('auth', ['clearAuthData']),
-    navigateToLogin() {
-      if (this.$route.path !== '/login') {
-        this.$router.push('/login')
-      }
-    },
-    logout() {
-      this.clearAuthData()
-    },
-  },
-})
-</script>
 
 <style>
 #app {

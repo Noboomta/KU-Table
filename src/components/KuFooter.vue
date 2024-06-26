@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+
+const store = useStore()
+const theme = computed(() => store.getters['theme/getTheme'])
+</script>
 <template>
   <footer
     class="text-xs p-5 h-44 items-center flex flex-col justify-center text-center bg-gray-300 dark:bg-gray-800 dark:text-white"
@@ -25,17 +32,5 @@
     </span>
   </footer>
 </template>
-
-<script lang="ts">
-import { mapGetters } from 'vuex'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  name: 'KuFooter',
-  computed: {
-    ...mapGetters({ theme: 'theme/getTheme' }),
-  },
-})
-</script>
 
 <style></style>
