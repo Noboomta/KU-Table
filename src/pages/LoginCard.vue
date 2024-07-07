@@ -1,40 +1,21 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 import SpinTableVue from '../components/SpinTable.vue'
-import { useStore } from 'vuex'
-import loginMyKu from '@/service/api/loginMyKu'
+
+import { useAuthStore } from '@/stores/auth'
 
 const username = ref('')
 const password = ref('')
 const err = ref('')
 const loading = ref(false)
-const router = useRouter()
-const store = useStore()
 
-onMounted(() => {
-  if (localStorage.getItem('accessToken')) {
-    router.push('/schedule')
-  }
-})
+const { login: loginKu } = useAuthStore()
 
 async function login() {
   loading.value = true
 
   try {
-    const { accesstoken, user } = await loginMyKu({
-      username: username.value,
-      password: password.value,
-    })
-
-    store.commit('auth/authenticate', {
-      studentInfo: {
-        stdCode: user.student.stdCode,
-        stdId: user.student.stdId,
-        majorCode: user.student.majorCode,
-      },
-      accessToken: accesstoken,
-    })
+    await loginKu({ username: username.value, password: password.value })
   } catch {
     if (err.value) {
       err.value =

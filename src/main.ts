@@ -8,28 +8,34 @@ import './assets/tailwind.css'
 import { faDownload, faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
+import { createPinia } from 'pinia'
 
 import KProgress from 'k-progress-v3'
-import theme from './modules/theme'
-import { createStore } from 'vuex'
-import auth from './modules/auth'
+
 import router from './router'
 
 library.add(faDownload, faMoon, faSun)
 
-const store = createStore({
-  modules: {
-    theme,
-    auth,
-  },
-})
+const pinia = createPinia()
 
 const app = createApp(App)
 
 app.component('FontAwesomeIcon', FontAwesomeIcon)
 app.component('KProgress', KProgress)
 
-app.use(store)
+router.beforeEach(async (to, _, next) => {
+  const isAuthenticated = localStorage.getItem('accessToken')
+
+  if (!isAuthenticated && to.path !== '/login') {
+    return '/login'
+  } else if (isAuthenticated && ['/', '/login'].includes(to.path)) {
+    return '/schedule'
+  }
+
+  next()
+})
+
 app.use(router)
+app.use(pinia)
 
 app.mount('#app')

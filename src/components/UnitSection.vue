@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import { ref, onMounted } from 'vue'
+
 import spinTableVue from './SpinTable.vue'
 import getUnitData from '@/service/api/getUnitData'
+import { useAuthStore } from '@/stores/auth'
 
 defineProps({
   lang: {
@@ -42,9 +43,7 @@ const progress = ref([
 const counter = ref(0)
 const data = ref(true)
 const major = ref('')
-const store = useStore()
-
-const studentInfo = computed(() => store.state.auth.studentInfo)
+const { studentInfo, clearAuthData } = useAuthStore()
 
 onMounted(async () => {
   await getUnit()
@@ -90,8 +89,8 @@ async function getUnit() {
   loading.value = true
   try {
     const data = await getUnitData({
-      stdCode: studentInfo.value.stdCode,
-      majorCode: studentInfo.value.majorCode,
+      stdCode: studentInfo.stdCode,
+      majorCode: studentInfo.majorCode,
     })
 
     unitYear.value = data.unitYear
@@ -101,7 +100,7 @@ async function getUnit() {
     units.value.push(data.Language_and_Communication)
     units.value.push(data.Aesthetics)
   } catch (error) {
-    store.commit('auth/clearAuthData')
+    clearAuthData()
   } finally {
     loading.value = false
   }
