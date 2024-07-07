@@ -8,13 +8,14 @@
     "build": "NODE_OPTIONS=--openssl-legacy-provider vite build",
     "serve": "NODE_OPTIONS=--openssl-legacy-provider vite preview",
     "lint": "eslint --fix src",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/vue-fontawesome": "^3.0.5",
-    "axios": "^0.21.1",
+    "axios": "^1.7.2",
     "k-progress-v3": "^1.0.0",
     "regenerator-runtime": "^0.14.1",
     "vue": "^3.3.9",
@@ -23,8 +24,11 @@
     "vuex": "^4.1.0"
   },
   "devDependencies": {
+    "@babel/types": "^7.24.7",
     "@eslint/compat": "^1.1.0",
+    "@types/node": "^20.14.8",
     "@vitejs/plugin-vue": "^5.0.5",
+    "@vue/tsconfig": "^0.5.1",
     "autoprefixer": "^10.4.19",
     "eslint": "^9.5.0",
     "eslint-config-prettier": "^9.1.0",
@@ -35,7 +39,9 @@
     "prettier": "^3.3.2",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.5.2",
-    "vite": "^5.3.1"
+    "typescript-eslint": "^7.13.1",
+    "vite": "^5.3.1",
+    "vue-tsc": "^2.0.22"
   },
   "browserslist": [
     "> 1%",

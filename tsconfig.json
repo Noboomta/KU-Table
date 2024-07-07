@@ -1,0 +1,18 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "outDir": "dist",
+    "importHelpers": true,
+    "strict": false,
+    "strictNullChecks": false,
+    "isolatedModules": true,
+    "noEmit": true,
+    "paths": {
+      "@/*": ["./*"]
+    },
+    "types": ["vite/client", "node"]
+  },
+  "include": ["./src/**/*", "vite.config.ts"],
+  "exclude": ["node_modules", "dist", "public", "scripts"]
+}
