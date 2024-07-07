@@ -11,6 +11,9 @@
   h3 {
     @apply text-lg;
   }
+  img {
+    @apply inline-block;
+  }
 }
 @tailwind components;
 @tailwind utilities;

@@ -4,8 +4,8 @@
     "baseUrl": "./src",
     "outDir": "dist",
     "importHelpers": true,
-    "strict": false,
-    "strictNullChecks": false,
+    "strict": true,
+    "strictNullChecks": true,
     "isolatedModules": true,
     "noEmit": true,
     "paths": {

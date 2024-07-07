@@ -9,7 +9,9 @@ interface IsAuthStore {
 export default {
   namespaced: true,
   state: {
-    studentInfo: JSON.parse(localStorage.getItem('studentInfo')) || null,
+    studentInfo: localStorage.getItem('studentInfo')
+      ? JSON.parse(localStorage.getItem('studentInfo')!)
+      : null,
     accessToken: localStorage.getItem('accessToken') || null,
   },
   mutations: {

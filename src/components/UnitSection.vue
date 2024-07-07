@@ -1,3 +1,116 @@
+<script setup lang="ts">
+import { ref, computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import spinTableVue from './SpinTable.vue'
+import axios from '../http'
+
+defineProps({
+  lang: {
+    type: Boolean,
+    default: false,
+  },
+})
+
+const loading = ref(true)
+const unitYear = ref(0)
+
+const units = ref<any[]>([])
+const unitsName = ref({
+  en: [
+    'Wellness',
+    'Entrepreneurship',
+    'Thai Citizen and Global Citizen',
+    'Language and Communication',
+    'Aesthetics',
+  ],
+  th: [
+    'กลุ่มสาระอยู่ดีมีสุข',
+    'กลุ่มสาระศาสตร์แห่งผู้ประกอบการ',
+    'กลุ่มสาระพลเมืองไทยและพลเมืองโลก',
+    'กลุ่มสาระภาษากับการสื่อสาร',
+    'กลุ่มสาระสุนทรียศาสตร์',
+  ],
+})
+const initProgress = ref([0, 0, 0, 0, 0])
+const progress = ref([
+  { percent: 0, ifUp: 'true' },
+  { percent: 0, ifUp: 'true' },
+  { percent: 0, ifUp: 'true' },
+  { percent: 0, ifUp: 'true' },
+  { percent: 0, ifUp: 'true' },
+])
+const counter = ref(0)
+const data = ref(true)
+const major = ref('')
+const store = useStore()
+
+const studentInfo = computed(() => store.state.auth.studentInfo)
+
+onMounted(async () => {
+  await getUnit()
+
+  major.value = JSON.parse(localStorage.getItem('studentInfo') || '{}').majorCode
+
+  setProgress()
+
+  processInterval()
+})
+
+function processInterval() {
+  const timer = setInterval(() => {
+    initProgress.value = initProgress.value.map((item, index) => {
+      if (counter.value === 300) {
+        clearInterval(timer)
+      }
+      if (item >= progress.value[index].percent) {
+        progress.value[index].ifUp = 'false'
+        counter.value += 1
+        return item
+      }
+      if (progress.value[index].ifUp === 'true') {
+        return item + 1
+      }
+      return item
+    })
+  }, 20)
+}
+
+function setProgress() {
+  units.value.forEach((item, index) => {
+    if (item.need == 0) data.value = false
+    else if (item.done < item.need) {
+      progress.value[index].percent = (parseInt(item.done) / parseInt(item.need)) * 100
+    } else {
+      progress.value[index].percent = 100
+    }
+  })
+}
+
+async function getUnit() {
+  loading.value = true
+  try {
+    const response = await axios.get('/getGenEd', {
+      params: {
+        stdCode: studentInfo.value.stdCode,
+        majorCode: studentInfo.value.majorCode,
+      },
+    })
+    const { data } = response
+    unitYear.value = data.unitYear
+    units.value.push(data.Wellness)
+    units.value.push(data.Entrepreneurship)
+    units.value.push(data.Thai_Citizen_and_Global_Citizen)
+    units.value.push(data.Language_and_Communication)
+    units.value.push(data.Aesthetics)
+  } catch (error) {
+    console.log(error)
+    store.commit('auth/clearAuthData')
+  } finally {
+    loading.value = false
+  }
+}
+</script>
+
 <template>
   <div class="container mx-auto items-center overflow-y-auto my-4 mt-10">
     <div class="flex flex-wrap items-baseline mb-2 space-x-2">
@@ -83,137 +196,5 @@
     <div />
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-import { mapMutations, mapState } from 'vuex'
-import spinTableVue from './SpinTable.vue'
-import axios from '../http'
-
-export default defineComponent({
-  name: 'UnitSection',
-  components: {
-    spinTableVue,
-  },
-  props: {
-    lang: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  data() {
-    return {
-      a: '30',
-      loading: true,
-      isCheck: true,
-      unitYear: 0,
-      units: [],
-      unitsName: {
-        en: [
-          'Wellness',
-          'Entrepreneurship',
-          'Thai Citizen and Global Citizen',
-          'Language and Communication',
-          'Aesthetics',
-        ],
-        th: [
-          'กลุ่มสาระอยู่ดีมีสุข',
-          'กลุ่มสาระศาสตร์แห่งผู้ประกอบการ',
-          'กลุ่มสาระพลเมืองไทยและพลเมืองโลก',
-          'กลุ่มสาระภาษากับการสื่อสาร',
-          'กลุ่มสาระสุนทรียศาสตร์',
-        ],
-      },
-      initProgress: [0, 0, 0, 0, 0],
-      subjects: [],
-      progress: [
-        { percent: 0, ifUp: true },
-        { percent: 0, ifUp: true },
-        { percent: 0, ifUp: true },
-        { percent: 0, ifUp: true },
-        { percent: 0, ifUp: true },
-      ],
-      progressBarColor: [],
-      counter: 0,
-      data: true,
-      major: '',
-    }
-  },
-  computed: {
-    ...mapState('auth', ['studentInfo']),
-  },
-  async mounted() {
-    await this.getUnit()
-
-    this.major = JSON.parse(localStorage.getItem('studentInfo'))?.majorCode
-
-    this.setProgress()
-
-    this.processInterval()
-  },
-  methods: {
-    ...mapMutations('auth', ['clearAuthData']),
-    processInterval() {
-      const timer = setInterval(() => {
-        this.initProgress = this.initProgress.map((item, index) => {
-          if (this.counter === 300) {
-            clearInterval(timer)
-          }
-          if (item >= this.progress[index].percent) {
-            this.progress[index].ifUp = false
-            this.counter += 1
-            return item
-          }
-          if (this.progress[index].ifUp) {
-            return item + 1
-          }
-        })
-      }, 20)
-    },
-    setProgress() {
-      this.units.forEach((item, index) => {
-        if (item.need == 0) this.data = false
-        else if (item.done < item.need) {
-          this.progress[index].percent = (parseInt(item.done) / parseInt(item.need)) * 100
-        } else {
-          this.progress[index].percent = 100
-        }
-      })
-    },
-    logout() {
-      localStorage.removeItem('accesstoken')
-      localStorage.removeItem('stdId')
-      this.$router.push('/')
-    },
-    getUnit() {
-      this.loading = true
-      return axios
-        .get('/getGenEd', {
-          params: {
-            stdCode: this.studentInfo.stdCode,
-            majorCode: this.studentInfo.majorCode,
-          },
-        })
-        .then((response) => {
-          const { data } = response
-          this.unitYear = data.unitYear
-          this.units.push(data.Wellness)
-          this.units.push(data.Entrepreneurship)
-          this.units.push(data.Thai_Citizen_and_Global_Citizen)
-          this.units.push(data.Language_and_Communication)
-          this.units.push(data.Aesthetics)
-        })
-        .catch((error) => {
-          console.log(error)
-          this.clearAuthData()
-        })
-        .finally(() => {
-          this.loading = false
-        })
-    },
-  },
-})
-</script>
 
 <style></style>
