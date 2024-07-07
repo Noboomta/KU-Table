@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useStore } from 'vuex'
+import { useThemeStore } from '@/stores/theme'
+import { storeToRefs } from 'pinia'
 
-const store = useStore()
-const theme = computed(() => store.getters['theme/getTheme'])
+const themeStore = useThemeStore()
+const { theme } = storeToRefs(themeStore)
 </script>
 <template>
   <footer

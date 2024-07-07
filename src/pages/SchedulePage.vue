@@ -1,21 +1,27 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { useStore } from 'vuex'
 import SpinTableVue from '../components/SpinTable.vue'
 import Unit from '../components/UnitSection.vue'
 import html2canvas from 'html2canvas'
 import type { Options } from 'html2canvas'
 import appendCopyright from '@/utils/appendCopyright'
-import getScheduleData from '@/service/api/getScheduleData'
+import { useThemeStore } from '@/stores/theme'
+import { useAuthStore } from '@/stores/auth'
+import { useScheduleStore } from '@/stores/schedule'
+import { storeToRefs } from 'pinia'
 
-const store = useStore()
-const theme = computed(() => store.getters['theme/getTheme'])
-const studentInfo = computed(() => store.state.auth.studentInfo)
+const { theme } = useThemeStore()
+
+const { studentInfo, clearAuthData } = useAuthStore()
+
+const scheduleStore = useScheduleStore()
+const { getSchedule } = scheduleStore
+const { periodDate, courses } = storeToRefs(scheduleStore)
 
 const printcontent = ref<HTMLElement>(null!)
+
 const loading = ref(false)
-const courses = ref<any[]>([])
-const period_date = ref('')
+
 const headers = ref([
   'Day/Time',
   '8:00',
@@ -36,29 +42,6 @@ const isCheck = ref(true)
 
 const orderedDate = computed(() => ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'])
 
-const mappedCourses = computed(() => {
-  if (Array.isArray(courses.value)) {
-    return courses.value.reduce(
-      (acc, course) => {
-        const dayKey = course.day_w.trim()
-        const mappedCourse = {
-          startCol: timeToCol(course.time_from),
-          endCol: timeToCol(course.time_to),
-          ...course,
-        }
-        if (dayKey in acc) {
-          acc[dayKey].push(mappedCourse)
-        } else {
-          acc[dayKey] = [mappedCourse]
-        }
-        return acc
-      },
-      {} as Record<string, any[]>
-    )
-  }
-  return ''
-})
-
 const savePhoto = (base64: string) => {
   const link = document.createElement('a')
   link.setAttribute('download', 'ku-table.png')
@@ -73,7 +56,7 @@ const download = async () => {
       appendCopyright(element)
     },
   }
-  if (theme.value === 'dark') {
+  if (theme == 'dark') {
     options.backgroundColor = '#111827'
   }
 
@@ -82,50 +65,25 @@ const download = async () => {
   savePhoto(printCanvas.toDataURL())
 }
 
-const timeToCol = (timeString: string) => {
-  const time = timeString?.split(':') || []
-  if (time.length != 2) {
-    return 0
-  }
-  const hours = +time[0]
-  const minutes = +time[1]
-
-  const hourCol = (hours - 8) * 12
-  const minuteCol = Math.floor(minutes / 5)
-
-  return hourCol + minuteCol + 12 + 1 // 12 is the first column (1 hour slot) + 1 for the first column
-}
-
-const getColorByDate = (date: string) => {
-  const color: Record<string, string> = {
-    MON: 'bg-yellow-200',
-    TUE: 'bg-pink-400',
-    WED: 'bg-green-400',
-    THU: 'bg-yellow-400',
-    FRI: 'bg-blue-400',
-    SAT: 'bg-purple-400',
-    SUN: 'bg-red-400',
-  }
-  return color[date]
-}
-
-const getSchedule = async () => {
-  loading.value = true
-
-  try {
-    const data = await getScheduleData(studentInfo.value.stdId)
-
-    courses.value = data.course
-    period_date.value = data.peroid_date
-  } catch {
-    store.commit('auth/clearAuthData')
-  } finally {
-    loading.value = false
-  }
+const DAY_COLOR_MAPPER: Record<string, string> = {
+  MON: 'bg-yellow-200',
+  TUE: 'bg-pink-400',
+  WED: 'bg-green-400',
+  THU: 'bg-yellow-400',
+  FRI: 'bg-blue-400',
+  SAT: 'bg-purple-400',
+  SUN: 'bg-red-400',
 }
 
 onMounted(() => {
-  getSchedule()
+  loading.value = true
+  try {
+    getSchedule(studentInfo.stdId)
+  } catch {
+    clearAuthData()
+  } finally {
+    loading.value = false
+  }
 })
 </script>
 <template>
@@ -137,7 +95,7 @@ onMounted(() => {
           <h1 class="text-4xl font-bold mb-2 md:mb-0 mr-5 inline-block align-top dark:text-white">
             Schedule
             <p class="md:text-xl text-sm font-normal text-gray-600 dark:text-white">
-              Period: {{ period_date }}
+              Period: {{ periodDate }}
             </p>
           </h1>
         </div>
@@ -198,16 +156,16 @@ onMounted(() => {
           >
             <div
               class="p-1 md:p-3 col-span-12 border-r-2 dark:border-gray-700"
-              :class="`${getColorByDate(date)}`"
+              :class="`${DAY_COLOR_MAPPER[date]}`"
             >
               <span class="font-bold dark:text-gray-900">{{ date }}</span>
             </div>
             <div
-              v-for="(course, courseIndex) in mappedCourses[date]"
+              v-for="(course, courseIndex) in courses[date]"
               :key="`course-${courseIndex}`"
               class="border p-2 md:px-3 md:py-2 rounded text-xs md:text-sm bg-opacity-60 flex flex-col justify-between hover:bg-opacity-70 overflow-hidden cursor-pointer dark:bg-opacity-100 dark:border-gray-700"
               :class="`col-start-${course.startCol} col-end-${course.endCol}
-							${getColorByDate(date)}`"
+							${DAY_COLOR_MAPPER[date]}`"
             >
               <div class="mb-2">
                 <p class="truncate">[{{ course.time_from }}-{{ course.time_to }}]</p>

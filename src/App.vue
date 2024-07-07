@@ -1,15 +1,19 @@
 <script setup lang="ts">
-import { computed, watch, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import { watch, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import KuFooter from './components/KuFooter.vue'
+import { storeToRefs } from 'pinia'
+import { useAuthStore } from './stores/auth'
+import { useThemeStore } from './stores/theme'
 
-const store = useStore()
+const authStore = useAuthStore()
+const { isAuthenticated } = storeToRefs(authStore)
+
+const themeStore = useThemeStore()
+const { theme } = storeToRefs(themeStore)
+
 const router = useRouter()
 const route = useRoute()
-
-const theme = computed(() => store.getters['theme/getTheme'])
-const isAuthenticated = computed(() => store.getters['auth/getIsAuthenticated'])
 
 watch(theme, (newTheme) => {
   newTheme === 'light'
@@ -27,12 +31,8 @@ watch(isAuthenticated, (newValue) => {
 
 // Mounted lifecycle hook
 onMounted(() => {
-  initTheme()
+  themeStore.initTheme()
 })
-
-// Methods
-const initTheme = () => store.dispatch('theme/initTheme')
-const toggleTheme = () => store.dispatch('theme/toggleTheme')
 
 const navigateToLogin = () => {
   if (route.path !== '/login') {
@@ -41,7 +41,7 @@ const navigateToLogin = () => {
 }
 
 const logout = () => {
-  store.commit('auth/clearAuthData')
+  authStore.clearAuthData()
 }
 </script>
 
@@ -63,7 +63,7 @@ const logout = () => {
           <a
             href="#"
             class="m-3 text-gray-200 dark:text-green-300 hover:text-white dark:hover:text-white transition duration-300"
-            @click.prevent="toggleTheme"
+            @click.prevent="themeStore.toggleTheme"
           >
             <font-awesome-icon v-if="theme === 'light'" icon="moon" />
             <font-awesome-icon v-else icon="sun" />
