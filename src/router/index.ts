@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 
-const Schedule = () => import('@/pages/Schedule.vue')
+const ScheduleSection = () => import('@/pages/SchedulePage.vue')
 const NotFound = () => import('@/pages/NotFound.vue')
-const Unit = () => import('@/components/Unit.vue')
-const Login = () => import('@/pages/Login.vue')
+const UnitSection = () => import('@/components/UnitSection.vue')
+const Login = () => import('@/pages/LoginCard.vue')
 
 const routes: RouteRecordRaw[] = [
   {
@@ -19,13 +19,13 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/schedule',
     name: 'Schedule',
-    component: Schedule,
+    component: ScheduleSection,
     meta: { requiresAuth: true },
   },
   {
     path: '/unit',
     name: 'Unit',
-    component: Unit,
+    component: UnitSection,
     meta: { requiresAuth: true },
   },
   {

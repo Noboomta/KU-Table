@@ -1,26 +1,12 @@
 <template>
   <div>
-    <img
-      src="../assets/table.png"
-      alt=""
-      class="loader z-50 opacity-80"
-    >
+    <img src="../assets/table.png" alt="" class="loader z-50 opacity-80" />
     <span class="centered half-screen z-50">
       <span class="animate-ping absolute h-full w-full rounded-full bg-gray-500 opacity-75" />
     </span>
     <div class="loader-wrapper lmask" />
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  name: 'SpinTable',
-})
-/*z-10 h-screen w-full bg-tranparent masked */
-// center w-72 spin
-</script>
 
 <style>
 div.masked {
