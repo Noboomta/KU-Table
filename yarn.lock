@@ -2469,7 +2469,7 @@ vue-eslint-parser@^9.4.3:
     lodash "^4.17.21"
     semver "^7.3.6"
 
-vue-i18n@9:
+vue-i18n@^9.13.1:
   version "9.13.1"
   resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-9.13.1.tgz#a292c8021b7be604ebfca5609ae1f8fafe5c36d7"
   integrity sha512-mh0GIxx0wPtPlcB1q4k277y0iKgo25xmDPWioVVYanjPufDBpvu5ySTjP5wOrSvlYQ2m1xI+CFhGdauv/61uQg==
