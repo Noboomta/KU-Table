@@ -100,7 +100,6 @@ function processInterval() {
 
 function setProgress() {
   units.value.forEach((item, index) => {
-    console.log(item)
     if (item.need == 0) data.value = false
     else if (item.done < item.need) {
       progress.value[index].percent = (parseInt(item.done) / parseInt(item.need)) * 100
@@ -194,7 +193,7 @@ async function getUnit() {
         </table>
       </div>
       <div class="container mx-auto flex text-center pl-2 text-xs md:text-lg">
-        <span class=""> {{ t('moreInfo') }} </span>
+        <span> {{ t('moreInfo') }} </span>
         <a
           class="text-blue-700 dark:text-gray-200 pl-1 underline"
           href="https://www.ku.ac.th/th/bachelor-degree"
