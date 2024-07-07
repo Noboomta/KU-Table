@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import SpinTableVue from '../components/SpinTable.vue'
 import { useStore } from 'vuex'
-import axios from '../http'
+import loginMyKu from '@/service/api/loginMyKu'
 
 const username = ref('')
 const password = ref('')
@@ -18,38 +18,33 @@ onMounted(() => {
   }
 })
 
-function login() {
-  const data = {
-    username: username.value,
-    password: password.value,
-  }
+async function login() {
   loading.value = true
-  axios
-    .post('/login', data)
-    .then((response) => {
-      const { accesstoken, user } = response.data
-      store.commit('auth/authenticate', {
-        studentInfo: {
-          stdCode: user.student.stdCode,
-          stdId: user.student.stdId,
-          majorCode: user.student.majorCode,
-        },
-        accessToken: accesstoken,
-      })
-    })
-    .catch((error) => {
-      console.log(error)
 
-      if (err.value) {
-        err.value =
-          'เกิดข้อผิดพลาดในการล็อคอิน กรุณาลองล็อคอินที่ <a class="underline" href="https://my.ku.th">my.ku.th</a> ก่อนแล้วลองอีกครั้ง'
-      } else {
-        err.value = 'เกิดข้อผิดพลาดในการล็อคอิน โปรดลองอีกครั้ง'
-      }
+  try {
+    const { accesstoken, user } = await loginMyKu({
+      username: username.value,
+      password: password.value,
     })
-    .finally(() => {
-      loading.value = false
+
+    store.commit('auth/authenticate', {
+      studentInfo: {
+        stdCode: user.student.stdCode,
+        stdId: user.student.stdId,
+        majorCode: user.student.majorCode,
+      },
+      accessToken: accesstoken,
     })
+  } catch {
+    if (err.value) {
+      err.value =
+        'เกิดข้อผิดพลาดในการล็อคอิน กรุณาลองล็อคอินที่ <a class="underline" href="https://my.ku.th">my.ku.th</a> ก่อนแล้วลองอีกครั้ง'
+    } else {
+      err.value = 'เกิดข้อผิดพลาดในการล็อคอิน โปรดลองอีกครั้ง'
+    }
+  } finally {
+    loading.value = false
+  }
 }
 </script>
 

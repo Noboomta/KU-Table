@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch, onMounted } from 'vue'
+import { computed, watch, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router'
 import KuFooter from './components/KuFooter.vue'
@@ -7,8 +7,6 @@ import KuFooter from './components/KuFooter.vue'
 const store = useStore()
 const router = useRouter()
 const route = useRoute()
-
-const adsenseContent = ref('')
 
 const theme = computed(() => store.getters['theme/getTheme'])
 const isAuthenticated = computed(() => store.getters['auth/getIsAuthenticated'])
@@ -29,7 +27,6 @@ watch(isAuthenticated, (newValue) => {
 
 // Mounted lifecycle hook
 onMounted(() => {
-  adsenseContent.value = document.getElementById('divadsensedisplaynone')!.innerHTML
   initTheme()
 })
 
