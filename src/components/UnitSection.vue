@@ -2,7 +2,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import spinTableVue from './SpinTable.vue'
-import axios from '../http'
+import getUnitData from '@/service/api/getUnitData'
 
 defineProps({
   lang: {
@@ -89,13 +89,11 @@ function setProgress() {
 async function getUnit() {
   loading.value = true
   try {
-    const response = await axios.get('/getGenEd', {
-      params: {
-        stdCode: studentInfo.value.stdCode,
-        majorCode: studentInfo.value.majorCode,
-      },
+    const data = await getUnitData({
+      stdCode: studentInfo.value.stdCode,
+      majorCode: studentInfo.value.majorCode,
     })
-    const { data } = response
+
     unitYear.value = data.unitYear
     units.value.push(data.Wellness)
     units.value.push(data.Entrepreneurship)
@@ -103,7 +101,6 @@ async function getUnit() {
     units.value.push(data.Language_and_Communication)
     units.value.push(data.Aesthetics)
   } catch (error) {
-    console.log(error)
     store.commit('auth/clearAuthData')
   } finally {
     loading.value = false
