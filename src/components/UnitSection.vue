@@ -119,7 +119,7 @@ async function getUnit() {
       <p class="mb-2">
         **กำลังแสดงหลักสูตรปี {{ unitYear }} หากจำนวนหน่วยกิตไม่ถูกต้อง โปรด
         <a class="underline" href="https://forms.gle/HJw8KFbKpuN3RrxE6">กรอกฟอร์ม</a>
-        เพื่อแจ้งให้เพิ่ม
+        เพื่อแจ้งให้เพิ่ม (ข้อมูลไม่ได้อัพเดทล่าสุด เช็ควิชากับจำนวนหน่วยกิตจากทางคณะจะชัวร์กว่าครับ)
       </p>
     </div>
     <div class="container text-sm font-bold mx-auto p-2 text-red-500">
