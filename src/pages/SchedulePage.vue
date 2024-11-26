@@ -3,10 +3,10 @@ import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import SpinTableVue from '../components/SpinTable.vue'
 import Unit from '../components/UnitSection.vue'
-import axios from '../http'
 import html2canvas from 'html2canvas'
 import type { Options } from 'html2canvas'
 import appendCopyright from '@/utils/appendCopyright'
+import getScheduleData from '@/service/api/getScheduleData'
 
 const store = useStore()
 const theme = computed(() => store.getters['theme/getTheme'])
@@ -109,26 +109,19 @@ const getColorByDate = (date: string) => {
   return color[date]
 }
 
-const getSchedule = () => {
+const getSchedule = async () => {
   loading.value = true
-  axios
-    .get('/getSchedule', {
-      params: {
-        stdId: studentInfo.value.stdId,
-      },
-    })
-    .then((response) => {
-      const { data } = response
-      courses.value = data.course
-      period_date.value = data.peroid_date
-    })
-    .catch((error) => {
-      console.log(error)
-      store.commit('auth/clearAuthData')
-    })
-    .finally(() => {
-      loading.value = false
-    })
+
+  try {
+    const data = await getScheduleData(studentInfo.value.stdId)
+
+    courses.value = data.course
+    period_date.value = data.peroid_date
+  } catch {
+    store.commit('auth/clearAuthData')
+  } finally {
+    loading.value = false
+  }
 }
 
 onMounted(() => {
