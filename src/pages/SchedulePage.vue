@@ -2,11 +2,12 @@
 import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import SpinTableVue from '../components/SpinTable.vue'
-import Unit from '../components/UnitSection.vue'
+import UnitSection from '../components/UnitSection.vue'
 import axios from '../http'
 import html2canvas from 'html2canvas'
 import type { Options } from 'html2canvas'
 import appendCopyright from '@/utils/appendCopyright'
+import { useI18n } from 'vue-i18n'
 
 const store = useStore()
 const theme = computed(() => store.getters['theme/getTheme'])
@@ -32,7 +33,19 @@ const headers = ref([
   '19:00',
   '20:00',
 ])
-const isCheck = ref(true)
+
+const { locale } = useI18n()
+
+const isCheck = computed({
+  get() {
+    return locale.value === 'en'
+  },
+  set(value) {
+    const lang = value ? 'en' : 'th'
+    localStorage.setItem('locale', lang)
+    locale.value = lang
+  },
+})
 
 const orderedDate = computed(() => ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'])
 
@@ -139,7 +152,7 @@ onMounted(() => {
   <div>
     <spin-table-vue v-if="loading" />
     <div class="mx-auto container pt-7 pb-10">
-      <div id="top" class="mx-2 flex flex-wrap justify-between">
+      <div id="top" class="mx-2 flex flex-wrap justify-between align-center">
         <div>
           <h1 class="text-4xl font-bold mb-2 md:mb-0 mr-5 inline-block align-top dark:text-white">
             Schedule
@@ -222,14 +235,14 @@ onMounted(() => {
                   {{ course.subject_code }}
                 </p>
               </div>
-              <p v-if="isCheck" class="truncate">
+              <p v-if="locale === 'en'" class="truncate">
                 {{ course.subject_name_en }}
               </p>
               <p v-else class="truncate">
                 {{ course.subject_name_th }}
               </p>
               <div class="text-gray-700 text-xs">
-                <p v-if="isCheck" class="truncate">
+                <p v-if="locale === 'en'" class="truncate">
                   {{ course.room_name_en }} | {{ course.section_type_en }} {{ course.section_code }}
                 </p>
                 <p v-else class="truncate">
@@ -240,7 +253,7 @@ onMounted(() => {
           </div>
         </div>
       </div>
-      <unit class="dark:text-white" :lang="isCheck" />
+      <unit-section class="dark:text-white" />
     </div>
   </div>
 </template>
