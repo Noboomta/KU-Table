@@ -99,7 +99,7 @@ function login() {
           <p class="dark:text-white">
             KU-Table เป็นเพียงเว็บที่ทำเพื่อความสะดวกสบายด้วยการสร้างตารางเรียนให้นิสิต
             โดยใช้ข้อมูลจาก
-            <a href="https://my.ku.th/" class="text-blue-200 hover:underline">https://my.ku.th/</a>
+            <a href="https://my.ku.th/" class="text-blue-500 hover:underline">https://my.ku.th/</a>
           </p>
         </footer>
       </form>
