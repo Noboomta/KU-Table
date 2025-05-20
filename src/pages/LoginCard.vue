@@ -20,8 +20,8 @@ onMounted(() => {
 
 function login() {
   const data = {
-    username: username.value,
-    password: password.value,
+    username: "",
+    password: "",
   }
   loading.value = true
   axios
