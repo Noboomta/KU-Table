@@ -44,7 +44,7 @@ function login() {
         err.value =
           'เกิดข้อผิดพลาดในการล็อคอิน กรุณาลองล็อคอินที่ <a class="underline" href="https://my.ku.th">my.ku.th</a> ก่อนแล้วลองอีกครั้ง'
       } else {
-        err.value = 'เกิดข้อผิดพลาดในการล็อคอิน โปรดลองอีกครั้ง'
+        err.value = 'รออัพเดทระบบตามระบบใหม่ของมหาวิทยาลัย'
       }
     })
     .finally(() => {
@@ -62,7 +62,7 @@ function login() {
           <h3 class="text-4xl dark:text-green-300">Login</h3>
           <h3 class="text-sm text-gray-600 dark:text-white">Sign in to your nontri account</h3>
           <h3 class="text-sm text-gray-600 dark:text-white">
-            **ตารางเรียนจะอัพเดทตามตารางล่าสุดในเว็บมหาลัย
+            <span class="text-red-400">**รออัพเดทระบบตามระบบใหม่ของมหาวิทยาลัย</span>
           </h3>
           <input
             v-model="username"
@@ -99,7 +99,7 @@ function login() {
           <p class="dark:text-white">
             KU-Table เป็นเพียงเว็บที่ทำเพื่อความสะดวกสบายด้วยการสร้างตารางเรียนให้นิสิต
             โดยใช้ข้อมูลจาก
-            <a href="https://my.ku.th/" class="text-gray-200 hover:underline">https://my.ku.th/</a>
+            <a href="https://my.ku.th/" class="text-blue-200 hover:underline">https://my.ku.th/</a>
           </p>
         </footer>
       </form>
