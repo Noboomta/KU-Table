@@ -42,9 +42,9 @@ function login() {
 
       if (err.value) {
         err.value =
-          'เกิดข้อผิดพลาดในการล็อคอิน กรุณาลองล็อคอินที่ <a class="underline" href="https://my.ku.th">my.ku.th</a> ก่อนแล้วลองอีกครั้ง'
+          'รออัพเดทระบบตามระบบใหม่ของมหาวิทยาลัย (สามารถใช้ตารางเรียนจากแอพ nisit ku แทน)'
       } else {
-        err.value = 'รออัพเดทระบบตามระบบใหม่ของมหาวิทยาลัย'
+        err.value = 'รออัพเดทระบบตามระบบใหม่ของมหาวิทยาลัย (สามารถใช้ตารางเรียนจากแอพ nisit ku แทน)'
       }
     })
     .finally(() => {
@@ -62,7 +62,7 @@ function login() {
           <h3 class="text-4xl dark:text-green-300">Login</h3>
           <h3 class="text-sm text-gray-600 dark:text-white">Sign in to your nontri account</h3>
           <h3 class="text-sm text-gray-600 dark:text-white">
-            <span class="text-red-400">**รออัพเดทระบบตามระบบใหม่ของมหาวิทยาลัย</span>
+            <span class="text-red-400">**รออัพเดทระบบตามระบบใหม่ของมหาวิทยาลัย (สามารถใช้ตารางเรียนจากแอพ nisit ku แทน)</span>
           </h3>
           <input
             v-model="username"
