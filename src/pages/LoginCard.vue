@@ -2,15 +2,15 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import SpinTableVue from '../components/SpinTable.vue'
-import { useStore } from 'vuex'
-import axios from '../http'
+// import { useStore } from 'vuex'
+// import axios from '../http'
 
 const username = ref('')
 const password = ref('')
 const err = ref('')
 const loading = ref(false)
 const router = useRouter()
-const store = useStore()
+// const store = useStore()
 
 onMounted(() => {
   if (localStorage.getItem('accessToken')) {
@@ -19,37 +19,40 @@ onMounted(() => {
 })
 
 function login() {
-  const data = {
-    username: "",
-    password: "",
-  }
-  loading.value = true
-  axios
-    .post('/login', data)
-    .then((response) => {
-      const { accesstoken, user } = response.data
-      store.commit('auth/authenticate', {
-        studentInfo: {
-          stdCode: user.student.stdCode,
-          stdId: user.student.stdId,
-          majorCode: user.student.majorCode,
-        },
-        accessToken: accesstoken,
-      })
-    })
-    .catch((error) => {
-      console.log(error)
+  alert('เว็บปิดแล้วครับ ใช้ของมหาลัยแทนเด้อน้องๆ')
+  err.value = 'เว็บปิดแล้วครับ ใช้ของมหาลัยแทนเด้อน้องๆ'
 
-      if (err.value) {
-        err.value =
-          '*เว็บปิดแล้วครับ* (สามารถใช้ตารางเรียนจากแอพ nisit ku แทน)'
-      } else {
-        err.value = '*เว็บปิดแล้วครับ* (สามารถใช้ตารางเรียนจากแอพ nisit ku แทน)'
-      }
-    })
-    .finally(() => {
-      loading.value = false
-    })
+  // const data = {
+  //   username: "",
+  //   password: "",
+  // }
+  // loading.value = true
+  // axios
+  //   .post('/login', data)
+  //   .then((response) => {
+  //     const { accesstoken, user } = response.data
+  //     store.commit('auth/authenticate', {
+  //       studentInfo: {
+  //         stdCode: user.student.stdCode,
+  //         stdId: user.student.stdId,
+  //         majorCode: user.student.majorCode,
+  //       },
+  //       accessToken: accesstoken,
+  //     })
+  //   })
+  //   .catch((error) => {
+  //     console.log(error)
+  //
+  //     if (err.value) {
+  //       err.value =
+  //         '*เว็บปิดแล้วครับ* (สามารถใช้ตารางเรียนจากแอพ nisit ku แทน)'
+  //     } else {
+  //       err.value = '*เว็บปิดแล้วครับ* (สามารถใช้ตารางเรียนจากแอพ nisit ku แทน)'
+  //     }
+  //   })
+  //   .finally(() => {
+  //     loading.value = false
+  //   })
 }
 </script>
 
@@ -62,7 +65,9 @@ function login() {
           <h3 class="text-4xl dark:text-green-300">Login</h3>
           <h3 class="text-sm text-gray-600 dark:text-white">Sign in to your nontri account</h3>
           <h3 class="text-sm text-gray-600 dark:text-white">
-            <span class="text-red-400">*เว็บปิดแล้วครับ* (สามารถใช้ตารางเรียนจากแอพ nisit ku แทน)</span>
+            <span class="text-red-400"
+              >*เว็บปิดแล้วครับ* (สามารถใช้ตารางเรียนจากแอพ nisit ku แทน)</span
+            >
           </h3>
           <input
             v-model="username"
