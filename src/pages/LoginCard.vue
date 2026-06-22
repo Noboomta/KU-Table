@@ -72,21 +72,21 @@ function login() {
           <input
             v-model="username"
             type="text"
-            class="w-full my-5 p-3 border rounded"
-            required
+            class="w-full my-5 p-3 border rounded bg-gray-100 dark:bg-gray-700 cursor-not-allowed"
+            disabled
             placeholder="username"
             autocomplete="on"
           />
           <input
             v-model="password"
-            class="w-full p-3 mb-5 border rounded"
+            class="w-full p-3 mb-5 border rounded bg-gray-100 dark:bg-gray-700 cursor-not-allowed"
             type="password"
-            required
+            disabled
             placeholder="password"
             autocomplete="on"
           />
           <button
-            class="py-2 px-6 text-white text-lg rounded-md transition duration-500 ease-in-out bg-blue-500 hover:bg-blue-700 transform hover:scale-110 mb-3"
+            class="py-2 px-6 text-white text-lg rounded-md transition duration-500 ease-in-out bg-blue-500 hover:bg-blue-700 transform hover:scale-110 mb-3 opacity-50 cursor-not-allowed"
             type="submit"
           >
             Login
