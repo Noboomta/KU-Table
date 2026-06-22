@@ -42,9 +42,9 @@ function login() {
 
       if (err.value) {
         err.value =
-          'รออัพเดทระบบตามระบบใหม่ของมหาวิทยาลัย (สามารถใช้ตารางเรียนจากแอพ nisit ku แทน)'
+          '*เว็บปิดแล้วครับ* (สามารถใช้ตารางเรียนจากแอพ nisit ku แทน)'
       } else {
-        err.value = 'รออัพเดทระบบตามระบบใหม่ของมหาวิทยาลัย (สามารถใช้ตารางเรียนจากแอพ nisit ku แทน)'
+        err.value = '*เว็บปิดแล้วครับ* (สามารถใช้ตารางเรียนจากแอพ nisit ku แทน)'
       }
     })
     .finally(() => {
@@ -62,7 +62,7 @@ function login() {
           <h3 class="text-4xl dark:text-green-300">Login</h3>
           <h3 class="text-sm text-gray-600 dark:text-white">Sign in to your nontri account</h3>
           <h3 class="text-sm text-gray-600 dark:text-white">
-            <span class="text-red-400">**รออัพเดทระบบตามระบบใหม่ของมหาวิทยาลัย (สามารถใช้ตารางเรียนจากแอพ nisit ku แทน)</span>
+            <span class="text-red-400">*เว็บปิดแล้วครับ* (สามารถใช้ตารางเรียนจากแอพ nisit ku แทน)</span>
           </h3>
           <input
             v-model="username"
@@ -97,9 +97,10 @@ function login() {
             ทั้งหมดนี้ <span class="text-red-400">ไม่ใช่</span> เว็บของมหาลัยจริง
           </p>
           <p class="dark:text-white">
-            KU-Table เป็นเพียงเว็บที่ทำเพื่อความสะดวกสบายด้วยการสร้างตารางเรียนให้นิสิต
+            KU-Table เป็นเพียงเว็บที่ทำโดยนิสิตเพื่อความสะดวกสบายด้วยการสร้างตารางเรียนให้นิสิต
             โดยใช้ข้อมูลจาก
             <a href="https://my.ku.th/" class="text-blue-500 hover:underline">https://my.ku.th/</a>
+            ติดต่อรับช่วงต่อหรือขอใช้โดเมนเดิมได้ที่ puvana.jp36@gmail.com
           </p>
         </footer>
       </form>
